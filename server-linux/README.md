@@ -1,6 +1,6 @@
 ris
 ===
 дл€ компил€ци€
-gcc им€ файла `cat add_headers.bs` -o вывод
+gcc им€ файла \`cat add_headers.bs\` -o вывод
 
 в файле add_headers.bs хран€тс€ библиотеки кторые надо подсоединить
