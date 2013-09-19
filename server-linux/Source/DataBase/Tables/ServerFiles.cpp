@@ -1,4 +1,4 @@
-#include "../SingletoneConn.h"
+#include "ServerFiles.h"
 
 namespace Database {
 	namespace Tables {
@@ -13,7 +13,7 @@ namespace Database {
 
 		ResultSet * ServerFiles::getElemById(unsigned int id)
 		{
-			return stmt -> executeQuery ("SELECT * FROM `server_files` WHERE `id`= " + ida);
+			return stmt -> executeQuery ("SELECT * FROM `server_files` WHERE `id`= " + id);
 		}
 
 		ResultSet * ServerFiles::select(string filds, string condition)

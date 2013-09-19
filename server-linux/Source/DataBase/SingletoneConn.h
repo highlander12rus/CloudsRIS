@@ -1,3 +1,4 @@
+#pragma once
 /* MySQL Connector/C++ specific headers */
 #include <cppconn/driver.h>
 #include <cppconn/connection.h>

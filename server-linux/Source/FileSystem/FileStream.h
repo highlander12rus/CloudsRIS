@@ -1,3 +1,4 @@
+#pragma once
 #include <fstream>
 using namespace std;
 
@@ -5,7 +6,7 @@ namespace FileSystem
 {
 	class Stream 
 	{
-		private:
+		protected:
 			unsigned int offset;
 			unsigned int dOffset;  //отступ от отступа
 			unsigned int length;

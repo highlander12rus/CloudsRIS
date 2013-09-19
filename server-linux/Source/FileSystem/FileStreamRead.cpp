@@ -2,16 +2,17 @@
 
 namespace FileSystem 
 {
+	StreamRead::StreamRead(fstream* file, unsigned int offset, unsigned int length): Stream(file,offset,length){}
 
-	unsigned int read(char* buffer, unsigned int lengthBuffer)
+	unsigned int StreamRead::read(char* buffer, unsigned int lengthBuffer)
 	{
 		if(dOffset >=  length)
 			return 0;
 			
-		else if(dOffsset + lengthBuffer >= length)
-			lengthBuffer =  length - dOffsset;	
+		else if(dOffset + lengthBuffer >= length)
+			lengthBuffer =  length - dOffset;	
 
-		file->seekg (0, offset + dOfsset);
+		file->seekg (offset + dOffset,file->beg);
 		file->read(buffer, lengthBuffer);
 		dOffset += lengthBuffer;
 		return lengthBuffer;	

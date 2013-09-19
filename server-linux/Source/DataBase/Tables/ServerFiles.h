@@ -1,5 +1,9 @@
+#pragma once
+#include "../SingletoneConn.h"
 #include <string>
+
 using namespace std;
+using namespace sql;
 
 namespace Database {
 	namespace Tables {
