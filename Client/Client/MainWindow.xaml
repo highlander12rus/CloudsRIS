@@ -1,11 +1,8 @@
 ﻿<Window x:Class="Client.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-<<<<<<< HEAD
-        Title="MainWindow" Height="350" Width="700">
-=======
-        Title="MainWindow" Height="350" Width="777">
->>>>>>> width=777
+        Title="MainWindow" Height="350" Width="117">
+
     <Grid>
         
     </Grid>
