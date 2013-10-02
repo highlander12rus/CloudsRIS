@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="DataBase" displayName="DataBase" projectFiles="true">
+      <logicalFolder name="Tables" displayName="Tables" projectFiles="true">
+        <itemPath>DataBase/Tables/ServerFiles.cpp</itemPath>
+        <itemPath>DataBase/Tables/ServerFiles.h</itemPath>
+      </logicalFolder>
+      <itemPath>DataBase/SingletoneConn.cpp</itemPath>
+      <itemPath>DataBase/SingletoneConn.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
+      <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
+      <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="FileSystem" displayName="FileSystem" projectFiles="true">
+      <itemPath>FileSystem/Block.cpp</itemPath>
+      <itemPath>FileSystem/Block.h</itemPath>
+      <itemPath>FileSystem/FileStream.cpp</itemPath>
+      <itemPath>FileSystem/FileStream.h</itemPath>
+      <itemPath>FileSystem/FileStreamRead.cpp</itemPath>
+      <itemPath>FileSystem/FileStreamRead.h</itemPath>
+      <itemPath>FileSystem/FileStreamWrite.cpp</itemPath>
+      <itemPath>FileSystem/FileStreamWrite.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="Network" displayName="Network" projectFiles="true">
+      <itemPath>Network/UdpBroatcast.cpp</itemPath>
+      <itemPath>Network/UdpBroatcast.h</itemPath>
+      <itemPath>Network/UdpCli.h</itemPath>
+      <itemPath>Network/UdpOnce.cpp</itemPath>
+      <itemPath>Network/UdpOnce.h</itemPath>
+      <itemPath>Network/UdpServer.h</itemPath>
+      <itemPath>Network/out.log</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Исходные файлы"
+                   projectFiles="true">
+      <itemPath>Config.h</itemPath>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Файлы заголовков"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Файлы ресурсов"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Файлы тестов"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Важные файлы"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>DataBase</Elem>
+    <Elem>Exception</Elem>
+    <Elem>FileSystem</Elem>
+    <Elem>Network</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization</commandLine>
+        </ccTool>
+      </compileType>
+      <item path="Config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpCli.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/out.log" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization</commandLine>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="Config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpCli.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/out.log" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
