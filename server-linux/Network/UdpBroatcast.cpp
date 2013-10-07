@@ -9,8 +9,8 @@
 #include "UdpBroatcast.h"
 
 UdpBroatcast::UdpBroatcast(boost::asio::io_service& io_service,
-        udp::endpoint& listenAddress, string idStr) :
-udp_server(io_service, listenAddress, idStr) {
+        udp::endpoint& listenAddress) :
+udp_server(io_service, listenAddress) {
 }
 
 void UdpBroatcast::send() {
@@ -26,7 +26,7 @@ void UdpBroatcast::send() {
 
 void UdpBroatcast::handle_receive(const boost::system::error_code& error,
         std::size_t bytes_transferred) {
-    cout << remote_endpoint_ << endl;
+
     if (!error || error == boost::asio::error::message_size) {
         boost::shared_ptr<std::string> message(
                 new std::string("dsdsad\n"));
@@ -43,26 +43,14 @@ void UdpBroatcast::handle_receive(const boost::system::error_code& error,
         boost::asio::ip::udp::endpoint myEndpoint; // Create endpoint on specified IP.
         myEndpoint.address(targetIP);
         myEndpoint.port(PORT_LISTEN);
-        cout << "curentHostIP" << curentHostIP << endl;
+
         if (remote_endpoint_.address() != curentHostIP) {
-            cout << "curentHostIP="<<  curentHostIP << endl;
-            cout << "remote_endpoint_.address()="<<  remote_endpoint_.address() << endl;
-            
-            std::cout << "send data to clients....." << endl;
             boost::asio::io_service io_service;
 
             udp_client client(io_service);
 
             string g = "test ";
             client.send(g, myEndpoint);
-
-            cout << "test" << endl;
-            //client.start_receive();
-            //cout << "test1"<<endl;
-            //io_service.run();
-            cout << "Send client complitefd" << endl;
-
-            cerr << "handle receive " << id << "\n" << endl;
         }
         start_receive();
     }

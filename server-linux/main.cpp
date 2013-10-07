@@ -7,7 +7,7 @@
 #include <string>
 #include "Network/UdpBroatcast.h"
 #include "Network/UdpOnce.h"
-#include "Network/UdpCli.h"
+#include "Network/UdpClient.h"
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
 #include <stdlib.h>

@@ -43,7 +43,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
+	${OBJECTDIR}/Network/UdpClient.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
+	${OBJECTDIR}/Network/UdpServer.o \
 	${OBJECTDIR}/main.o
 
 
@@ -111,10 +113,20 @@ ${OBJECTDIR}/Network/UdpBroatcast.o: Network/UdpBroatcast.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpBroatcast.o Network/UdpBroatcast.cpp
 
+${OBJECTDIR}/Network/UdpClient.o: Network/UdpClient.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Network
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpClient.o Network/UdpClient.cpp
+
 ${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
+
+${OBJECTDIR}/Network/UdpServer.o: Network/UdpServer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Network
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpServer.o Network/UdpServer.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -9,8 +9,8 @@
 #include "UdpOnce.h"
 
 UdpOnce::UdpOnce(boost::asio::io_service& io_service,
-        udp::endpoint& listenAddress, string idStr) :
-udp_server(io_service, listenAddress, idStr) {
+        udp::endpoint& listenAddress) :
+udp_server(io_service, listenAddress) {
 
 }
 

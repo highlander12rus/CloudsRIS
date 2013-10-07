@@ -10,7 +10,7 @@
 class UdpBroatcast : public udp_server {
 public:
     UdpBroatcast(boost::asio::io_service& io_service,
-            udp::endpoint& listenAddress, string idStr);
+            udp::endpoint& listenAddress);
     void send();
     ~UdpBroatcast();
 

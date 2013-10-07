@@ -11,7 +11,7 @@
 class UdpOnce : public udp_server {
 public:
     UdpOnce(boost::asio::io_service& io_service,
-            udp::endpoint& listenAddress, string idStr);
+            udp::endpoint& listenAddress);
 
     ~UdpOnce();
 

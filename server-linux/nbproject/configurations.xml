@@ -26,11 +26,12 @@
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
       <itemPath>Network/UdpBroatcast.cpp</itemPath>
       <itemPath>Network/UdpBroatcast.h</itemPath>
-      <itemPath>Network/UdpCli.h</itemPath>
+      <itemPath>Network/UdpClient.cpp</itemPath>
+      <itemPath>Network/UdpClient.h</itemPath>
       <itemPath>Network/UdpOnce.cpp</itemPath>
       <itemPath>Network/UdpOnce.h</itemPath>
+      <itemPath>Network/UdpServer.cpp</itemPath>
       <itemPath>Network/UdpServer.h</itemPath>
-      <itemPath>Network/out.log</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Исходные файлы"
@@ -115,15 +116,17 @@
       </item>
       <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Network/UdpCli.h" ex="false" tool="3" flavor2="0">
+      <item path="Network/UdpClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpClient.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
+      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Network/out.log" ex="false" tool="3" flavor2="0">
+      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -187,15 +190,17 @@
       </item>
       <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Network/UdpCli.h" ex="false" tool="3" flavor2="0">
+      <item path="Network/UdpClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpClient.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
+      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Network/out.log" ex="false" tool="3" flavor2="0">
+      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
