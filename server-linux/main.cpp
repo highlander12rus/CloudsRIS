@@ -5,17 +5,21 @@
 //tmp include
 #include "Config.h"
 #include <string>
-#include "Network/UdpBroatcast.h"
+/*#include "Network/UdpBroatcast.h"
 #include "Network/UdpOnce.h"
 #include "Network/UdpClient.h"
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
-#include <stdlib.h>
+#include <stdlib.h>*/
 
-using namespace FileSystem::Block;
-using boost::asio::ip::udp;
 
-void send_to_socket(UdpBroatcast& server) {
+//using namespace FileSystem::Block;
+//using boost::asio::ip::udp;
+
+#include "DataBase/SingletoneConn.h"
+#include "DataBase/Tables/Blocks.h"
+#include "DataBase/Tables/SecurityMethod.h"
+/*void send_to_socket(UdpBroatcast& server) {
     while (1) {
         int n;
         std::cout << "Enter chislo" << endl;
@@ -45,11 +49,15 @@ void serverPort() {
 
     UdpOnce server(io_service, listenAddress, g);
     io_service.run();
-}
+}*/
 
 int main(int argc, char *argv[]) {
-
-    boost::asio::io_service io_service;
+    Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
+    Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());
+  
+    
+  //  std::cout<<sm.getById(1)<<std::endl;
+    /*boost::asio::io_service io_service;
 
     string g = "server brotcast";
 
@@ -62,7 +70,7 @@ int main(int argc, char *argv[]) {
     threads.create_thread(serverPort);
 
     io_service.run();
-    threads.join_all();
+    threads.join_all();*/
 
     return 0;
 }

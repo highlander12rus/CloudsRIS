@@ -16,12 +16,18 @@ namespace Database{
 	class SingletoneConn
 	{
 	public:
-		static const SingletoneConn& Instance();
+		static SingletoneConn& Instance();
 		
 		/**
 		 * Return obj for query
 		 */
 		Statement* getStatementObj(void);
+                
+                /**
+                 * Return Connection obj
+                 * @return 
+                 */
+                Connection* getConnection();
 	private:
 		Driver *driver;
 		Connection *con;

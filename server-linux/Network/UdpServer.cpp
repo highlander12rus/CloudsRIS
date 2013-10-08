@@ -2,7 +2,7 @@
 namespace Network {
     namespace Udp {
 
-        UdpServer::udp_server(boost::asio::io_service& io_service, udp::endpoint& listenAddress)
+        UdpServer::UdpServer(boost::asio::io_service& io_service, udp::endpoint& listenAddress)
         : socket_(io_service, listenAddress) {
             socket_.set_option(boost::asio::ip::udp::socket::reuse_address(true));
             boost::asio::socket_base::broadcast option(true);

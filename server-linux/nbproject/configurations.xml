@@ -3,6 +3,10 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="DataBase" displayName="DataBase" projectFiles="true">
       <logicalFolder name="Tables" displayName="Tables" projectFiles="true">
+        <itemPath>DataBase/Tables/Blocks.cpp</itemPath>
+        <itemPath>DataBase/Tables/Blocks.h</itemPath>
+        <itemPath>DataBase/Tables/SecurityMethod.cpp</itemPath>
+        <itemPath>DataBase/Tables/SecurityMethod.h</itemPath>
         <itemPath>DataBase/Tables/ServerFiles.cpp</itemPath>
         <itemPath>DataBase/Tables/ServerFiles.h</itemPath>
       </logicalFolder>
@@ -85,6 +89,14 @@
       </item>
       <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
@@ -158,6 +170,14 @@
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
       </item>

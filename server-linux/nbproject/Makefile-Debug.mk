@@ -36,6 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/DataBase/SingletoneConn.o \
+	${OBJECTDIR}/DataBase/Tables/Blocks.o \
+	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
 	${OBJECTDIR}/FileSystem/Block.o \
@@ -77,6 +79,16 @@ ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp
 	${MKDIR} -p ${OBJECTDIR}/DataBase
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/SingletoneConn.o DataBase/SingletoneConn.cpp
+
+${OBJECTDIR}/DataBase/Tables/Blocks.o: DataBase/Tables/Blocks.cpp 
+	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/Blocks.o DataBase/Tables/Blocks.cpp
+
+${OBJECTDIR}/DataBase/Tables/SecurityMethod.o: DataBase/Tables/SecurityMethod.cpp 
+	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/SecurityMethod.o DataBase/Tables/SecurityMethod.cpp
 
 ${OBJECTDIR}/DataBase/Tables/ServerFiles.o: DataBase/Tables/ServerFiles.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables

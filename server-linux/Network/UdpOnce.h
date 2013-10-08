@@ -7,26 +7,30 @@
  */
 
 #include "UdpServer.h"
+namespace Network {
+    namespace Udp {
 
-class UdpOnce : public udp_server {
-public:
-    UdpOnce(boost::asio::io_service& io_service,
-            udp::endpoint& listenAddress);
+        class UdpOnce : public UdpServer  {
+        public:
+            UdpOnce(boost::asio::io_service& io_service,
+                    udp::endpoint& listenAddress);
 
-    ~UdpOnce();
+            ~UdpOnce();
 
 
 
-    void handle_send(boost::shared_ptr<std::string> message,
-            const boost::system::error_code& error,
-            std::size_t bytes_transferred);
+            void handle_send(boost::shared_ptr<std::string> message,
+                    const boost::system::error_code& error,
+                    std::size_t bytes_transferred);
 
-protected:
-    virtual void handle_receive(const boost::system::error_code& error,
-            std::size_t bytes_transferred);
-private:
+        protected:
+            virtual void handle_receive(const boost::system::error_code& error,
+                    std::size_t bytes_transferred);
+        private:
 
-};
+        };
+    }
+}
 
 
 

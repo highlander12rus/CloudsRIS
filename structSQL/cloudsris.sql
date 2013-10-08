@@ -18,14 +18,14 @@ USE `cloudsris`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `block`
+-- Table structure for table `blocks`
 --
 
-DROP TABLE IF EXISTS `block`;
+DROP TABLE IF EXISTS `blocks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `block` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE `blocks` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
   `occupied_space` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -33,12 +33,12 @@ CREATE TABLE `block` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `block`
+-- Dumping data for table `blocks`
 --
 
-LOCK TABLES `block` WRITE;
-/*!40000 ALTER TABLE `block` DISABLE KEYS */;
-/*!40000 ALTER TABLE `block` ENABLE KEYS */;
+LOCK TABLES `blocks` WRITE;
+/*!40000 ALTER TABLE `blocks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-07 14:11:50
+-- Dump completed on 2013-10-08 18:48:11

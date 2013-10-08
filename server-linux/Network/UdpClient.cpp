@@ -16,10 +16,10 @@ namespace Network {
             boost::shared_ptr<std::string> message(
                     new std::string(messageStr));
 
-            socket_.async_send_to(boost::asio::buffer(*message), address,
+           /*socket_.async_send_to(boost::asio::buffer(*message), address,
                     boost::bind(&UdpClient::handle_send, this, message,
                     boost::asio::placeholders::error,
-                    boost::asio::placeholders::bytes_transferred));
+                    boost::asio::placeholders::bytes_transferred));*/
         }
 
         void UdpClient::start_receive() {

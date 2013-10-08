@@ -23,13 +23,13 @@ namespace Network {
              * @param listenAddress
              * @param bind function call when was data recive
              */
-            udp_server(boost::asio::io_service& io_service, udp::endpoint& listenAddress);
+            UdpServer(boost::asio::io_service& io_service, udp::endpoint& listenAddress);
 
         protected:
             virtual void handle_receive(const boost::system::error_code& error,
                     std::size_t bytes_transferred) = 0;
 
-            start_receive();
+            void start_receive();
         protected:
             udp::socket socket_;
             udp::endpoint remote_endpoint_;
