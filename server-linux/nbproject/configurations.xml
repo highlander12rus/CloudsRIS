@@ -3,6 +3,8 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="DataBase" displayName="DataBase" projectFiles="true">
       <logicalFolder name="Tables" displayName="Tables" projectFiles="true">
+        <itemPath>DataBase/Tables/AddressBlocks.cpp</itemPath>
+        <itemPath>DataBase/Tables/AddressBlocks.h</itemPath>
         <itemPath>DataBase/Tables/Blocks.cpp</itemPath>
         <itemPath>DataBase/Tables/Blocks.h</itemPath>
         <itemPath>DataBase/Tables/SecurityMethod.cpp</itemPath>
@@ -18,6 +20,8 @@
       <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
     </logicalFolder>
     <logicalFolder name="FileSystem" displayName="FileSystem" projectFiles="true">
+      <itemPath>FileSystem/AllocatedBlocks.cpp</itemPath>
+      <itemPath>FileSystem/AllocatedBlocks.h</itemPath>
       <itemPath>FileSystem/Block.cpp</itemPath>
       <itemPath>FileSystem/Block.h</itemPath>
       <itemPath>FileSystem/FileStream.cpp</itemPath>
@@ -89,6 +93,10 @@
       </item>
       <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="DataBase/Tables/AddressBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/AddressBlocks.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
@@ -107,6 +115,10 @@
             flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -171,6 +183,10 @@
       </item>
       <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="DataBase/Tables/AddressBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/AddressBlocks.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
@@ -189,6 +205,10 @@
             flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
       </item>

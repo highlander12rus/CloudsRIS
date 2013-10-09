@@ -36,10 +36,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/DataBase/SingletoneConn.o \
+	${OBJECTDIR}/DataBase/Tables/AddressBlocks.o \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
 	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
+	${OBJECTDIR}/FileSystem/AllocatedBlocks.o \
 	${OBJECTDIR}/FileSystem/Block.o \
 	${OBJECTDIR}/FileSystem/FileStream.o \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
@@ -80,6 +82,11 @@ ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/SingletoneConn.o DataBase/SingletoneConn.cpp
 
+${OBJECTDIR}/DataBase/Tables/AddressBlocks.o: DataBase/Tables/AddressBlocks.cpp 
+	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/AddressBlocks.o DataBase/Tables/AddressBlocks.cpp
+
 ${OBJECTDIR}/DataBase/Tables/Blocks.o: DataBase/Tables/Blocks.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
@@ -99,6 +106,11 @@ ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o: Exception/ExceptionFileNotOpene
 	${MKDIR} -p ${OBJECTDIR}/Exception
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o Exception/ExceptionFileNotOpened.cpp
+
+${OBJECTDIR}/FileSystem/AllocatedBlocks.o: FileSystem/AllocatedBlocks.cpp 
+	${MKDIR} -p ${OBJECTDIR}/FileSystem
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/AllocatedBlocks.o FileSystem/AllocatedBlocks.cpp
 
 ${OBJECTDIR}/FileSystem/Block.o: FileSystem/Block.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem

@@ -1,26 +1,40 @@
 #include "ServerFiles.h"
 
 namespace Database {
-	namespace Tables {
-		ServerFiles::ServerFiles (Statement* stm) 
-		{
-			stmt = stm;
-		}
-		ResultSet * ServerFiles::query(string q)
-		{
-			return stmt -> executeQuery (q);
-		}
+    namespace Tables {
 
-		ResultSet * ServerFiles::getElemById(unsigned int id)
-		{
-			return stmt -> executeQuery ("SELECT * FROM `server_files` WHERE `id`= " + id);
-		}
+        ServerFiles::ServerFiles(Connection* conn) :
+        TABLE_NAME("`server_files`") {
+            this->conn = conn;
+        }
 
-		ResultSet * ServerFiles::select(string filds, string condition)
-		{
-			return stmt -> executeQuery ("SELECT "+ filds
-				 +" FROM `server_files` " + condition);
-		}
-		ServerFiles::~ServerFiles (){}
-	}
+        ResultSet* ServerFiles::getById(uint32_t id) {
+            ResultSet* res;
+            sql::PreparedStatement* prep_stmt;
+
+            prep_stmt = conn-> prepareStatement("SELECT * FROM " + TABLE_NAME
+                    + " WHERE `id` = ?");
+            prep_stmt->setUInt(1, id);
+            res = prep_stmt->executeQuery();
+            delete prep_stmt;
+            return res;
+        }
+        
+        
+        
+        ResultSet* ServerFiles::getByFileId(uint32_t fileId) {
+            ResultSet* res;
+            sql::PreparedStatement* prep_stmt;
+
+            prep_stmt = conn-> prepareStatement("SELECT * FROM " + TABLE_NAME
+                    + " WHERE `file_id` = ?");
+            prep_stmt->setUInt(1, fileId);
+            res = prep_stmt->executeQuery();
+            delete prep_stmt;
+            return res;
+        }
+
+        ServerFiles::~ServerFiles() {
+        }
+    }
 }

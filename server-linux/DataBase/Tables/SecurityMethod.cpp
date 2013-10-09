@@ -29,7 +29,7 @@ namespace Database {
 
             prep_stmt = conn-> prepareStatement("SELECT id FROM " + TABLE_NAME
                     + " WHERE `name` = ?");
-            prep_stmt->setUInt(1, methodName);
+            prep_stmt->setString(1, methodName);
             res = prep_stmt->executeQuery();
             res->next();
             uint32_t result = res->getUInt(1);

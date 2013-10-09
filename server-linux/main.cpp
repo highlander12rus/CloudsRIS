@@ -19,6 +19,7 @@
 #include "DataBase/SingletoneConn.h"
 #include "DataBase/Tables/Blocks.h"
 #include "DataBase/Tables/SecurityMethod.h"
+#include "DataBase/Tables/AddressBlocks.h"
 /*void send_to_socket(UdpBroatcast& server) {
     while (1) {
         int n;
@@ -52,9 +53,15 @@ void serverPort() {
 }*/
 
 int main(int argc, char *argv[]) {
-    Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
-    Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());
-  
+    //Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
+    //Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());
+   Database::Tables::AddressBlocks test(Database::SingletoneConn::Instance().getConnection());
+   sql::ResultSet* testRes =  test.getBlokFreeSpaceId("test", 51201);
+   
+   while(testRes -> next()) {
+       std::cout << testRes->getString(1) << " " << testRes->getUInt(2) << endl;
+   }
+            
     
   //  std::cout<<sm.getById(1)<<std::endl;
     /*boost::asio::io_service io_service;

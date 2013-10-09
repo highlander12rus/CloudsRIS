@@ -18,6 +18,30 @@ USE `cloudsris`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `address_blocks`
+--
+
+DROP TABLE IF EXISTS `address_blocks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `address_blocks` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(15) DEFAULT NULL,
+  `blok_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `address_blocks`
+--
+
+LOCK TABLES `address_blocks` WRITE;
+/*!40000 ALTER TABLE `address_blocks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `address_blocks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `blocks`
 --
 
@@ -29,7 +53,7 @@ CREATE TABLE `blocks` (
   `address` varchar(255) DEFAULT NULL,
   `occupied_space` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-08 18:48:11
+-- Dump completed on 2013-10-09 18:02:59
