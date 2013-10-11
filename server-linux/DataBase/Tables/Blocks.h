@@ -20,13 +20,14 @@ namespace Database {
 
 
             /**
-             * insert in table
+             * Вставка и изменение имени блока
              * @param path path to  block file
              * @param occuredSpace
+             * @param ip
              * @throws sql::SQLException 
-             * @return
+             * @return id- insert tables
              */
-            bool insertRecords(std::string path, uint32_t occuredSpace);
+             uint32_t insertBlocks(std::string path, uint32_t occuredSpace,std::string ip);
 
             /**
              * delete records into path

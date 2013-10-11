@@ -1,10 +1,12 @@
 //#include "DataBase/SingletoneConn.h"
 //#include "DataBase/Tables/ServerFiles.h"
 #include "FileSystem/Block.h"
+#include <fstream>
 
 //tmp include
 #include "Config.h"
 #include <string>
+
 /*#include "Network/UdpBroatcast.h"
 #include "Network/UdpOnce.h"
 #include "Network/UdpClient.h"
@@ -15,11 +17,13 @@
 
 //using namespace FileSystem::Block;
 //using boost::asio::ip::udp;
-
+#include <boost/filesystem.hpp>
 #include "DataBase/SingletoneConn.h"
-#include "DataBase/Tables/Blocks.h"
+/*#include "DataBase/Tables/Blocks.h"
 #include "DataBase/Tables/SecurityMethod.h"
-#include "DataBase/Tables/AddressBlocks.h"
+#include "DataBase/Tables/AddressBlocks.h"*/
+#include "FileSystem/AllocatedBlocks.h"
+#include "boost/threadpool.hpp"
 /*void send_to_socket(UdpBroatcast& server) {
     while (1) {
         int n;
@@ -51,16 +55,42 @@ void serverPort() {
     UdpOnce server(io_service, listenAddress, g);
     io_service.run();
 }*/
+// Some example tasks
+void first_task()
+{
+   std::cout << "first task is running\n" ;
+}
 
+void second_task()
+{
+   std::cout << "second task is running\n" ;
+}
 int main(int argc, char *argv[]) {
+    
+    //boost::filesystem::path dir("blockWareHouse");
+   // boost::filesystem::create_directory(dir);
+    
+    //FileSystem::Block::AllocatedBlocks test(23, "127.0.0.1");
+    
+    // Create fifo thread pool container with two threads.
+   boost::threadpool::pool tp(5);
+   
+   // Add some tasks to the pool.
+   tp.schedule(&first_task);
+   tp.schedule(&second_task);   
+  
+   //  Wait until all tasks are finished.
+   tp.wait();
+    
+    
     //Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
     //Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());
-   Database::Tables::AddressBlocks test(Database::SingletoneConn::Instance().getConnection());
+  /* Database::Tables::AddressBlocks test(Database::SingletoneConn::Instance().getConnection());
    sql::ResultSet* testRes =  test.getBlokFreeSpaceId("test", 51201);
    
    while(testRes -> next()) {
        std::cout << testRes->getString(1) << " " << testRes->getUInt(2) << endl;
-   }
+   }*/
             
     
   //  std::cout<<sm.getById(1)<<std::endl;

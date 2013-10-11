@@ -1,64 +1,54 @@
 #include "Block.h"
 
 
-namespace FileSystem
-{
-	namespace Block
-	{
-			Block::Block(unsigned int id)
-			{
-			// connection to database realization
-				string FileName ="test.bl";
-				file= new fstream(); 
-				file->open (FileName.c_str(),ios::out | ios::binary| ios::in );
-				if (file->fail())
-					throw new Exception::FileSystem::FileNotOpened();
-					
-			}
+namespace FileSystem {
+    namespace Block {
 
-			Block::Block(unsigned int id, void* create)
-			{
-				// connection to database realization
-				string FileName ="test.bl";
-				file= new fstream(); 
-				file->open (FileName.c_str(),ios::out | ios::binary| ios::in |ios::trunc);
-				if (file->fail())
-					throw new Exception::FileSystem::FileNotOpened();				
-				this->createBlock();	
-			}
+        Block::Block(std::string pathToBlock) {
 
+            file = new fstream();
+            file->open(pathToBlock.c_str(), ios::out | ios::binary | ios::in);
+            if (file->fail())
+                throw new Exception::FileSystem::FileNotOpened();
 
-			void Block::createBlock() 
-			{
-				char*  newBlock = new char[BLOCK_SIZE];
-				file->write(newBlock , BLOCK_SIZE);			        
-				delete[] newBlock; 
-			}
+        }
 
-			StreamRead* Block::readFile(unsigned int offset,unsigned int length)
-			{
-				if(BLOCK_SIZE >= offset + length)
-					return new FileSystem::StreamRead(file, offset, length);
-				return new FileSystem::StreamRead(file, offset, BLOCK_SIZE-(offset + length) );
+        Block::Block(std::string pathToBlock, void* create) {
+            string FileName = pathToBlock;
+            file = new fstream();
+            cout << FileName.c_str() << endl;
+            file->open(FileName.c_str(), ios::out | ios::binary | ios::in | ios::trunc);
+            if (file->fail())
+                throw new Exception::FileSystem::FileNotOpened();
+            this->createBlock();
+        }
 
-			}
+        void Block::createBlock() {
+            char* newBlock = new char[BLOCK_SIZE];
+            file->write(newBlock, BLOCK_SIZE);
+            delete[] newBlock;
+        }
 
-			StreamWrite* Block::writeFile(unsigned int offset,unsigned int length)
-			{
-				if(BLOCK_SIZE >= offset + length)
-					return new FileSystem::StreamWrite(file, offset, length);
-				return new FileSystem::StreamWrite(file, offset, BLOCK_SIZE-(offset + length) );
-			}
+        StreamRead* Block::readFile(unsigned int offset, unsigned int length) {
+            if (BLOCK_SIZE >= offset + length)
+                return new FileSystem::StreamRead(file, offset, length);
+            return new FileSystem::StreamRead(file, offset, BLOCK_SIZE - (offset + length));
 
-			bool Block::checkFile(unsigned int offset,unsigned int length,string md5)
-			{
+        }
 
-			}
+        StreamWrite* Block::writeFile(unsigned int offset, unsigned int length) {
+            if (BLOCK_SIZE >= offset + length)
+                return new FileSystem::StreamWrite(file, offset, length);
+            return new FileSystem::StreamWrite(file, offset, BLOCK_SIZE - (offset + length));
+        }
 
-			Block::~Block(void)
-			{
-				file->close();
-			}
-  
-	}
+        bool Block::checkFile(unsigned int offset, unsigned int length, string md5) {
+
+        }
+
+        Block::~Block(void) {
+            file->close();
+        }
+
+    }
 }

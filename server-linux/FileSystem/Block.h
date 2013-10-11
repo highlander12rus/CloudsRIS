@@ -15,8 +15,8 @@ namespace FileSystem
 		{
 			fstream* file;
 		public:
-			Block(unsigned int id);
-			Block(unsigned int id, void* createBlock);
+			Block(std::string pathToBlock);
+			Block(std::string pathToBlock, void* createBlock);
 			StreamRead* readFile(unsigned int offset,unsigned int length);
 			StreamWrite* writeFile(unsigned int offset,unsigned int length);
 			bool checkFile(unsigned int offset,unsigned int length,string md5);

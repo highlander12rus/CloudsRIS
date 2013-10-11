@@ -10,29 +10,33 @@ namespace Database {
         ResultSet* Blocks::freeSpaceBlock(uint32_t fileSize) {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
-            
+
             prep_stmt = conn-> prepareStatement("SELECT * FROM " + TABLE_NAME
                     + " WHERE `occupied_space` <= ?");
             prep_stmt->setUInt(1, fileSize);
             res = prep_stmt->executeQuery();
 
-            delete prep_stmt; 
+            delete prep_stmt;
             return res;
         }
 
-        bool Blocks::insertRecords(std::string path, uint32_t occuredSpace) {
+        //@todo: refractoring
+
+        uint32_t Blocks::insertBlocks(std::string path, uint32_t occuredSpace, std::string ip) {
             sql::PreparedStatement* prep_stmt;
-            bool result = false;
 
-            
-            prep_stmt = conn->prepareStatement("INSERT INTO " +
-                    TABLE_NAME + " (`address`, `occupied_space`) VALUES (?, ?)");
-            prep_stmt->setString(1, path); 
+            uint32_t idInsertLast = -1;
+            ResultSet* res;
+            prep_stmt = conn->prepareStatement("select `cloudsris`.`insertNewBlock`(?,?,?)");
+            prep_stmt->setString(1, path);
             prep_stmt->setUInt(2, occuredSpace);
-            result = prep_stmt->execute();
+            prep_stmt->setString(3, ip);
+            res = prep_stmt->executeQuery();
+            res->next();
+            idInsertLast = res->getUInt(1);
 
-            delete prep_stmt;
-            return result;
+            delete prep_stmt, res;
+            return idInsertLast;
         }
 
         bool Blocks::deleteRecords(std::string path) {
@@ -41,7 +45,7 @@ namespace Database {
 
             prep_stmt = conn->prepareStatement("DELETE FROM " +
                     TABLE_NAME + " WHERE `address` = ?");
-            prep_stmt->setString(1, path); 
+            prep_stmt->setString(1, path);
             result = prep_stmt->executeUpdate() > 0;
 
             delete prep_stmt;

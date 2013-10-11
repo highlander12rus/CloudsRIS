@@ -25,7 +25,7 @@ namespace Database {
         // create a database connection using the Driver
         con = driver -> connect(DBHOST, USER, PASSWORD);
         // turn off the autocommit
-        con -> setAutoCommit(0);
+        con -> setAutoCommit(1);
         //select appropriate database schema
         con -> setSchema(DATABASE);
 

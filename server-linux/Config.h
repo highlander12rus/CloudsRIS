@@ -9,9 +9,12 @@
 /*
 			FILE SYSTEM CONFIG
 */
-#define BLOCK_SIZE 512*1024*1024
+#define BLOCK_SIZE 536870912
+#define PATH_TO_BLOCK "blockWareHouse/"
 
 
+//Threads pool
+#define THREADS_POOL_MAX 5
 
 /**
  * PORTS for listen 

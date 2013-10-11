@@ -17,7 +17,7 @@ namespace Database {
                     std::string("FROM `blocks`, `address_blocks` ") +
                     "WHERE `address_blocks`.`blok_id` = `blocks`.`id` AND " + 
                     "FreeSpace(?, `blocks`.`occupied_space`, ?) AND " + 
-                    "`address_blocks`.`ip` = ?";         
+                    "`address_blocks`.`ip` = ? LIMIT 1";         
             
             prep_stmt = conn-> prepareStatement(query);
             
@@ -30,6 +30,10 @@ namespace Database {
             return res;
         }
 
+        uint32_t insertBlock(std::string ip) {
+            
+        }
+        
         AddressBlocks::~AddressBlocks() {
         }
     }

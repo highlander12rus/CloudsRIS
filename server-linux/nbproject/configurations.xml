@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="boost" displayName="boost" projectFiles="true">
+      <logicalFolder name="threadpool" displayName="threadpool" projectFiles="true">
+        <logicalFolder name="detail" displayName="detail" projectFiles="true">
+          <itemPath>boost/threadpool/detail/future.hpp</itemPath>
+          <itemPath>boost/threadpool/detail/locking_ptr.hpp</itemPath>
+          <itemPath>boost/threadpool/detail/pool_core.hpp</itemPath>
+          <itemPath>boost/threadpool/detail/scope_guard.hpp</itemPath>
+          <itemPath>boost/threadpool/detail/worker_thread.hpp</itemPath>
+        </logicalFolder>
+        <itemPath>boost/threadpool/future.hpp</itemPath>
+        <itemPath>boost/threadpool/pool.hpp</itemPath>
+        <itemPath>boost/threadpool/pool_adaptors.hpp</itemPath>
+        <itemPath>boost/threadpool/scheduling_policies.hpp</itemPath>
+        <itemPath>boost/threadpool/shutdown_policies.hpp</itemPath>
+        <itemPath>boost/threadpool/size_policies.hpp</itemPath>
+        <itemPath>boost/threadpool/task_adaptors.hpp</itemPath>
+      </logicalFolder>
+      <itemPath>boost/threadpool.hpp</itemPath>
+    </logicalFolder>
     <logicalFolder name="DataBase" displayName="DataBase" projectFiles="true">
       <logicalFolder name="Tables" displayName="Tables" projectFiles="true">
         <itemPath>DataBase/Tables/AddressBlocks.cpp</itemPath>
@@ -72,6 +91,7 @@
     <Elem>Exception</Elem>
     <Elem>FileSystem</Elem>
     <Elem>Network</Elem>
+    <Elem>boost</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -84,7 +104,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization</commandLine>
+          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem</commandLine>
         </ccTool>
       </compileType>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
@@ -151,6 +171,50 @@
       <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/future.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/locking_ptr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/pool_core.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/scope_guard.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/worker_thread.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/future.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/pool.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/pool_adaptors.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/scheduling_policies.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/shutdown_policies.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/size_policies.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/task_adaptors.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -241,6 +305,50 @@
       <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/future.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/locking_ptr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/pool_core.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/scope_guard.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/detail/worker_thread.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/future.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/pool.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/pool_adaptors.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/scheduling_policies.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/shutdown_policies.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="boost/threadpool/size_policies.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boost/threadpool/task_adaptors.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
