@@ -65,23 +65,18 @@ void second_task()
 {
    std::cout << "second task is running\n" ;
 }
+
+#include "Network/TcpServer.h"
 int main(int argc, char *argv[]) {
     
     //boost::filesystem::path dir("blockWareHouse");
    // boost::filesystem::create_directory(dir);
     
     //FileSystem::Block::AllocatedBlocks test(23, "127.0.0.1");
-    
-    // Create fifo thread pool container with two threads.
-   boost::threadpool::pool tp(5);
-   
-   // Add some tasks to the pool.
-   tp.schedule(&first_task);
-   tp.schedule(&second_task);   
-  
-   //  Wait until all tasks are finished.
-   tp.wait();
-    
+    std::cerr << "dsda" << std::endl;
+    boost::asio::io_service io_service;
+    Network::Tcp::tcp_server serv (&io_service);
+    io_service.run();
     
     //Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
     //Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());

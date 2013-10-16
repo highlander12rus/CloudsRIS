@@ -46,6 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileSystem/FileStream.o \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
+	${OBJECTDIR}/Network/TcpServer.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
 	${OBJECTDIR}/Network/UdpClient.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
@@ -131,6 +132,11 @@ ${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
+
+${OBJECTDIR}/Network/TcpServer.o: Network/TcpServer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Network
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpServer.o Network/TcpServer.cpp
 
 ${OBJECTDIR}/Network/UdpBroatcast.o: Network/UdpBroatcast.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
