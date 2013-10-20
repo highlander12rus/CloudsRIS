@@ -15,6 +15,7 @@
                 <sourceRootElem>FileSystem</sourceRootElem>
                 <sourceRootElem>Network</sourceRootElem>
                 <sourceRootElem>boost</sourceRootElem>
+                <sourceRootElem>Event</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
