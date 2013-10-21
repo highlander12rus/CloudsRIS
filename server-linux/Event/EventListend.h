@@ -9,43 +9,34 @@ namespace Event {
      * @see http://habrahabr.ru/post/171471/
      * Абстрактный класс для созданиея своих событий
      */
-    typedef boost::function<void()> EventCallback;
     
+    
+    template <class T>
     class EventListend {
     public:
 
-        static EventListend& Instance();
+        
 
         /**
          * Добавление функции к событию, вызыватся будет один раз потом удалена
          * boost::bind(&CLASSNAME::METHOD, this)
          * @param ev
          */
-        virtual void addEvent(EventCallback ev);
+        virtual void addEvent(T ev) = 0;
         
         /**
          * Удаление конкретного события
          * @todo: не факт что надо
          * @param ev
          */
-        virtual void removeEvent(EventCallback ev);
+        virtual void removeEvent(T ev) = 0;
         
-        /**
-         * Запуск всех событий
-         */
-        virtual void runAll();
         
         /**
          * Удаление всех событий
          */
-        virtual void removeAll();
+        virtual void removeAll() = 0;
 
-    private:
-
-        EventListend() {
-        };
-        EventListend(const EventListend root);
-        EventListend& operator=(const EventListend&);
 
     };
 

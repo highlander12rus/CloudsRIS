@@ -1,18 +1,24 @@
 #pragma once
 
 #include "EventListend.h"
+#include <boost/system/error_code.hpp>
 #include <boost/signal.hpp>
+
+typedef boost::function<void(boost::system::error_code&, std::size_t)> EventBroatcast;
 
 namespace Event {
 
-    class UdpBrotcastEventListener : public EventListend {
-    
-        
+    class UdpBrotcastEventListener : private EventListend<EventBroatcast> {
+      
     public:
+        
+        
          /**
           * Пришел udp brotcast
           */
-         boost::signal<void()> OnRecieve;
+         boost::signal<void(boost::system::error_code&, std::size_t)> OnRecieve;
+         
+         static UdpBrotcastEventListener& Instance();
          
         
         /**
@@ -20,24 +26,28 @@ namespace Event {
          * boost::bind(&CLASSNAME::METHOD, this)
          * @param ev
          */
-        virtual void addEvent(EventCallback ev);
+        virtual void addEvent(EventBroatcast ev);
 
         /**
          * Удаление конкретного события
          * @todo: не факт что надо
          * @param ev
          */
-        virtual void removeEvent(EventCallback ev);
+        virtual void removeEvent(EventBroatcast ev);
 
         /**
          * Запуск всех событий
          */
-        virtual void runAll();
+        virtual void runAll(boost::system::error_code& error_code, std::size_t byte_transfer);
 
         /**
          * Удаление всех событий
          */
         virtual void removeAll();
+    private:
+        UdpBrotcastEventListener();
+        UdpBrotcastEventListener(const UdpBrotcastEventListener& root);
+        UdpBrotcastEventListener& operator=(const UdpBrotcastEventListener&);
 
     };
 }

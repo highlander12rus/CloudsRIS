@@ -113,7 +113,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem</commandLine>
+          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals</commandLine>
         </ccTool>
       </compileType>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
