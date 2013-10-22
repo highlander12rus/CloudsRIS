@@ -3,11 +3,7 @@ namespace Database {
 
      SingletoneConn& SingletoneConn::Instance() {
         static SingletoneConn theSingleInstance;
-
-
-
-
-
+        
         return theSingleInstance;
     }
 

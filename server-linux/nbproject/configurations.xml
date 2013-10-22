@@ -34,6 +34,12 @@
       <itemPath>DataBase/SingletoneConn.cpp</itemPath>
       <itemPath>DataBase/SingletoneConn.h</itemPath>
     </logicalFolder>
+    <logicalFolder name="Event" displayName="Event" projectFiles="true">
+      <itemPath>Event/EventListend.cpp</itemPath>
+      <itemPath>Event/EventListend.h</itemPath>
+      <itemPath>Event/UdpBrotcastEventListener.cpp</itemPath>
+      <itemPath>Event/UdpBrotcastEventListener.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
       <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
       <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
@@ -94,6 +100,7 @@
     <Elem>FileSystem</Elem>
     <Elem>Network</Elem>
     <Elem>boost</Elem>
+    <Elem>Event</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -106,7 +113,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem</commandLine>
+          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals</commandLine>
         </ccTool>
       </compileType>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
@@ -130,6 +137,14 @@
       <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
@@ -268,6 +283,14 @@
       <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"

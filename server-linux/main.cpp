@@ -56,7 +56,7 @@ void serverPort() {
     io_service.run();
 }*/
 // Some example tasks
-void first_task()
+/*void first_task()
 {
    std::cout << "first task is running\n" ;
 }
@@ -64,19 +64,19 @@ void first_task()
 void second_task()
 {
    std::cout << "second task is running\n" ;
-}
+}*/
 
-#include "Network/TcpServer.h"
+//#include "Network/TcpServer.h"
 int main(int argc, char *argv[]) {
-    
+    std::cout << "compile" << std::endl;
     //boost::filesystem::path dir("blockWareHouse");
    // boost::filesystem::create_directory(dir);
     
     //FileSystem::Block::AllocatedBlocks test(23, "127.0.0.1");
-    std::cerr << "dsda" << std::endl;
+    /*std::cerr << "dsda" << std::endl;
     boost::asio::io_service io_service;
     Network::Tcp::tcp_server serv (&io_service);
-    io_service.run();
+    io_service.run();*/
     
     //Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
     //Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());
