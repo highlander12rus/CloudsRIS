@@ -44,7 +44,8 @@ namespace Event {
          * Удаление всех событий
          */
         virtual void removeAll();
-    private:
+        
+    protected:
         UdpBrotcastEventListener();
         UdpBrotcastEventListener(const UdpBrotcastEventListener& root);
         UdpBrotcastEventListener& operator=(const UdpBrotcastEventListener&);

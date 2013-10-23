@@ -16,11 +16,10 @@ namespace Network {
 
         }
 
-        void UdpOnce::handle_receive(const boost::system::error_code& error,
+        void UdpOnce::handle_receive(boost::system::error_code& error,
                 std::size_t bytes_transferred) {
             if (!error || error == boost::asio::error::message_size) {
-                cout << "data responce in one clients" << endl;
-
+                 Event::UdpOnceEvent::Instance().runAll(error, bytes_transferred);
                 start_receive();
             }
         }

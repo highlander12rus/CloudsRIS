@@ -10,29 +10,9 @@
 
 using boost::asio::ip::tcp;
 
-//#include "../boost/threadpool.hpp"
 
 namespace Network {
     namespace Tcp {
-
-        /*class TcpServer {
-        public:
-            TcpServer(boost::asio::ip::tcp::endpoint& listen);
-
-            void start();
-
-
-
-            ~TcpServer();
-        protected:
-            void recive();
-
-            boost::asio::io_service io_service;
-            boost::asio::ip::tcp::acceptor acceptor;
-            boost::threadpool::pool poolThreads;
-        };*/
-
-
 
         class tcp_connection
         : public boost::enable_shared_from_this<tcp_connection> {

@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
 	${OBJECTDIR}/Event/EventListend.o \
 	${OBJECTDIR}/Event/UdpBrotcastEventListener.o \
+	${OBJECTDIR}/Event/UdpOnceEvent.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
 	${OBJECTDIR}/FileSystem/AllocatedBlocks.o \
 	${OBJECTDIR}/FileSystem/Block.o \
@@ -50,10 +51,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
 	${OBJECTDIR}/Network/TcpServer.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
-	${OBJECTDIR}/Network/UdpClient.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
 	${OBJECTDIR}/Network/UdpServer.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/redis/RedisConnection.o \
+	${OBJECTDIR}/redis/anet.o
 
 
 # C Compiler Flags
@@ -74,11 +76,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -114,6 +116,11 @@ ${OBJECTDIR}/Event/UdpBrotcastEventListener.o: Event/UdpBrotcastEventListener.cp
 	${MKDIR} -p ${OBJECTDIR}/Event
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpBrotcastEventListener.o Event/UdpBrotcastEventListener.cpp
+
+${OBJECTDIR}/Event/UdpOnceEvent.o: Event/UdpOnceEvent.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Event
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpOnceEvent.o Event/UdpOnceEvent.cpp
 
 ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o: Exception/ExceptionFileNotOpened.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Exception
@@ -155,11 +162,6 @@ ${OBJECTDIR}/Network/UdpBroatcast.o: Network/UdpBroatcast.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpBroatcast.o Network/UdpBroatcast.cpp
 
-${OBJECTDIR}/Network/UdpClient.o: Network/UdpClient.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpClient.o Network/UdpClient.cpp
-
 ${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
@@ -175,13 +177,23 @@ ${OBJECTDIR}/main.o: main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
+${OBJECTDIR}/redis/RedisConnection.o: redis/RedisConnection.cpp 
+	${MKDIR} -p ${OBJECTDIR}/redis
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisConnection.o redis/RedisConnection.cpp
+
+${OBJECTDIR}/redis/anet.o: redis/anet.cpp 
+	${MKDIR} -p ${OBJECTDIR}/redis
+	${RM} $@.d
+	$(COMPILE.cc) -g -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/anet.o redis/anet.cpp
+
 # Subprojects
 .build-subprojects:
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
 # Subprojects
 .clean-subprojects:

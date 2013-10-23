@@ -67,8 +67,18 @@ void second_task()
 }*/
 
 //#include "Network/TcpServer.h"
+
+#include "redis/RedisConnection.h"
+
 int main(int argc, char *argv[]) {
+    
     std::cout << "compile" << std::endl;
+    std::cout << redis::RedisConnection::Instance().getConn().get("ggg") << std::endl;
+    
+    
+    std::cout << redis::RedisConnection::Instance().getConn().del("ggg") << std::endl;
+    
+    std::cout << redis::RedisConnection::Instance().getConn().get("ggg") << std::endl;
     //boost::filesystem::path dir("blockWareHouse");
    // boost::filesystem::create_directory(dir);
     

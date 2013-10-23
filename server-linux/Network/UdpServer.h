@@ -6,7 +6,6 @@
 #include <iostream>
 
 #include "../Config.h"
-#include "UdpClient.h"
 
 using namespace std;
 using boost::asio::ip::udp;
@@ -26,7 +25,7 @@ namespace Network {
             UdpServer(boost::asio::io_service& io_service, udp::endpoint& listenAddress);
 
         protected:
-            virtual void handle_receive(const boost::system::error_code& error,
+            virtual void handle_receive(boost::system::error_code& error,
                     std::size_t bytes_transferred) = 0;
 
             void start_receive();
