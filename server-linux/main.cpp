@@ -66,27 +66,27 @@ void second_task()
    std::cout << "second task is running\n" ;
 }*/
 
-//#include "Network/TcpServer.h"
+#include "Network/TcpServer.h"
 
 #include "redis/RedisConnection.h"
 
 int main(int argc, char *argv[]) {
     
-    std::cout << "compile" << std::endl;
+   /* std::cout << "compile" << std::endl;
     std::cout << redis::RedisConnection::Instance().getConn().get("ggg") << std::endl;
     
     
     std::cout << redis::RedisConnection::Instance().getConn().del("ggg") << std::endl;
     
-    std::cout << redis::RedisConnection::Instance().getConn().get("ggg") << std::endl;
+    std::cout << redis::RedisConnection::Instance().getConn().get("ggg") << std::endl;*/
     //boost::filesystem::path dir("blockWareHouse");
    // boost::filesystem::create_directory(dir);
     
     //FileSystem::Block::AllocatedBlocks test(23, "127.0.0.1");
-    /*std::cerr << "dsda" << std::endl;
+    std::cerr << "dsda" << std::endl;
     boost::asio::io_service io_service;
-    Network::Tcp::tcp_server serv (&io_service);
-    io_service.run();*/
+    Network::Tcp::TcpServer serv (&io_service);
+    io_service.run();
     
     //Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());
     //Database::Tables::Blocks bloks(Database::SingletoneConn::Instance().getConnection());

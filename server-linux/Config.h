@@ -21,3 +21,8 @@
 **/
 #define PORT_LISTEN 45788
 #define PORT_BROATCAST 45782
+
+
+//   Network
+#define BUFFER_SIZE 8096
+#define TCP_PORT_SERVER 6454

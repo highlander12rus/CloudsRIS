@@ -42,6 +42,8 @@
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
       <itemPath>Network/TcpServer.cpp</itemPath>
       <itemPath>Network/TcpServer.h</itemPath>
+      <itemPath>Network/TcpSession.cpp</itemPath>
+      <itemPath>Network/TcpSession.h</itemPath>
       <itemPath>Network/UdpBroatcast.cpp</itemPath>
       <itemPath>Network/UdpBroatcast.h</itemPath>
       <itemPath>Network/UdpOnce.cpp</itemPath>
@@ -171,6 +173,10 @@
       </item>
       <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
@@ -284,6 +290,10 @@
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
       </item>
