@@ -41,6 +41,7 @@ namespace Network {
             this->redisInstance = rI;
             this->byte_read_count = 0;
             this->blockThis = 0;
+            this->byte_write_block = 0;
 
         }
 
@@ -84,18 +85,62 @@ namespace Network {
                         return;
                     }
                     mod = modLocal;
-                    
+                    if (mod.compare("w")) {
+                        //поиск места под файл
+                        this->blockMass = new FileSystem::Block::AllocatedBlocks(file_size, SELF_IP);
+                        if (blockMass->getVectors().size() == 1) {
+                            strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, ((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size);
+                            char * tmp_buf = new char[((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size];
+                            memcpy(tmp_buf, &g + 136, sizeof (char)*(((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size));
+                            strWrite->write(tmp_buf, (((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size));
+                            delete[] tmp_buf;
+                            delete strWrite;
+                        } else {
+                            strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, BUFFER_SIZE - 136);
+                            char * tmp_buf = new char[BUFFER_SIZE - 136];
+                            memcpy(tmp_buf, &g + 136, sizeof (char)*(BUFFER_SIZE - 136));
+                            strWrite->write(tmp_buf, BUFFER_SIZE - 136);
+                            delete[] tmp_buf;
+                            delete strWrite;
+                            byte_write_block += BUFFER_SIZE - 136;
+                        }
+                    }
+                    byte_read_count += bytes_transferred;
+                    //TODO: mode r, mode s
+                    this->start();
 
                 }
                 if (mod.compare("w")) {
-                    //поиск места под файл
-                    this->blockMass = new FileSystem::Block::AllocatedBlocks(file_size, SELF_IP);
-                   // this->blockMass->getVectors()[this->blockThis].writeFile(/*/)
+                    if (blockMass->getVectors().size() == 1) {
+                        strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space + byte_read_count - 136, ((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size);
+                        char * tmp_buf = new char[((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size];
+                        memcpy(tmp_buf, &g, sizeof (char)*(((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size));
+                        strWrite->write(tmp_buf, (((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size));
+                        delete[] tmp_buf;
+                        delete strWrite;
+                    } else {
+                        strWrite = blockMass->getVectors()[blockThis]->writeFile(blockMass->getVectors()[blockThis]->occupied_space + byte_write_block, BUFFER_SIZE);
+                        char * tmp_buf = new char[BUFFER_SIZE];
+                        memcpy(tmp_buf, &g, sizeof (char)*(BUFFER_SIZE));
+                        strWrite->write(tmp_buf, BUFFER_SIZE);
+                        delete[] tmp_buf;
+                        delete strWrite;
+                        byte_write_block += BUFFER_SIZE;
+                        if (byte_write_block + BUFFER_SIZE > BLOCK_SIZE) {
+                            byte_write_block = 0;
+                            blockThis++;
+                        }
+                    }
+                    //strWrite = blockMass->getVectors()[blockThis].writeFile(blockMass->getVectors()[blockThis].occupied_space, file_size);
+                    //strWrite->write();
                 }
                 byte_read_count += bytes_transferred;
-
+                if ((byte_read_count - 136) == file_size) {
+                    this->send("1");
+                }
                 this->start();
             } else {
+
                 std::cout << "connection clouse" << std::endl;
 
             }
@@ -106,6 +151,7 @@ namespace Network {
         }
 
         unsigned long long TcpSession::htonll(unsigned long long src) {
+
             static int typ = TYP_INIT;
             unsigned char c;
 

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include"../redis/RedisConnection.h"
 #include "../FileSystem/AllocatedBlocks.h"
+#include"../FileSystem/FileStreamWrite.h"
 
 #define TYP_INIT 0 
 #define TYP_SMLE 1 
@@ -51,6 +52,8 @@ namespace Network {
             FileSystem::Block::AllocatedBlocks* blockMass;
             //текущий обрабатываемый блока
             int blockThis;
+            FileSystem::StreamWrite* strWrite;
+            unsigned long long byte_write_block;
         };
     }
 }

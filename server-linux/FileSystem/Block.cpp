@@ -4,8 +4,8 @@
 namespace FileSystem {
     namespace Block {
 
-        Block::Block(std::string pathToBlock) {
-
+        Block::Block(std::string pathToBlock, unsigned long long oC) {
+            this->occupied_space = oC;
             file = new fstream();
             file->open(pathToBlock.c_str(), ios::out | ios::binary | ios::in);
             if (file->fail())
@@ -13,7 +13,8 @@ namespace FileSystem {
 
         }
 
-        Block::Block(std::string pathToBlock, void* create) {
+        Block::Block(std::string pathToBlock, void* create, void* create2) {
+            this->occupied_space = 0;
             string FileName = pathToBlock;
             file = new fstream();
             cout << FileName.c_str() << endl;
