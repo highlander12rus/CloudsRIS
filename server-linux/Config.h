@@ -26,3 +26,4 @@
 //   Network
 #define BUFFER_SIZE 8096
 #define TCP_PORT_SERVER 6454
+#define SELF_IP "127.0.0.1"

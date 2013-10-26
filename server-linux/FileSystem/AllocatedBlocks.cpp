@@ -29,7 +29,7 @@ namespace FileSystem {
                 //@todo: подумать с базой мб как то лучше можно а не обращатся к ней в цикле
 
                 uint32_t idInsert = block.insertBlocks(PATH_TO_BLOCK, 0,ip);
-                std::cout<< idInsert<<std::endl;
+         
                 std::stringstream pathToFile;
                 pathToFile << PATH_TO_BLOCK << "block_" << idInsert << ".blb";
                 string path = pathToFile.str();
