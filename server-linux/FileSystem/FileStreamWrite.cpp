@@ -19,7 +19,6 @@ namespace FileSystem {
         return lengthBuffer;
     }
 
-    StreamWrite::~StreamWrite()  {
-    };
+   
 
 }

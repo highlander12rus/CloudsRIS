@@ -20,6 +20,7 @@ namespace FileSystem {
             bool checkFile(unsigned int offset, unsigned int length, string md5);
             ~Block(void);
             unsigned long long occupied_space;
+            std::string pathToBlockID;
         private:
             void createBlock();
         };

@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
     //FileSystem::Block::AllocatedBlocks test(23, "127.0.0.1");
     std::cerr << "dsda" << std::endl;
     boost::asio::io_service io_service;
-    Network::Tcp::TcpServer serv (&io_service,&redis::RedisConnection::Instance());
+    Network::Tcp::TcpServer serv (&io_service,&redis::RedisConnection::Instance(),Database::SingletoneConn::Instance().getConnection());
     io_service.run();
     
     //Database::Tables::SecurityMethod sm(Database::SingletoneConn::Instance().getConnection());

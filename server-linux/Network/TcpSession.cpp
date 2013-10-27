@@ -4,8 +4,8 @@
 namespace Network {
     namespace Tcp {
 
-        TcpSession::pointer TcpSession::create(boost::asio::io_service& io_service, redis::RedisConnection * rI) {
-            return pointer(new TcpSession(io_service, rI));
+        TcpSession::pointer TcpSession::create(boost::asio::io_service& io_service, redis::RedisConnection * rI,Connection* connect) {
+            return pointer(new TcpSession(io_service, rI,connect));
         }
 
         tcp::socket& TcpSession::socket() {
@@ -36,12 +36,13 @@ namespace Network {
 
         }
 
-        TcpSession::TcpSession(boost::asio::io_service& io_service, redis::RedisConnection * rI)
+        TcpSession::TcpSession(boost::asio::io_service& io_service, redis::RedisConnection * rI, Connection* connect)
         : socket_(io_service) {
             this->redisInstance = rI;
             this->byte_read_count = 0;
             this->blockThis = 0;
             this->byte_write_block = 0;
+            this->conn = connect;
 
         }
 
@@ -95,6 +96,17 @@ namespace Network {
                             strWrite->write(tmp_buf, (((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size));
                             delete[] tmp_buf;
                             delete strWrite;
+                            if ((bytes_transferred - 136) == file_size) {
+                                Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                                if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
+                                    this->send("11");
+                                    delete blockDB;
+                                    return;
+                                }
+                                this->send("1");
+                                delete blockDB;
+                                return;
+                            }
                         } else {
                             strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, BUFFER_SIZE - 136);
                             char * tmp_buf = new char[BUFFER_SIZE - 136];
@@ -110,6 +122,7 @@ namespace Network {
                     this->start();
 
                 }
+                //дальше идет магия, без понятия что она делает
                 if (mod.compare("w")) {
                     if (blockMass->getVectors().size() == 1) {
                         strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space + byte_read_count - 136, ((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size);
@@ -118,6 +131,17 @@ namespace Network {
                         strWrite->write(tmp_buf, (((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size));
                         delete[] tmp_buf;
                         delete strWrite;
+                        if ((byte_read_count - 136) == file_size) {
+                            Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                            if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
+                                this->send("11");
+                                delete blockDB;
+                                return;
+                            }
+                            this->send("1");
+                            delete blockDB;
+                            return;
+                        }
                     } else {
                         strWrite = blockMass->getVectors()[blockThis]->writeFile(blockMass->getVectors()[blockThis]->occupied_space + byte_write_block, BUFFER_SIZE);
                         char * tmp_buf = new char[BUFFER_SIZE];
@@ -127,6 +151,13 @@ namespace Network {
                         delete strWrite;
                         byte_write_block += BUFFER_SIZE;
                         if (byte_write_block + BUFFER_SIZE > BLOCK_SIZE) {
+                            Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                            if (!blockDB->updateOccuredSize(blockMass->getVectors()[blockThis]->pathToBlockID, byte_write_block)) {
+                                this->send("11");
+                                delete blockDB;
+                                return;
+                            }
+                            delete blockDB;
                             byte_write_block = 0;
                             blockThis++;
                         }
@@ -137,6 +168,7 @@ namespace Network {
                 byte_read_count += bytes_transferred;
                 if ((byte_read_count - 136) == file_size) {
                     this->send("1");
+                    return;
                 }
                 this->start();
             } else {
@@ -147,7 +179,9 @@ namespace Network {
         }
 
         TcpSession::~TcpSession() {
-
+            for (int i = 0; i < blockMass->getVectors().size(); i++) {
+                delete blockMass->getVectors()[i];
+            }
         }
 
         unsigned long long TcpSession::htonll(unsigned long long src) {

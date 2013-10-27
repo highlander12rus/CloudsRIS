@@ -7,6 +7,6 @@ namespace FileSystem {
     public:
         StreamWrite(fstream* file, unsigned int offset, unsigned int length);
         unsigned int write(char* buffer, unsigned int lengthBuffer);
-        ~StreamWrite();
+      
     };
 }

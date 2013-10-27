@@ -9,6 +9,8 @@
 #include"../redis/RedisConnection.h"
 #include "../FileSystem/AllocatedBlocks.h"
 #include"../FileSystem/FileStreamWrite.h"
+#include "../DataBase/SingletoneConn.h"
+#include "../DataBase/Tables/Blocks.h"
 
 #define TYP_INIT 0 
 #define TYP_SMLE 1 
@@ -23,7 +25,7 @@ namespace Network {
         public:
             typedef boost::shared_ptr<TcpSession> pointer;
 
-            static pointer create(boost::asio::io_service& io_service, redis::RedisConnection * rI);
+            static pointer create(boost::asio::io_service& io_service, redis::RedisConnection * rI,Connection* connect);
 
 
             tcp::socket& socket();
@@ -32,7 +34,7 @@ namespace Network {
             ~TcpSession();
         private:
 
-            TcpSession(boost::asio::io_service& io_service, redis::RedisConnection * rI);
+            TcpSession(boost::asio::io_service& io_service, redis::RedisConnection * rI,Connection* connect);
             void send(std::string msg);
             void handle_write(const boost::system::error_code& /*error*/, size_t /*bytes_transferred*/);
             /**
@@ -54,6 +56,7 @@ namespace Network {
             int blockThis;
             FileSystem::StreamWrite* strWrite;
             unsigned long long byte_write_block;
+            Connection* conn;
         };
     }
 }
