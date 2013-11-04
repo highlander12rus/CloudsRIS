@@ -19,7 +19,7 @@ namespace Network {
         void UdpOnce::handle_receive(boost::system::error_code& error,
                 std::size_t bytes_transferred) {
             if (!error || error == boost::asio::error::message_size) {
-                 Event::UdpOnceEvent::Instance().runAll(error, bytes_transferred);
+                 //Event::UdpOnceEvent::Instance().runAll(error, bytes_transferred);
                 start_receive();
             }
         }

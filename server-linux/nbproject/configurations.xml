@@ -15,17 +15,11 @@
       <itemPath>DataBase/SingletoneConn.cpp</itemPath>
       <itemPath>DataBase/SingletoneConn.h</itemPath>
     </logicalFolder>
-    <logicalFolder name="Event" displayName="Event" projectFiles="true">
-      <itemPath>Event/EventListend.cpp</itemPath>
-      <itemPath>Event/EventListend.h</itemPath>
-      <itemPath>Event/UdpBrotcastEventListener.cpp</itemPath>
-      <itemPath>Event/UdpBrotcastEventListener.h</itemPath>
-      <itemPath>Event/UdpOnceEvent.cpp</itemPath>
-      <itemPath>Event/UdpOnceEvent.h</itemPath>
-    </logicalFolder>
     <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
       <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
       <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
+      <itemPath>Exception/MaxSearchPort.cpp</itemPath>
+      <itemPath>Exception/MaxSearchPort.h</itemPath>
     </logicalFolder>
     <logicalFolder name="FileSystem" displayName="FileSystem" projectFiles="true">
       <itemPath>FileSystem/AllocatedBlocks.cpp</itemPath>
@@ -40,6 +34,9 @@
       <itemPath>FileSystem/FileStreamWrite.h</itemPath>
     </logicalFolder>
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
+      <itemPath>Network/SearchServer.cpp</itemPath>
+      <itemPath>Network/SearchServer.h</itemPath>
+      <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
       <itemPath>Network/TcpServer.cpp</itemPath>
       <itemPath>Network/TcpServer.h</itemPath>
       <itemPath>Network/TcpSession.cpp</itemPath>
@@ -130,24 +127,16 @@
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -168,6 +157,12 @@
       <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -248,24 +243,16 @@
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -286,6 +273,12 @@
       <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>

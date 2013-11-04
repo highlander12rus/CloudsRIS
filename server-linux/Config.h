@@ -13,14 +13,21 @@
 #define PATH_TO_BLOCK "blockWareHouse/"
 
 
-//Threads pool
-#define THREADS_POOL_MAX 5
 
 /**
  * PORTS for listen 
 **/
+//@doto: вроде не испоьзуется
 #define PORT_LISTEN 45788
+//@doto: вроде не испоьзуется
+#define PORT_LISTEN_UDP 45796
 #define PORT_BROATCAST 45782
+
+/**
+ * Максимальное количество ошибок при поиске
+ * порта дял UDP
+ */
+#define MAX_CONNECTION_ERROR_PORT 100
 
 
 //   Network
