@@ -3,7 +3,7 @@
 namespace Network {
     namespace Tcp {
 
-        TcpServer::TcpServer(boost::asio::io_service* io_service, redis::RedisConnection * rI,Connection* connect)
+        TcpServer::TcpServer(boost::asio::io_service* io_service, IBaseEditor * rI,Connection* connect)
         : acceptor_(*io_service, tcp::endpoint(tcp::v4(), TCP_PORT_SERVER)) {
             this->io_service = io_service;
             this->redisInstance = rI;

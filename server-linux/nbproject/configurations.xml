@@ -39,6 +39,20 @@
       <itemPath>FileSystem/FileStreamWrite.cpp</itemPath>
       <itemPath>FileSystem/FileStreamWrite.h</itemPath>
     </logicalFolder>
+    <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
+      <itemPath>Helper/StringExtended.cpp</itemPath>
+      <itemPath>Helper/StringExtended.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="Interface" displayName="Interface" projectFiles="true">
+      <logicalFolder name="CurrentBaseOperations"
+                     displayName="CurrentBaseOperations"
+                     projectFiles="true">
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp</itemPath>
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperation.h</itemPath>
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp</itemPath>
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
       <itemPath>Network/TcpServer.cpp</itemPath>
       <itemPath>Network/TcpServer.h</itemPath>
@@ -52,6 +66,8 @@
       <itemPath>Network/UdpServer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="redis" displayName="redis" projectFiles="true">
+      <itemPath>redis/RedisAdaptor.cpp</itemPath>
+      <itemPath>redis/RedisAdaptor.h</itemPath>
       <itemPath>redis/RedisConnection.cpp</itemPath>
       <itemPath>redis/RedisConnection.h</itemPath>
       <itemPath>redis/anet.cpp</itemPath>
@@ -93,6 +109,8 @@
     <Elem>boost</Elem>
     <Elem>Event</Elem>
     <Elem>redis</Elem>
+    <Elem>Interface</Elem>
+    <Elem>Helper</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -169,6 +187,30 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/StringExtended.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/StringExtended.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
@@ -190,6 +232,10 @@
       <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="redis/RedisConnection.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -287,6 +333,30 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/StringExtended.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/StringExtended.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
@@ -308,6 +378,10 @@
       <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="redis/RedisConnection.cpp" ex="false" tool="1" flavor2="0">
       </item>

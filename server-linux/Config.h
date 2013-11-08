@@ -27,3 +27,6 @@
 #define BUFFER_SIZE 8192
 #define TCP_PORT_SERVER 6454
 #define SELF_IP "127.0.0.1"
+#define HEADER_TCP_LENGTH 136
+#define ERROR_TCP_SOCKET "11"
+#define TCP_SOCKET_OK "1"

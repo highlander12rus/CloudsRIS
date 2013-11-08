@@ -6,12 +6,14 @@
 #include <boost/asio.hpp>
 #include <sstream>
 #include <stdlib.h>
-#include"../redis/RedisConnection.h"
 #include "../FileSystem/AllocatedBlocks.h"
 #include"../FileSystem/FileStreamWrite.h"
 #include "../DataBase/SingletoneConn.h"
 #include "../DataBase/Tables/Blocks.h"
-
+#include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+#include "../Helper/StringExtended.h"
+#include <string>
+#include <vector>
 #define TYP_INIT 0 
 #define TYP_SMLE 1 
 #define TYP_BIGE 2 
@@ -25,7 +27,7 @@ namespace Network {
         public:
             typedef boost::shared_ptr<TcpSession> pointer;
 
-            static pointer create(boost::asio::io_service& io_service, redis::RedisConnection * rI,Connection* connect);
+            static pointer create(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect);
 
 
             tcp::socket& socket();
@@ -34,8 +36,24 @@ namespace Network {
             ~TcpSession();
         private:
 
-            TcpSession(boost::asio::io_service& io_service, redis::RedisConnection * rI,Connection* connect);
+            TcpSession(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect);
             void send(std::string msg);
+
+            /**
+             *
+             * разбор заголовков
+             */
+            void parseHeaders();
+            /**
+             * первый проход с модом w
+             * @param bytes_transferred
+             */
+            void wModeWorkFirst(size_t bytes_transferred);
+            /**
+             * действие с входящим параметром "w"
+             * @param bytes_transferred
+             */
+            void wModeWork(size_t bytes_transferred);
             void handle_write(const boost::system::error_code& /*error*/, size_t /*bytes_transferred*/);
             /**
              * функция преобразующая из сетевого порядка байт в число
@@ -43,13 +61,15 @@ namespace Network {
              * @return 
              */
             unsigned long long htonll(unsigned long long src);
+
             void handle_read(const boost::system::error_code& error, size_t bytes_transferred);
+
             char g[BUFFER_SIZE];
             tcp::socket socket_;
             std::stringstream token;
             unsigned long long byte_read_count;
             unsigned long long file_size;
-            redis::RedisConnection * redisInstance;
+            IBaseEditor * redisInstance;
             std::string mod;
             FileSystem::Block::AllocatedBlocks* blockMass;
             //текущий обрабатываемый блока

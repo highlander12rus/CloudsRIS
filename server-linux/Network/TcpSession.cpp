@@ -4,8 +4,8 @@
 namespace Network {
     namespace Tcp {
 
-        TcpSession::pointer TcpSession::create(boost::asio::io_service& io_service, redis::RedisConnection * rI,Connection* connect) {
-            return pointer(new TcpSession(io_service, rI,connect));
+        TcpSession::pointer TcpSession::create(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect) {
+            return pointer(new TcpSession(io_service, rI, connect));
         }
 
         tcp::socket& TcpSession::socket() {
@@ -36,7 +36,7 @@ namespace Network {
 
         }
 
-        TcpSession::TcpSession(boost::asio::io_service& io_service, redis::RedisConnection * rI, Connection* connect)
+        TcpSession::TcpSession(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect)
         : socket_(io_service) {
             this->redisInstance = rI;
             this->byte_read_count = 0;
@@ -50,72 +50,127 @@ namespace Network {
                 size_t /*bytes_transferred*/) {
         }
 
+        void TcpSession::parseHeaders() {
+            //считывание токена из сокета
+            for (int i = 0; i < 128; i++) {
+                token << g[i];
+            }
+
+            //считывание размера файла
+            char* tmpSize = new char[8];
+            for (int i = 0; i < 8; i++) {
+                tmpSize[i] = g[i + 128];
+            }
+
+            //конвертация
+            file_size = this->htonll(*tmpSize);
+            delete[] tmpSize;
+
+            //проверка на существование токена в базе
+            if (!this->redisInstance->exists(token.str())) {
+                this->send(ERROR_TCP_SOCKET);
+                return;
+            }
+            std::string value = this->redisInstance->get(token.str());
+            std::vector<std::string> spVect = Helper::StringExtended::split(value, ' ');
+            if(spVect.size()!=3){
+                this->send(ERROR_TCP_SOCKET);
+                return;
+            }
+            std::string sizeFile = spVect[1];
+
+            //проверка на соответствие размера файла
+            if (strtoul(sizeFile.c_str(), NULL, 0) != file_size) {
+                this->send(ERROR_TCP_SOCKET);
+                return;
+            }
+            mod = spVect[0];
+        }
+
+        void TcpSession::wModeWorkFirst(size_t bytes_transferred) {
+            //поиск места под файл
+            this->blockMass = new FileSystem::Block::AllocatedBlocks(file_size, SELF_IP);
+            if (blockMass->getVectors().size() == 1) {
+                unsigned long long sizeFileOrBuff = (((BUFFER_SIZE - HEADER_TCP_LENGTH) < file_size) ? (BUFFER_SIZE - HEADER_TCP_LENGTH) : file_size);
+                strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, sizeFileOrBuff);
+                char * tmp_buf = new char[sizeFileOrBuff];
+                memcpy(tmp_buf, &g + HEADER_TCP_LENGTH, sizeof (char)*(sizeFileOrBuff));
+                strWrite->write(tmp_buf, sizeFileOrBuff);
+                delete[] tmp_buf;
+                delete strWrite;
+                if ((bytes_transferred - HEADER_TCP_LENGTH) == file_size) {
+                    Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                    if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
+                        this->send(ERROR_TCP_SOCKET);
+                        delete blockDB;
+                        return;
+                    }
+                    this->send(TCP_SOCKET_OK);
+                    delete blockDB;
+                    return;
+                }
+            } else {
+                strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, BUFFER_SIZE - HEADER_TCP_LENGTH);
+                char * tmp_buf = new char[BUFFER_SIZE - HEADER_TCP_LENGTH];
+                memcpy(tmp_buf, &g + HEADER_TCP_LENGTH, sizeof (char)*(BUFFER_SIZE - HEADER_TCP_LENGTH));
+                strWrite->write(tmp_buf, BUFFER_SIZE - HEADER_TCP_LENGTH);
+                delete[] tmp_buf;
+                delete strWrite;
+                byte_write_block += BUFFER_SIZE - HEADER_TCP_LENGTH;
+            }
+        }
+
+        void TcpSession::wModeWork(size_t bytes_transferred) {
+            if (blockMass->getVectors().size() == 1) {
+                unsigned long long sizeFileOrBuff = (((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size);
+                strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space + byte_read_count - HEADER_TCP_LENGTH, sizeFileOrBuff);
+                char * tmp_buf = new char[sizeFileOrBuff];
+                memcpy(tmp_buf, &g, sizeof (char)*(sizeFileOrBuff));
+                strWrite->write(tmp_buf, sizeFileOrBuff);
+                delete[] tmp_buf;
+                delete strWrite;
+                if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
+                    Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                    if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
+                        this->send(ERROR_TCP_SOCKET);
+                        delete blockDB;
+                        return;
+                    }
+                    this->send(TCP_SOCKET_OK);
+                    delete blockDB;
+                    return;
+                }
+            } else {
+                strWrite = blockMass->getVectors()[blockThis]->writeFile(blockMass->getVectors()[blockThis]->occupied_space + byte_write_block, BUFFER_SIZE);
+                char * tmp_buf = new char[BUFFER_SIZE];
+                memcpy(tmp_buf, &g, sizeof (char)*(BUFFER_SIZE));
+                strWrite->write(tmp_buf, BUFFER_SIZE);
+                delete[] tmp_buf;
+                delete strWrite;
+                byte_write_block += BUFFER_SIZE;
+                if (byte_write_block + BUFFER_SIZE > BLOCK_SIZE) {
+                    Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                    if (!blockDB->updateOccuredSize(blockMass->getVectors()[blockThis]->pathToBlockID, byte_write_block)) {
+                        this->send(ERROR_TCP_SOCKET);
+                        delete blockDB;
+                        return;
+                    }
+                    delete blockDB;
+                    byte_write_block = 0;
+                    blockThis++;
+                }
+            }
+        }
+
         void TcpSession::handle_read(const boost::system::error_code& error, size_t bytes_transferred) {
             if (!error || error == boost::asio::error::message_size || bytes_transferred != 0) {
                 //std::cout << "handle read" << std::endl << "g=" << *g << std::endl;
 
                 //начальная проверка соединения
                 if (byte_read_count == 0 || bytes_transferred > (128 + 8)) {
-                    //считывание токена из сокета
-                    for (int i = 0; i < 128; i++) {
-                        token << g[i];
-                    }
-
-                    //считывание размера файла
-                    char* tmpSize = new char[8];
-                    for (int i = 0; i < 8; i++) {
-                        tmpSize[i] = g[i + 128];
-                    }
-
-                    //конвертация
-                    file_size = this->htonll(*tmpSize);
-                    delete[] tmpSize;
-
-                    //проверка на существование токена в базе
-                    if (!this->redisInstance->getConn().exists(token.str())) {
-                        this->send("11");
-                        return;
-                    }
-                    std::string value = this->redisInstance->getConn().get(token.str());
-                    std::string modLocal = value.substr(0, 1);
-                    std::string sizeFile = value.substr(2, value.length() - 3);
-
-                    //проверка на соответствие размера файла
-                    if (strtoul(sizeFile.c_str(), NULL, 0) != file_size) {
-                        this->send("11");
-                        return;
-                    }
-                    mod = modLocal;
+                    this->parseHeaders();
                     if (mod.compare("w")) {
-                        //поиск места под файл
-                        this->blockMass = new FileSystem::Block::AllocatedBlocks(file_size, SELF_IP);
-                        if (blockMass->getVectors().size() == 1) {
-                            strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, ((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size);
-                            char * tmp_buf = new char[((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size];
-                            memcpy(tmp_buf, &g + 136, sizeof (char)*(((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size));
-                            strWrite->write(tmp_buf, (((BUFFER_SIZE - 136) < file_size) ? (BUFFER_SIZE - 136) : file_size));
-                            delete[] tmp_buf;
-                            delete strWrite;
-                            if ((bytes_transferred - 136) == file_size) {
-                                Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
-                                if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
-                                    this->send("11");
-                                    delete blockDB;
-                                    return;
-                                }
-                                this->send("1");
-                                delete blockDB;
-                                return;
-                            }
-                        } else {
-                            strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, BUFFER_SIZE - 136);
-                            char * tmp_buf = new char[BUFFER_SIZE - 136];
-                            memcpy(tmp_buf, &g + 136, sizeof (char)*(BUFFER_SIZE - 136));
-                            strWrite->write(tmp_buf, BUFFER_SIZE - 136);
-                            delete[] tmp_buf;
-                            delete strWrite;
-                            byte_write_block += BUFFER_SIZE - 136;
-                        }
+                        this->wModeWorkFirst(bytes_transferred);
                     }
                     byte_read_count += bytes_transferred;
                     //TODO: mode r, mode s
@@ -124,50 +179,12 @@ namespace Network {
                 }
                 //дальше идет магия, без понятия что она делает
                 if (mod.compare("w")) {
-                    if (blockMass->getVectors().size() == 1) {
-                        strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space + byte_read_count - 136, ((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size);
-                        char * tmp_buf = new char[((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size];
-                        memcpy(tmp_buf, &g, sizeof (char)*(((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size));
-                        strWrite->write(tmp_buf, (((BUFFER_SIZE) < file_size) ? (BUFFER_SIZE) : file_size));
-                        delete[] tmp_buf;
-                        delete strWrite;
-                        if ((byte_read_count - 136) == file_size) {
-                            Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
-                            if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
-                                this->send("11");
-                                delete blockDB;
-                                return;
-                            }
-                            this->send("1");
-                            delete blockDB;
-                            return;
-                        }
-                    } else {
-                        strWrite = blockMass->getVectors()[blockThis]->writeFile(blockMass->getVectors()[blockThis]->occupied_space + byte_write_block, BUFFER_SIZE);
-                        char * tmp_buf = new char[BUFFER_SIZE];
-                        memcpy(tmp_buf, &g, sizeof (char)*(BUFFER_SIZE));
-                        strWrite->write(tmp_buf, BUFFER_SIZE);
-                        delete[] tmp_buf;
-                        delete strWrite;
-                        byte_write_block += BUFFER_SIZE;
-                        if (byte_write_block + BUFFER_SIZE > BLOCK_SIZE) {
-                            Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
-                            if (!blockDB->updateOccuredSize(blockMass->getVectors()[blockThis]->pathToBlockID, byte_write_block)) {
-                                this->send("11");
-                                delete blockDB;
-                                return;
-                            }
-                            delete blockDB;
-                            byte_write_block = 0;
-                            blockThis++;
-                        }
-                    }
-                    //strWrite = blockMass->getVectors()[blockThis].writeFile(blockMass->getVectors()[blockThis].occupied_space, file_size);
-                    //strWrite->write();
+
+                    this->wModeWork(bytes_transferred);
                 }
                 byte_read_count += bytes_transferred;
-                if ((byte_read_count - 136) == file_size) {
-                    this->send("1");
+                if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
+                    this->send(TCP_SOCKET_OK);
                     return;
                 }
                 this->start();

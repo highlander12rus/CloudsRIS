@@ -17,6 +17,8 @@
                 <sourceRootElem>boost</sourceRootElem>
                 <sourceRootElem>Event</sourceRootElem>
                 <sourceRootElem>redis</sourceRootElem>
+                <sourceRootElem>Interface</sourceRootElem>
+                <sourceRootElem>Helper</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

@@ -2,13 +2,13 @@
 
 #include "../Config.h"
 #include "TcpSession.h"
-#include"../redis/RedisConnection.h"
+
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
 #include "../DataBase/SingletoneConn.h"
-
+#include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
 using boost::asio::ip::tcp;
 
 
@@ -18,7 +18,7 @@ namespace Network {
         class TcpServer {
         public:
 
-            TcpServer(boost::asio::io_service* io_service, redis::RedisConnection * rI,Connection* connect);
+            TcpServer(boost::asio::io_service* io_service, IBaseEditor * rI,Connection* connect);
 
         private:
 
@@ -29,7 +29,7 @@ namespace Network {
 
             tcp::acceptor acceptor_;
             boost::asio::io_service* io_service;
-            redis::RedisConnection * redisInstance;
+            IBaseEditor * redisInstance;
             Connection* conn;
         };
 

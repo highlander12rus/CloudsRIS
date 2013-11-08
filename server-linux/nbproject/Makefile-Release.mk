@@ -49,12 +49,16 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileSystem/FileStream.o \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
+	${OBJECTDIR}/Helper/StringExtended.o \
+	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o \
+	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o \
 	${OBJECTDIR}/Network/TcpServer.o \
 	${OBJECTDIR}/Network/TcpSession.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
 	${OBJECTDIR}/Network/UdpServer.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/redis/RedisAdaptor.o \
 	${OBJECTDIR}/redis/RedisConnection.o \
 	${OBJECTDIR}/redis/anet.o
 
@@ -153,6 +157,21 @@ ${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
 
+${OBJECTDIR}/Helper/StringExtended.o: Helper/StringExtended.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/StringExtended.o Helper/StringExtended.cpp
+
+${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o: Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp
+
+${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o: Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp
+
 ${OBJECTDIR}/Network/TcpServer.o: Network/TcpServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
@@ -182,6 +201,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/redis/RedisAdaptor.o: redis/RedisAdaptor.cpp 
+	${MKDIR} -p ${OBJECTDIR}/redis
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisAdaptor.o redis/RedisAdaptor.cpp
 
 ${OBJECTDIR}/redis/RedisConnection.o: redis/RedisConnection.cpp 
 	${MKDIR} -p ${OBJECTDIR}/redis
