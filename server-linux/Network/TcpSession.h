@@ -12,6 +12,7 @@
 #include "../DataBase/Tables/Blocks.h"
 #include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
 #include "../Helper/StringExtended.h"
+#include"../DataBase/Tables/ServerFiles.h"
 #include <string>
 #include <vector>
 #define TYP_INIT 0 
@@ -61,9 +62,18 @@ namespace Network {
              * @return 
              */
             unsigned long long htonll(unsigned long long src);
-
+            /**
+             * отправка файла
+             */
+            void sendFile();
+            /**
+             * отправка бинарных данных
+             * @param buff буфер
+             * @param n размер буфера
+             */
+            void sendBinary(char* buff, unsigned int n);
             void handle_read(const boost::system::error_code& error, size_t bytes_transferred);
-
+            void handle_write_binary(const boost::system::error_code& error, size_t bytes_transferred);
             char g[BUFFER_SIZE];
             tcp::socket socket_;
             std::stringstream token;
@@ -77,6 +87,7 @@ namespace Network {
             FileSystem::StreamWrite* strWrite;
             unsigned long long byte_write_block;
             Connection* conn;
+            unsigned int idFile;
         };
     }
 }

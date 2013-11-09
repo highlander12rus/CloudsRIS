@@ -9,6 +9,7 @@
 #include <boost/asio.hpp>
 #include "../DataBase/SingletoneConn.h"
 #include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+#include "../DataBase/Tables/ServerFiles.h"
 using boost::asio::ip::tcp;
 
 

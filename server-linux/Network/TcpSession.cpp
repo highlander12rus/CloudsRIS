@@ -26,6 +26,16 @@ namespace Network {
 
         }
 
+        void TcpSession::sendBinary(char* buff, unsigned int n) {
+
+
+            boost::asio::async_write(socket_, boost::asio::buffer(buff, n),
+                    boost::bind(&TcpSession::handle_write_binary, shared_from_this(),
+                    boost::asio::placeholders::error,
+                    boost::asio::placeholders::bytes_transferred));
+
+        }
+
         void TcpSession::send(std::string msg) {
 
 
@@ -44,6 +54,10 @@ namespace Network {
             this->byte_write_block = 0;
             this->conn = connect;
 
+        }
+
+        void TcpSession::handle_write_binary(const boost::system::error_code& error,
+                size_t bytes_transferred) {
         }
 
         void TcpSession::handle_write(const boost::system::error_code& /*error*/,
@@ -73,12 +87,14 @@ namespace Network {
             }
             std::string value = this->redisInstance->get(token.str());
             std::vector<std::string> spVect = Helper::StringExtended::split(value, ' ');
-            if(spVect.size()!=3){
+            if (spVect.size() != 3) {
                 this->send(ERROR_TCP_SOCKET);
                 return;
             }
             std::string sizeFile = spVect[1];
-
+            if (spVect[0].compare("r")) {
+                idFile = strtoul(spVect[2].c_str(), NULL, 0);
+            }
             //проверка на соответствие размера файла
             if (strtoul(sizeFile.c_str(), NULL, 0) != file_size) {
                 this->send(ERROR_TCP_SOCKET);
@@ -106,6 +122,7 @@ namespace Network {
                         return;
                     }
                     this->send(TCP_SOCKET_OK);
+                    this->redisInstance->del(token.str());
                     delete blockDB;
                     return;
                 }
@@ -138,6 +155,7 @@ namespace Network {
                     }
                     this->send(TCP_SOCKET_OK);
                     delete blockDB;
+                    this->redisInstance->del(token.str());
                     return;
                 }
             } else {
@@ -162,18 +180,29 @@ namespace Network {
             }
         }
 
+        void TcpSession::sendFile() {
+
+            Database::Tables::ServerFiles* serverFilesTablet =new  Database::Tables::ServerFiles(conn);
+            ResultSet* res = serverFilesTablet->GetInfoByFileId(idFile, SELF_IP);
+
+        }
+
         void TcpSession::handle_read(const boost::system::error_code& error, size_t bytes_transferred) {
             if (!error || error == boost::asio::error::message_size || bytes_transferred != 0) {
                 //std::cout << "handle read" << std::endl << "g=" << *g << std::endl;
 
                 //начальная проверка соединения
                 if (byte_read_count == 0 || bytes_transferred > (128 + 8)) {
+
                     this->parseHeaders();
+                    if (mod.compare("r")) {
+                        sendFile();
+                    }
                     if (mod.compare("w")) {
                         this->wModeWorkFirst(bytes_transferred);
                     }
                     byte_read_count += bytes_transferred;
-                    //TODO: mode r, mode s
+
                     this->start();
 
                 }
@@ -181,13 +210,16 @@ namespace Network {
                 if (mod.compare("w")) {
 
                     this->wModeWork(bytes_transferred);
+
+                    byte_read_count += bytes_transferred;
+                    if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
+                        this->send(TCP_SOCKET_OK);
+                        this->redisInstance->del(token.str());
+                        return;
+                    }
+                    this->start();
                 }
-                byte_read_count += bytes_transferred;
-                if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
-                    this->send(TCP_SOCKET_OK);
-                    return;
-                }
-                this->start();
+
             } else {
 
                 std::cout << "connection clouse" << std::endl;
