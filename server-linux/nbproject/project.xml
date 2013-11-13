@@ -14,9 +14,9 @@
                 <sourceRootElem>Exception</sourceRootElem>
                 <sourceRootElem>FileSystem</sourceRootElem>
                 <sourceRootElem>Network</sourceRootElem>
-                <sourceRootElem>boost</sourceRootElem>
                 <sourceRootElem>Event</sourceRootElem>
                 <sourceRootElem>redis</sourceRootElem>
+                <sourceRootElem>Helper</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

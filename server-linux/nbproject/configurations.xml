@@ -33,10 +33,15 @@
       <itemPath>FileSystem/FileStreamWrite.cpp</itemPath>
       <itemPath>FileSystem/FileStreamWrite.h</itemPath>
     </logicalFolder>
+    <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
+      <itemPath>Helper/Network.cpp</itemPath>
+      <itemPath>Helper/Network.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
       <itemPath>Network/SearchServer.cpp</itemPath>
       <itemPath>Network/SearchServer.h</itemPath>
       <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
+      <itemPath>Network/StructUdpReceiveOtherServer.h</itemPath>
       <itemPath>Network/TcpServer.cpp</itemPath>
       <itemPath>Network/TcpServer.h</itemPath>
       <itemPath>Network/TcpSession.cpp</itemPath>
@@ -45,8 +50,6 @@
       <itemPath>Network/UdpBroatcast.h</itemPath>
       <itemPath>Network/UdpOnce.cpp</itemPath>
       <itemPath>Network/UdpOnce.h</itemPath>
-      <itemPath>Network/UdpServer.cpp</itemPath>
-      <itemPath>Network/UdpServer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="redis" displayName="redis" projectFiles="true">
       <itemPath>redis/RedisConnection.cpp</itemPath>
@@ -87,9 +90,9 @@
     <Elem>Exception</Elem>
     <Elem>FileSystem</Elem>
     <Elem>Network</Elem>
-    <Elem>boost</Elem>
     <Elem>Event</Elem>
     <Elem>redis</Elem>
+    <Elem>Helper</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -102,6 +105,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <standard>8</standard>
           <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals</commandLine>
         </ccTool>
       </compileType>
@@ -158,11 +162,20 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -179,10 +192,6 @@
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -274,11 +283,20 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -295,10 +313,6 @@
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

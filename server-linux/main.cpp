@@ -21,9 +21,9 @@ using boost::asio::ip::udp;
 void searchServe() {
     while (1) {
         char ip[] = "127.0.0.1";
-        Network::SearchServer search(45, ip);
+        Network::SearchServer search(45, ip, 10);
         search.search();
-        sleep(3);
+        sleep(10);
     }
 }
 

@@ -3,11 +3,18 @@
 #include "../Config.h"
 #include "../Exception/MaxSearchPort.h"
 #include "StructUdpBroatcastRecive.h"
-#include "UdpBroatcast.h"
+#include "StructUdpReceiveOtherServer.h"
+#include "UdpOnce.h"
+
+
+#include "../Helper/Network.h"
 
 #include <exception>
+#include <iostream>
 #include <boost/asio.hpp>
-#include <arpa/inet.h>
+#include <boost/thread/recursive_mutex.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
 
 //для генерации случайного порта
 #include <boost/random/mersenne_twister.hpp>
@@ -24,10 +31,11 @@ namespace Network {
     public:
         /**
          * 
-         * @param fileSize размер файла котоырй требуется найти
+         * @param fileSize размер файла котоырй требуется найти @todo: мб убрать из pапросить из базы?
          * @param curentIp ip адрес текущего компьтера
+         * @param fileId id файла из таблицы files
          */
-        SearchServer(unsigned long fileSize, char* curentIp);
+        SearchServer(unsigned long fileSize, char* curentIp, unsigned int fileId);
 
         /**
          * Запуск поиска
@@ -35,11 +43,18 @@ namespace Network {
          * @todo: в будущем будет возращать список серверов
          */
         void search();
-        
+
         ~SearchServer();
     private:
         unsigned long fileSize;
         char* curentIp;
+        unsigned int fileId;
+
+
+        //for threads jobs
+        boost::thread_group group_add_servers;
+        boost::recursive_mutex m_guard; //critical section
+        //-------
 
         /**
          * Количество ошибок при открытие порта
@@ -55,31 +70,29 @@ namespace Network {
 
         /**
          * Ждет ответ от серверов на порт. котоырй передан в sendBrotcast()
+         * @param socket сокет по которому установленно соедиднение которое слушать
          * @return  порт клиента на который будем ждать ответа
          */
-        void reciveReponceIntoPort();
+        void reciveReponceIntoPort(boost::asio::ip::udp::socket& socket);
 
         /**
          * Устанавливает содениние и возращает номер порта. и обьект сокета в парамер
-         * @param socket возращаеет сюда уставновленое соединение
          * @return 
          */
-        unsigned short randomPort(boost::asio::ip::udp::socket & socket);
-        
-        //@todo: мб следующийе две функции вынести в Utility класс?
+        Udp::UdpOnce* createOnce(boost::asio::io_service& io_service);
+
+    public:
         /**
-         * Конвертирование ip адресса из строки в unsigned int
-         * @param ipStr - строка ip v4 адреса, вида: "127.0.0.1"
-         * @return 
+         * @todo: мб тоже вунести в хелпер?
+         * Крутит цикл по принятию ответов 
+         * @param once
          */
-        uint32_t ipAddresToInt(char* ipStr);
-        
+        void reciverThreads(Udp::UdpOnce* once);
         /**
-         * конвертирование ip адресс из unsigned int в строку
-         * @param ip - ip адрес
-         * @return 
+         * Обработка принятых данных от клиента
+         * @param receiver
          */
-        char* ipIntToString(uint32_t ip);
+        void threadProccessingStruct(const Udp::UdpReceiveOtherServer& receiver);
     };
 
 }

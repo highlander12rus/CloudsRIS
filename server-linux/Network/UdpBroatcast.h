@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
@@ -6,6 +7,8 @@
 
 
 #include "StructUdpBroatcastRecive.h"
+#include "StructUdpReceiveOtherServer.h"
+#include "../Helper/Network.h"
 #include "../Config.h"
 
 using boost::asio::ip::udp;
@@ -22,13 +25,15 @@ namespace Network {
             ~UdpBroatcast();
             
             udp::socket* getSocket();
-            void handle_send(const boost::system::error_code& error,
-                    std::size_t bytes_transferred);
+    
 
             void start_receive();
             
         protected:
             void handle_receive(const boost::system::error_code& error,
+                    std::size_t bytes_transferred);
+            
+            void handle_send(const boost::system::error_code& error,
                     std::size_t bytes_transferred);
 
        

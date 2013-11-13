@@ -47,12 +47,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileSystem/FileStream.o \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
+	${OBJECTDIR}/Helper/Network.o \
 	${OBJECTDIR}/Network/SearchServer.o \
 	${OBJECTDIR}/Network/TcpServer.o \
 	${OBJECTDIR}/Network/TcpSession.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
-	${OBJECTDIR}/Network/UdpServer.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/redis/RedisConnection.o \
 	${OBJECTDIR}/redis/anet.o
@@ -142,6 +142,11 @@ ${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
 
+${OBJECTDIR}/Helper/Network.o: Helper/Network.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Network.o Helper/Network.cpp
+
 ${OBJECTDIR}/Network/SearchServer.o: Network/SearchServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
@@ -166,11 +171,6 @@ ${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
-
-${OBJECTDIR}/Network/UdpServer.o: Network/UdpServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpServer.o Network/UdpServer.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
