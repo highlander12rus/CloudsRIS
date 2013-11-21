@@ -13,21 +13,16 @@ namespace Network {
             unsigned int ip; 
             unsigned short port;
             
-            /**
-             * файл id  из таблицы files
-             */
-            unsigned int fileId;
             
             /**
              * Размер котоырй требуется найти на серваке
              */
             unsigned long fileSize;
             
-            UdpBroatcastRecive(unsigned int ip, unsigned short port, unsigned long fileSize, unsigned int fileId) {
+            UdpBroatcastRecive(unsigned int ip, unsigned short port, unsigned long fileSize) {
                 this->fileSize= fileSize;
                 this->ip = ip;
                 this->port = port;
-                this->fileId = fileId;
             }
             UdpBroatcastRecive() {
                 this->fileSize= 0;

@@ -11,7 +11,7 @@
 			FILE SYSTEM CONFIG
 */
 #define BLOCK_SIZE 536870912
-#define PATH_TO_BLOCK "blockWareHouse/"
+#define PATH_TO_BLOCK "/home/vfs/CloudsRIS/server-linux/blockWareHouse/"
 
 
 

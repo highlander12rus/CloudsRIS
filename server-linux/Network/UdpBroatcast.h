@@ -17,16 +17,18 @@ namespace Network {
         
         class UdpBroatcast {
         public:
+            
             UdpBroatcast(boost::asio::io_service& io_service,
                     udp::endpoint& listenAddress);
             
+            /**
+             * 
+             * @param recive
+             */
             void sendFreeSpaceRequest(UdpBroatcastRecive& recive);
             
             ~UdpBroatcast();
             
-            udp::socket* getSocket();
-    
-
             void start_receive();
             
         protected:
@@ -37,10 +39,8 @@ namespace Network {
                     std::size_t bytes_transferred);
 
        
-            /**
-             * Структура котoрую требутся принять
-             */
-            char* recv_buffer_;
+            char* recv_buffer_; //структура которую принмиаем в байтах
+          
             udp::socket socket_;
             udp::endpoint remote_endpoint_;
 

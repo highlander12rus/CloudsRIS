@@ -1,10 +1,6 @@
 #pragma once
-/* 
- * File:   UdpOnce.cpp
- * Author: vfs
- * 
- * Created on 29 Сентябрь 2013 г., 1:33
- */
+
+#include <boost/log/trivial.hpp>
 
 #include "UdpOnce.h"
 #include "StructUdpReceiveOtherServer.h"
@@ -31,8 +27,7 @@ namespace Network {
             if (!error || error == boost::asio::error::message_size) {
                  
                 UdpReceiveOtherServer reciver = *((UdpReceiveOtherServer*) recv_buffer_);
-                std:: cout << "handle_receive Udp Once, offset=" << reciver.offset << std::endl;
-                std:: cout << "handle_receive Udp Once, block_id=" << reciver.block_id << std::endl;
+                 BOOST_LOG_TRIVIAL(debug) << "handle_receive Udp Once, fileSize=" << reciver.freeSpace;
                 
                 start_receive();
             }

@@ -1,8 +1,10 @@
 #pragma once
 
+#include <boost/log/trivial.hpp>
 
 #include <iostream>
 #include <string>
+#include <boost/filesystem.hpp> 
 #include "UdpBroatcast.h"
 
 
@@ -20,33 +22,49 @@ namespace Network {
         }
 
         void UdpBroatcast::sendFreeSpaceRequest(UdpBroatcastRecive& reciver) {
-           char* ipString = Helper::Network::ipIntToString(reciver.ip);
-           std::cout << "sending responce " << std::endl;
-            std::cout << "boost addres =" << boost::asio::ip::address::from_string(ipString) << std::endl;
+            char* ipString = Helper::Network::ipIntToString(reciver.ip);
+
             boost::asio::ip::udp::endpoint sender_ep(boost::asio::ip::address::from_string(ipString), reciver.port);
-            Udp::UdpReceiveOtherServer lol(1, 10, 20);
 
-            socket_.async_send_to(boost::asio::buffer((char*) &lol, sizeof (UdpReceiveOtherServer)), sender_ep,
-                    boost::bind(&UdpBroatcast::handle_send, this,
-                    boost::asio::placeholders::error,
-                    boost::asio::placeholders::bytes_transferred));
-            std::cout << "sending sendFreeSpace complited" << std::endl;
+            //опредяем свободынй размер
+            boost::filesystem::path p(PATH_TO_BLOCK);
+            unsigned long long freeSpaceL = 0;
+            try {
+                boost::filesystem::space_info s = boost::filesystem::space(p);
+                freeSpaceL = s.free;
+            } catch (boost::filesystem::filesystem_error &e) {
+                BOOST_LOG_TRIVIAL(error) << e.what();
+            }
+            
+            
+            if (freeSpaceL > BLOCK_SIZE) {
+                //@todo: предпологаем, что сервера живы и июазем это только для посика бльших файлов:)
+                if(freeSpaceL > reciver.fileSize) {
+                    freeSpaceL = reciver.fileSize;
+                } else {
+                    //расчет сколько блоков можно вместить
+                    int countBlock = freeSpaceL / BLOCK_SIZE;
+                    freeSpaceL = countBlock * BLOCK_SIZE;
+                }
+                
+                Udp::UdpReceiveOtherServer freeSpace(freeSpaceL);
+                socket_.async_send_to(boost::asio::buffer((char*) &freeSpace, sizeof (UdpReceiveOtherServer)),
+                        sender_ep, boost::bind(&UdpBroatcast::handle_send, this,
+                        boost::asio::placeholders::error,
+                        boost::asio::placeholders::bytes_transferred)
+                        );
+            }
+
             delete[] ipString;
-        }
-
-        udp::socket* UdpBroatcast::getSocket() {
-            return &this->socket_;
         }
 
         void UdpBroatcast::handle_receive(const boost::system::error_code& error,
                 std::size_t bytes_transferred) {
 
             if (!error || error == boost::asio::error::message_size) {
-                std::cout << "recive data. bytes_transferred=" << bytes_transferred << std::endl;
-
                 UdpBroatcastRecive reciver = *((UdpBroatcastRecive*) recv_buffer_); //hack преобразование из байтов в стурктуру
                 sendFreeSpaceRequest(reciver);
-                
+
                 start_receive();
             }
         }
@@ -54,7 +72,8 @@ namespace Network {
         void UdpBroatcast::handle_send(
                 const boost::system::error_code& error,
                 std::size_t bytes_transferred) {
-            std::cout << "sending data=" << bytes_transferred << std::endl;
+            //После отправки ничего не делаем
+
         }
 
         void UdpBroatcast::start_receive() {

@@ -29,13 +29,13 @@ namespace Network {
      */
     class SearchServer {
     public:
+        
         /**
          * 
          * @param fileSize размер файла котоырй требуется найти @todo: мб убрать из pапросить из базы?
          * @param curentIp ip адрес текущего компьтера
-         * @param fileId id файла из таблицы files
          */
-        SearchServer(unsigned long fileSize, char* curentIp, unsigned int fileId);
+        SearchServer(unsigned long fileSize, char* curentIp);
 
         /**
          * Запуск поиска
@@ -45,16 +45,13 @@ namespace Network {
         void search();
 
         ~SearchServer();
+        
     private:
         unsigned long fileSize;
         char* curentIp;
-        unsigned int fileId;
 
-
-        //for threads jobs
-        boost::thread_group group_add_servers;
         boost::recursive_mutex m_guard; //critical section
-        //-------
+        
 
         /**
          * Количество ошибок при открытие порта
@@ -69,13 +66,6 @@ namespace Network {
         void sendBrotcast(unsigned short port);
 
         /**
-         * Ждет ответ от серверов на порт. котоырй передан в sendBrotcast()
-         * @param socket сокет по которому установленно соедиднение которое слушать
-         * @return  порт клиента на который будем ждать ответа
-         */
-        void reciveReponceIntoPort(boost::asio::ip::udp::socket& socket);
-
-        /**
          * Устанавливает содениние и возращает номер порта. и обьект сокета в парамер
          * @return 
          */
@@ -88,11 +78,7 @@ namespace Network {
          * @param once
          */
         void reciverThreads(Udp::UdpOnce* once);
-        /**
-         * Обработка принятых данных от клиента
-         * @param receiver
-         */
-        void threadProccessingStruct(const Udp::UdpReceiveOtherServer& receiver);
+        
     };
 
 }
