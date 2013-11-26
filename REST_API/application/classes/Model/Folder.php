@@ -9,18 +9,19 @@ class Model_Folder extends ORM {
         'id' => '',
         'name' => '',
         'user_id' => '',
-    );
-    protected $_has_many = array(
+    );    
+    
+    protected $_belongs_to  = array(
         'user' => array(
             'model' => 'User',
             'foreign_key' => 'user_id',
         ),
     );
     
-    
-    protected $_belongs_to  = array(
+    protected $_has_many = array(
         'files' => array(
-            'model' => 'Files',
+            'model' => 'File',
+            'foreign_key' => 'folder_id',
         ),
     );
 

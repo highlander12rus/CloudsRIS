@@ -13,48 +13,93 @@ class Model_File extends ORM {
         'date_Create' => '',
         'permission' => '',
     );
-    protected $_has_many = array(
+    protected $_belongs_to = array(
         'user' => array(
             'model' => 'User',
             'foreign_key' => 'user_id',
         ),
         'folder' => array(
             'model' => 'Folder',
-            'foreign_key' => 'folder_id',
+            'foreign_key' => 'id',
+            'far_key' => 'folder_id',
         ),
     );
 
-    public function filters() {
-        return array(
-            TRUE => array(
-                array('UTF8::trim', array(':value')),
-                array('HTML::chars', array(':value')),
-            ),
-        );
+    /**
+     * Проверяет на корректность данные
+     * @param array $post данные запроса
+     * @param \Validation куда передать обьек валидации
+     * @return bool прошла ли проверка
+     */
+    public function validationFileUploads(array $post, &$valid) {
+        
+        $valid = Validation::factory($post);
+       $post = Arr::map('UTF8::trim', $post);
+       $pos = Arr::map('HTML::chars', $post);
+        
+        $valid->rules('file_name', array(
+            array('not_empty'),
+            array('max_length', array(':value', 255)),
+        ));
+        $valid->rules('path', array(
+            array('not_empty'),
+            array('max_length', array(':value', 255)),
+        ));
+        $valid->rules('check', array(
+            array('not_empty'),
+            array('max_length', array(':value', 255)),
+        ));
+        $valid->rules('file_size', array(
+            array('not_empty'),
+            array('digit'),
+        ));
+        $valid->rules('security_method', array(
+            array('not_empty'),
+        ));
+        
+        return $valid->check();
     }
 
-    public function rules() {
-        return array(
-            'file_name' => array(
-                array('not_empty'),
-                array('max_length', array(':value', 255)),
-            ),
-            'path' => array(
-                array('not_empty'),
-                array('max_length', array(':value', 255)),
-            ),
-            'check' => array(
-                array('not_empty'),
-                array('max_length', array(':value', 255)),
-            ),
-            'file_size' => array(
-                array('not_empty'),
-            ),
-            'security_method' => array(
-                array('not_empty'),
-                array('digit'),
-            ),
-        );
+    /**
+     * Загрузка информации о файле
+     * @param array $data 
+     * @throws HTTP_Exception_404
+     */
+    public function saveFilesOperation(array $data) {
+        //проверяем есть ли папка у пользователя
+        $folder = ORM::factory('Folder')
+                ->where('name', '=', $data['path'])
+                ->where('user_id', '=', Auth::instance()->get_user()->id)
+                ->find();
+
+        if (!$folder->loaded())
+            throw new HTTP_Exception_404;
+
+        $file = ORM::factory('File');
+        $file->user_id = Auth::instance()->get_user()->id;
+        $file->name = $data['file_name'];
+        $file->folder_id = $folder->id;
+        $file->permission = 1;
+        $file->save();
+
+        DB::query(Database::INSERT, "INSERT IGNORE INTO `security_method` (`name`)"
+                        . "VALUES (:sec_name)")
+                ->parameters(array(
+                    ':sec_name' => $data['security_method'],
+                ))
+                ->execute();
+        
+       $sec_menhod = DB::select('id')
+                ->from('security_method')
+                ->where('name', '=', $data['security_method'])
+                ->execute()
+               ->as_array();
+       $sec_menhod_id = $sec_menhod[0]['id'];
+       
+       DB::insert('server_files', array('file_id', 'lenght', 'check', 'security_method_id'))
+               ->values(array($file->id, $data['file_size'], $data['check'], $sec_menhod_id))
+               ->execute();
+       
     }
 
 }

@@ -12,7 +12,7 @@ class Controller_Folder extends Controller_REST {
         $path = urldecode($path);
         $path = HTML::chars($path);
 
-        $isLastSlash = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
+        $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
 
         $foldes = ORM::factory('Folder')
                 ->where(DB::expr("(name REGEXP '{$path}[a-zA-z0-9]*[/]?$')"), '=', 1)

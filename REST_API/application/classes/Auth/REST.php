@@ -94,7 +94,7 @@ class Auth_REST {
      * 
      * @return string "уникальный" индификатор
      */
-    private function generateUniqId() {
+    public function generateUniqId() {
         return hash('sha512', uniqid(mt_rand(0, 2E8), true));
     }
 
