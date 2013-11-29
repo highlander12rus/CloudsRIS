@@ -11,7 +11,7 @@ class Controller_File extends Controller_REST {
         $fileModel = new Model_File();
         if (!$fileModel->validationFileUploads($_POST, $valid))
             throw new HTTP_Exception_400;
-        $fileModel->saveFilesOperation($valid->data());
+        $file_id = $fileModel->saveFilesOperation($valid->data());
 
         $token = Auth::instance()->generateUniqId();
         $options = array(
@@ -19,9 +19,11 @@ class Controller_File extends Controller_REST {
                 'server1' => array('host' => '127.0.0.1', 'port' => 6379)
             )
         );
-        //$rediska = new Rediska($options);
-        //$key = new Rediska_Key('keyName');
-        //$key->setValue('d');
+        $rediska = new Rediska($options);
+        $key = new Rediska_Key($token);
+        $data = $valid->data();
+        $key->setValue('w ' . $data['file_size']. ' ' . $file_id);
+        
         $this->json->server_uplouds = "localhost";
         $this->json->token_operation = $token;
     }

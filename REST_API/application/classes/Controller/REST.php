@@ -8,7 +8,7 @@ class Controller_REST extends Controller_JSON
      * Тип авторизации используемой на сервере
      */
 
-    const AUTH_TYPE = 'cloudsris';
+    const AUTH_TYPE = 'basic';
 
     //@todo: добавить логирование
     //@todo: рефракторинг
@@ -20,16 +20,14 @@ class Controller_REST extends Controller_JSON
             throw HTTP_Exception::factory(401)->authenticate(self::AUTH_TYPE);
         } else {
             //пробуем разобрать заголовок
-            if (UTF8::strpos($auth, '=') === FALSE) {
+            $auth = UTF8::strtolower($auth);
+            if (UTF8::strpos($auth, self::AUTH_TYPE) === FALSE) {
                 throw new HTTP_Exception_412(); //не верынй заголовок
             }
 
-            list($type, $access_token) = explode('=', $auth);
-            $type = UTF8::trim($type);
+            $auth = UTF8::trim($auth);
+            list($type, $access_token) = explode(' ', $auth);
             $access_token = UTF8::trim($access_token);
-
-            if (UTF8::strtolower($type) != self::AUTH_TYPE)
-                throw new HTTP_Exception_412(); //не верынй заголовок
 
             if (Auth::instance()->logged_in($access_token)) {
                 //Обновляем время дествия токена

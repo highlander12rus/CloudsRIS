@@ -63,6 +63,7 @@ class Model_File extends ORM {
     /**
      * Загрузка информации о файле
      * @param array $data 
+     * @return возвращает id файла
      * @throws HTTP_Exception_404
      */
     public function saveFilesOperation(array $data) {
@@ -99,6 +100,8 @@ class Model_File extends ORM {
        DB::insert('server_files', array('file_id', 'lenght', 'check', 'security_method_id'))
                ->values(array($file->id, $data['file_size'], $data['check'], $sec_menhod_id))
                ->execute();
+       
+       return $file->id; 
        
     }
 

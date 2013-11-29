@@ -16,9 +16,10 @@ class Controller_Auth extends Controller_JSON
             throw HTTP_Exception::factory(401)->authenticate('CloudsRIS');
         } else {
             //пробуем разобрать заголовок
-            if(UTF8::strpos($auth, '=') === FALSE) {
+            if(UTF8::strpos($auth, 'Login') === FALSE) {
                 throw new HTTP_Exception_412(); //не верынй заголовок
             }
+            $auth = UTF8::str_ireplace("Login", "", $auth);
             
             list($email, $password) = explode('=', $auth);
             $email = UTF8::trim($email);
