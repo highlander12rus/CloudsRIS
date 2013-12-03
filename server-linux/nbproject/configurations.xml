@@ -15,17 +15,11 @@
       <itemPath>DataBase/SingletoneConn.cpp</itemPath>
       <itemPath>DataBase/SingletoneConn.h</itemPath>
     </logicalFolder>
-    <logicalFolder name="Event" displayName="Event" projectFiles="true">
-      <itemPath>Event/EventListend.cpp</itemPath>
-      <itemPath>Event/EventListend.h</itemPath>
-      <itemPath>Event/UdpBrotcastEventListener.cpp</itemPath>
-      <itemPath>Event/UdpBrotcastEventListener.h</itemPath>
-      <itemPath>Event/UdpOnceEvent.cpp</itemPath>
-      <itemPath>Event/UdpOnceEvent.h</itemPath>
-    </logicalFolder>
     <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
       <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
       <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
+      <itemPath>Exception/MaxSearchPort.cpp</itemPath>
+      <itemPath>Exception/MaxSearchPort.h</itemPath>
     </logicalFolder>
     <logicalFolder name="FileSystem" displayName="FileSystem" projectFiles="true">
       <itemPath>FileSystem/AllocatedBlocks.cpp</itemPath>
@@ -39,15 +33,24 @@
       <itemPath>FileSystem/FileStreamWrite.cpp</itemPath>
       <itemPath>FileSystem/FileStreamWrite.h</itemPath>
     </logicalFolder>
+    <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
+      <itemPath>Helper/Network.cpp</itemPath>
+      <itemPath>Helper/Network.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
+      <itemPath>Network/SearchServer.cpp</itemPath>
+      <itemPath>Network/SearchServer.h</itemPath>
+      <itemPath>/home/vfs/CloudsRIS/server-linux/Network/StructServersResponce.h</itemPath>
+      <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
+      <itemPath>Network/StructUdpReceiveOtherServer.h</itemPath>
       <itemPath>Network/TcpServer.cpp</itemPath>
       <itemPath>Network/TcpServer.h</itemPath>
+      <itemPath>Network/TcpSession.cpp</itemPath>
+      <itemPath>Network/TcpSession.h</itemPath>
       <itemPath>Network/UdpBroatcast.cpp</itemPath>
       <itemPath>Network/UdpBroatcast.h</itemPath>
       <itemPath>Network/UdpOnce.cpp</itemPath>
       <itemPath>Network/UdpOnce.h</itemPath>
-      <itemPath>Network/UdpServer.cpp</itemPath>
-      <itemPath>Network/UdpServer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="redis" displayName="redis" projectFiles="true">
       <itemPath>redis/RedisConnection.cpp</itemPath>
@@ -84,13 +87,13 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>DataBase</Elem>
-    <Elem>Exception</Elem>
-    <Elem>FileSystem</Elem>
-    <Elem>Network</Elem>
-    <Elem>boost</Elem>
-    <Elem>Event</Elem>
-    <Elem>redis</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/DataBase</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Exception</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/FileSystem</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Network</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Event</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/redis</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Helper</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -98,14 +101,40 @@
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
-        <dependencyChecking>true</dependencyChecking>
+        <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandLine>-lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -lboost_filesystem -lboost_signals</commandLine>
+          <standard>8</standard>
+          <commandlineTool>g++</commandlineTool>
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+          <commandLine>-lrt -lmysqlcppconn</commandLine>
         </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/home/vfs/CloudsRIS/server-linux/mysql-connector-c++-1.1.3-linux-debian6.0-x86-64bit/lib</pElem>
+            <pElem>/usr/local/lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>/usr/local/lib/libboost_date_time.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_filesystem.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_log.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_serialization.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_system.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_thread.a</linkerLibFileItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
+      <item path="/home/vfs/CloudsRIS/server-linux/Network/StructServersResponce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
@@ -128,24 +157,16 @@
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -167,9 +188,28 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -178,10 +218,6 @@
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -220,6 +256,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="/home/vfs/CloudsRIS/server-linux/Network/StructServersResponce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
@@ -242,24 +283,16 @@
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -281,9 +314,28 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -292,10 +344,6 @@
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
