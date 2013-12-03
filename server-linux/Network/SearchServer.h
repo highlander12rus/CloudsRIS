@@ -6,11 +6,13 @@
 #include "StructUdpReceiveOtherServer.h"
 #include "UdpOnce.h"
 
-
+#include "StructServersResponce.h"
 #include "../Helper/Network.h"
 
 #include <exception>
 #include <iostream>
+#include <vector>
+#include <string>
 #include <boost/asio.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/thread/thread.hpp>
@@ -43,15 +45,16 @@ namespace Network {
          * @todo: в будущем будет возращать список серверов
          */
         void search();
-
+        
+        std::vector<ServersResponce> getServers();
+        
         ~SearchServer();
         
     private:
         unsigned long fileSize;
         char* curentIp;
 
-        boost::recursive_mutex m_guard; //critical section
-        
+        std::vector<ServersResponce> servers_;
 
         /**
          * Количество ошибок при открытие порта

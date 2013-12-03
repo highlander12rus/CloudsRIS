@@ -1,9 +1,15 @@
 #pragma once
 
+#include "StructServersResponce.h"
+
+#include <vector>
+#include <string>
 
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
+#include <boost/thread/lock_guard.hpp> 
+#include <boost/thread/recursive_mutex.hpp>
 
 using namespace boost::asio::ip;
 
@@ -23,6 +29,7 @@ namespace Network {
             void start_receive();
             unsigned short getPort();
             boost::asio::io_service& getService();
+            std::vector<ServersResponce> getServers();
 
         protected:
 
@@ -33,8 +40,15 @@ namespace Network {
             udp::socket socket_;
             udp::endpoint remote_endpoint_;
             
+           
+            std::vector<ServersResponce> servers_;
+            
             
             udp::endpoint listenAddress;
+            
+            //for critical sections
+ 
+            boost::recursive_mutex  m_guard;
 
         };
     }

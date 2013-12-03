@@ -40,6 +40,7 @@
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
       <itemPath>Network/SearchServer.cpp</itemPath>
       <itemPath>Network/SearchServer.h</itemPath>
+      <itemPath>/home/vfs/CloudsRIS/server-linux/Network/StructServersResponce.h</itemPath>
       <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
       <itemPath>Network/StructUdpReceiveOtherServer.h</itemPath>
       <itemPath>Network/TcpServer.cpp</itemPath>
@@ -129,6 +130,11 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="/home/vfs/CloudsRIS/server-linux/Network/StructServersResponce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
@@ -250,6 +256,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="/home/vfs/CloudsRIS/server-linux/Network/StructServersResponce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">

@@ -25,11 +25,24 @@ namespace Network {
         sleep(WAITING_RESPONSE_TIME_UDP);
         BOOST_LOG_TRIVIAL(debug) << "sleep complited, stop hreads reciver";
         io_service.stopped();
-         BOOST_LOG_TRIVIAL(debug) << "stop waaiting receive";
+        BOOST_LOG_TRIVIAL(debug) << "stop waaiting receive";
+         
+         //Поулчаем список серверов
+        std::vector<ServersResponce> servers = once->getServers();
+        BOOST_LOG_TRIVIAL(debug) << "start print servers";
+        for(std::vector<ServersResponce>::iterator it = servers.begin(); it != servers.end(); it++) {
+            BOOST_LOG_TRIVIAL(debug) << "iteration servers ip =" << (*it).ip;
+        }
+        BOOST_LOG_TRIVIAL(debug) << "end print servers";
+        
         delete once;
     }
 
     SearchServer::~SearchServer() {
+    }
+    
+    std::vector<ServersResponce> SearchServer::getServers() {
+        return this->servers_;
     }
 
     void SearchServer::sendBrotcast(unsigned short port) {
