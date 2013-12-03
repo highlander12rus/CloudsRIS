@@ -26,14 +26,13 @@ namespace Client
         const string site = " https://localhost:8000/auth/";
         public LoginWindow()
         {
-            Crypt cr = new Crypt();
-            //cr.FileDecrypt("E://1.txtTMP","E://1TMP.txt");
+           
             InitializeComponent();
         }
 
         private void Button_Enter_Click(object sender, RoutedEventArgs e)
         {
-            System.Net.Http.HttpClient httpclient = new HttpClient();
+            HttpClient httpclient = new HttpClient();
             httpclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Login marina=a7gssffdsd67ddsgas9");
             var response = httpclient.GetAsync(site);
            //System.Net.Http.HttpMethod.

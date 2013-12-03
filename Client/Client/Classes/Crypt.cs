@@ -205,6 +205,10 @@ namespace Client.Classes
             FileInfo f = new FileInfo(path); // Создаем объект класса, чтобы узнать длину файла в байтах
             return (int) f.Length;
         }
-
+         internal static ICrypt getICrypt()
+         {
+             Crypt crypt = new Crypt();
+             return crypt;
+         }
     }
 }

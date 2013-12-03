@@ -7,17 +7,17 @@ namespace Client.Interfaces
 {
     interface IFolder
     {
-        bool CreateFolder(string name);
+        bool CreateFolder(string path,string token);
         /// <summary>
         /// Изменение имени папки
         /// </summary>
         /// <param name="name">старое имя папки с указанием полного пути</param>
         /// <param name="new_name">новое имя папки с указанием полного пути</param>
         /// <returns></returns>
-        bool ChangeFolderName(string name, string new_name);
+        bool ChangeFolderName(string name, string new_name,string token);
 
-        bool DeleteFolder(string path);
+        bool DeleteFolder(string path,string token);
 
-        bool GetFolderContent(string path);
+        Dictionary<string, List<string>> GetFolderContent(string path, string token);
     }
 }
