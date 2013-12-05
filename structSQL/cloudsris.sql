@@ -381,4 +381,17 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+DROP PROCEDURE IF EXISTS `fileSpliter`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fileSpliter`(_file_id int(10) unsigned, _block_id int(10) unsigned, _sizeWriter int(10) unsigned)
+BEGIN
+SELECT @residual_size := `lenght`, @id_update := `id`, @last_order := `order`, @security_id := `security_method_id` FROM `server_files` WHERE `file_id` = _file_id ORDER BY `order` DESC LIMIT 1;
+UPDATE `server_files` SET `lenght`= _sizeWriter, `block_id`= _block_id WHERE `server_files`.`id` = @id_update;
+IF (@residual_size - _sizeWriter ) > 0 THEN
+        INSERT INTO `server_files` (`file_id`, `order`, `lenght`, `offset`, `security_method_id`) VALUES(_file_id, (@last_order + 1), (@residual_size - _sizeWriter), 0, @security_id); 
+END IF;
+
+END ;;
+DELIMITER ;
+
 -- Dump completed on 2013-11-09 18:15:26
