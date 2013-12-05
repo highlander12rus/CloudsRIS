@@ -136,6 +136,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+
+Route::set('cabineet_registration', 'registration')
+    ->defaults(array(
+            'controller' => 'Cabinet',
+            'action' => 'registration',
+        ));
 Route::set('cabineet_change_paswd', 'change_paswd')
     ->defaults(array(
             'controller' => 'Cabinet',

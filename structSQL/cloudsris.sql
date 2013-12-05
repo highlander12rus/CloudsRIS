@@ -257,8 +257,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lifetime` bigint(20) NOT NULL,
   `session_id` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
