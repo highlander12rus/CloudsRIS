@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=server-linux
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/server-linux
+CND_ARTIFACT_NAME_Debug=cloudsris
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/cloudsris
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=server-linux.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/server-linux.tar
+CND_PACKAGE_NAME_Debug=cloudsris.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/cloudsris.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=server-linux
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/server-linux
+CND_ARTIFACT_NAME_Release=cloudsris
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/cloudsris
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=server-linux.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/server-linux.tar
+CND_PACKAGE_NAME_Release=cloudsris.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/cloudsris.tar
 #
 # include compiler specific variables
 #
