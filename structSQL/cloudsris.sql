@@ -167,6 +167,8 @@ CREATE TABLE `server_files` (
   `order` tinyint(3) unsigned DEFAULT NULL,
   `check` varchar(33) DEFAULT NULL,
   `security_method_id` int(10) unsigned NOT NULL,
+  `date_insert` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_loaded` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   KEY `server_files_files_idx` (`file_id`),
   KEY `server_files_security_method_idx` (`security_method_id`),
@@ -181,7 +183,6 @@ CREATE TABLE `server_files` (
 
 LOCK TABLES `server_files` WRITE;
 /*!40000 ALTER TABLE `server_files` DISABLE KEYS */;
-INSERT INTO `server_files` VALUES (3,1,1,1,1,0,'1',1);
 /*!40000 ALTER TABLE `server_files` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +268,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'test1','test','dsasdsa'),(2,'test2','test','dasdsa'),(3,'test3','test','sdsa'),(4,'ter','dsdsa','tet');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
