@@ -26,7 +26,11 @@ namespace Client
         const string site = " https://localhost:8000/auth/";
         public LoginWindow()
         {
-           
+            Folder f = new Folder();
+            User user = new User();
+            var token = user.Authorize("ilia12r@gmail.com", "ilya");
+           // f.CreateFolder("/example",token );
+            f.DeleteFolder("/example", token);
             InitializeComponent();
         }
 
@@ -35,7 +39,7 @@ namespace Client
             HttpClient httpclient = new HttpClient();
             httpclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Login marina=a7gssffdsd67ddsgas9");
             var response = httpclient.GetAsync(site);
-           //System.Net.Http.HttpMethod.
+            //System.Net.Http.HttpMethod.
 
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, "http://e1.ru");
             Task<HttpResponseMessage> sendAsync = httpclient.SendAsync(httpRequestMessage);
