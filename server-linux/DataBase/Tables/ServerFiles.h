@@ -32,6 +32,15 @@ namespace Database {
              */
             ResultSet* getByFileId(uint32_t fileId);
             
+            /**
+             * получает информацию из базы с помощью сохраненной процедуры 
+             * возвращяет сет содержащий:
+             * порядок, сдвиг, адрес, длинну
+             * @param fileId
+             * @param ip
+             * @return 
+             */
+            ResultSet* GetInfoByFileId(uint32_t fileId,std::string ip);
             
             ~ServerFiles();
         };

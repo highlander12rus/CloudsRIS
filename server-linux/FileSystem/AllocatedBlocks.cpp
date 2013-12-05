@@ -29,11 +29,11 @@ namespace FileSystem {
                 //@todo: подумать с базой мб как то лучше можно а не обращатся к ней в цикле
 
                 uint32_t idInsert = block.insertBlocks(PATH_TO_BLOCK, 0,ip);
-                std::cout<< idInsert<<std::endl;
+         
                 std::stringstream pathToFile;
                 pathToFile << PATH_TO_BLOCK << "block_" << idInsert << ".blb";
                 string path = pathToFile.str();
-                blocks.push_back(new Block(path, NULL));
+                blocks.push_back(new Block(path, NULL,NULL));
             }
         }
 
@@ -51,7 +51,7 @@ namespace FileSystem {
             ResultSet* res = addresBlock.getBlokFreeSpaceId(ip, sizeFile);
 
             if (res->next())
-                blocks.push_back(new Block(res->getString(1)));
+                blocks.push_back(new Block(res->getString(1),strtoul(res->getString(2).c_str(),NULL,0)));
             else {
                 this->createBlock();
             }

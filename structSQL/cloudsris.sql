@@ -29,7 +29,7 @@ CREATE TABLE `address_blocks` (
   `ip` varchar(15) DEFAULT NULL,
   `blok_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `address_blocks` (
 
 LOCK TABLES `address_blocks` WRITE;
 /*!40000 ALTER TABLE `address_blocks` DISABLE KEYS */;
+INSERT INTO `address_blocks` VALUES (1,'localhost',1);
 /*!40000 ALTER TABLE `address_blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,7 +54,7 @@ CREATE TABLE `blocks` (
   `address` varchar(255) DEFAULT NULL,
   `occupied_space` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +63,7 @@ CREATE TABLE `blocks` (
 
 LOCK TABLES `blocks` WRITE;
 /*!40000 ALTER TABLE `blocks` DISABLE KEYS */;
+INSERT INTO `blocks` VALUES (1,'ttttt',234);
 /*!40000 ALTER TABLE `blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +87,7 @@ CREATE TABLE `files` (
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `files_folders_id` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `files_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +96,7 @@ CREATE TABLE `files` (
 
 LOCK TABLES `files` WRITE;
 /*!40000 ALTER TABLE `files` DISABLE KEYS */;
+INSERT INTO `files` VALUES (1,2,'d',1,'2013-11-09 00:44:16','2013-11-09 00:44:16','');
 /*!40000 ALTER TABLE `files` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +138,7 @@ CREATE TABLE `security_method` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +147,7 @@ CREATE TABLE `security_method` (
 
 LOCK TABLES `security_method` WRITE;
 /*!40000 ALTER TABLE `security_method` DISABLE KEYS */;
+INSERT INTO `security_method` VALUES (1,'dc');
 /*!40000 ALTER TABLE `security_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +172,7 @@ CREATE TABLE `server_files` (
   KEY `server_files_security_method_idx` (`security_method_id`),
   CONSTRAINT `server_files_files` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `server_files_security_method` FOREIGN KEY (`security_method_id`) REFERENCES `security_method` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,6 +181,7 @@ CREATE TABLE `server_files` (
 
 LOCK TABLES `server_files` WRITE;
 /*!40000 ALTER TABLE `server_files` DISABLE KEYS */;
+INSERT INTO `server_files` VALUES (3,1,1,1,1,0,'1',1);
 /*!40000 ALTER TABLE `server_files` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,6 +344,33 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `fileInfo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fileInfo`( _file_id int(10), _ip varchar(15))
+BEGIN
+
+SELECT `server_files`.`order`, `server_files`.`offset`, `blocks`.`address`, `server_files`.`lenght` 
+FROM (`cloudsris`.`blocks` INNER JOIN `cloudsris`.`address_blocks` ON `blocks`.`id` = `address_blocks`.`id`) 
+INNER JOIN `cloudsris`.`server_files` ON `blocks`.`id` = `server_files`.`block_id` 
+where 
+`server_files`.`file_id` = _file_id 
+AND 
+`address_blocks`.`ip` = _ip
+order by server_files.order;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -349,4 +381,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-11 17:13:20
+-- Dump completed on 2013-11-09 18:15:26
