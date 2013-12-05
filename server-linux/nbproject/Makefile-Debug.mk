@@ -40,9 +40,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
 	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
-	${OBJECTDIR}/Event/EventListend.o \
-	${OBJECTDIR}/Event/UdpBrotcastEventListener.o \
-	${OBJECTDIR}/Event/UdpOnceEvent.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
 	${OBJECTDIR}/Exception/MaxSearchPort.o \
 	${OBJECTDIR}/FileSystem/AllocatedBlocks.o \
@@ -60,7 +57,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Network/TcpSession.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
-	${OBJECTDIR}/Network/UdpServer.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/redis/RedisAdaptor.o \
 	${OBJECTDIR}/redis/RedisConnection.o \
@@ -71,8 +67,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-lmysqlcppconn -lrt
+CXXFLAGS=-lmysqlcppconn -lrt
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -81,165 +77,165 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-L/usr/local/lib /usr/local/lib/libboost_date_time.a /usr/local/lib/libboost_filesystem.a /usr/local/lib/libboost_serialization.a /usr/local/lib/libboost_system.a /usr/local/lib/libboost_thread.a /usr/local/lib/libboost_timer.a -lpthread /usr/local/lib/libboost_random.a /usr/local/lib/libboost_signals.a /usr/local/lib/libboost_signals.a /usr/local/lib/libboost_log.a
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_date_time.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_filesystem.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_serialization.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_system.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_thread.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_timer.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_random.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_signals.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_signals.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_log.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/SingletoneConn.o DataBase/SingletoneConn.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/SingletoneConn.o DataBase/SingletoneConn.cpp
 
 ${OBJECTDIR}/DataBase/Tables/AddressBlocks.o: DataBase/Tables/AddressBlocks.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/AddressBlocks.o DataBase/Tables/AddressBlocks.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/AddressBlocks.o DataBase/Tables/AddressBlocks.cpp
 
 ${OBJECTDIR}/DataBase/Tables/Blocks.o: DataBase/Tables/Blocks.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/Blocks.o DataBase/Tables/Blocks.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/Blocks.o DataBase/Tables/Blocks.cpp
 
 ${OBJECTDIR}/DataBase/Tables/SecurityMethod.o: DataBase/Tables/SecurityMethod.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/SecurityMethod.o DataBase/Tables/SecurityMethod.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/SecurityMethod.o DataBase/Tables/SecurityMethod.cpp
 
 ${OBJECTDIR}/DataBase/Tables/ServerFiles.o: DataBase/Tables/ServerFiles.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/ServerFiles.o DataBase/Tables/ServerFiles.cpp
-
-${OBJECTDIR}/Event/EventListend.o: Event/EventListend.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/EventListend.o Event/EventListend.cpp
-
-${OBJECTDIR}/Event/UdpBrotcastEventListener.o: Event/UdpBrotcastEventListener.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpBrotcastEventListener.o Event/UdpBrotcastEventListener.cpp
-
-${OBJECTDIR}/Event/UdpOnceEvent.o: Event/UdpOnceEvent.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpOnceEvent.o Event/UdpOnceEvent.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/ServerFiles.o DataBase/Tables/ServerFiles.cpp
 
 ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o: Exception/ExceptionFileNotOpened.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Exception
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o Exception/ExceptionFileNotOpened.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o Exception/ExceptionFileNotOpened.cpp
 
 ${OBJECTDIR}/Exception/MaxSearchPort.o: Exception/MaxSearchPort.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Exception
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/MaxSearchPort.o Exception/MaxSearchPort.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/MaxSearchPort.o Exception/MaxSearchPort.cpp
 
 ${OBJECTDIR}/FileSystem/AllocatedBlocks.o: FileSystem/AllocatedBlocks.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/AllocatedBlocks.o FileSystem/AllocatedBlocks.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/AllocatedBlocks.o FileSystem/AllocatedBlocks.cpp
 
 ${OBJECTDIR}/FileSystem/Block.o: FileSystem/Block.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/Block.o FileSystem/Block.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/Block.o FileSystem/Block.cpp
 
 ${OBJECTDIR}/FileSystem/FileStream.o: FileSystem/FileStream.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStream.o FileSystem/FileStream.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStream.o FileSystem/FileStream.cpp
 
 ${OBJECTDIR}/FileSystem/FileStreamRead.o: FileSystem/FileStreamRead.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamRead.o FileSystem/FileStreamRead.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamRead.o FileSystem/FileStreamRead.cpp
 
 ${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
 
 ${OBJECTDIR}/Helper/Network.o: Helper/Network.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Helper
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Network.o Helper/Network.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Network.o Helper/Network.cpp
 
 ${OBJECTDIR}/Helper/StringExtended.o: Helper/StringExtended.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Helper
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/StringExtended.o Helper/StringExtended.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/StringExtended.o Helper/StringExtended.cpp
 
 ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o: Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp
 
 ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o: Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp
 
 ${OBJECTDIR}/Network/SearchServer.o: Network/SearchServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchServer.o Network/SearchServer.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchServer.o Network/SearchServer.cpp
 
 ${OBJECTDIR}/Network/SearchSpace.o: Network/SearchSpace.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchSpace.o Network/SearchSpace.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchSpace.o Network/SearchSpace.cpp
 
 ${OBJECTDIR}/Network/TcpServer.o: Network/TcpServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpServer.o Network/TcpServer.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpServer.o Network/TcpServer.cpp
 
 ${OBJECTDIR}/Network/TcpSession.o: Network/TcpSession.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpSession.o Network/TcpSession.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpSession.o Network/TcpSession.cpp
 
 ${OBJECTDIR}/Network/UdpBroatcast.o: Network/UdpBroatcast.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpBroatcast.o Network/UdpBroatcast.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpBroatcast.o Network/UdpBroatcast.cpp
 
 ${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
-
-${OBJECTDIR}/Network/UdpServer.o: Network/UdpServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpServer.o Network/UdpServer.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/redis/RedisAdaptor.o: redis/RedisAdaptor.cpp 
 	${MKDIR} -p ${OBJECTDIR}/redis
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisAdaptor.o redis/RedisAdaptor.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisAdaptor.o redis/RedisAdaptor.cpp
 
 ${OBJECTDIR}/redis/RedisConnection.o: redis/RedisConnection.cpp 
 	${MKDIR} -p ${OBJECTDIR}/redis
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisConnection.o redis/RedisConnection.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisConnection.o redis/RedisConnection.cpp
 
 ${OBJECTDIR}/redis/anet.o: redis/anet.cpp 
 	${MKDIR} -p ${OBJECTDIR}/redis
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/anet.o redis/anet.cpp
+	$(COMPILE.cc) -g -I/usr/local/include -lmysqlcppconn -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/anet.o redis/anet.cpp
 
 # Subprojects
 .build-subprojects:
@@ -247,7 +243,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
 # Subprojects
 .clean-subprojects:

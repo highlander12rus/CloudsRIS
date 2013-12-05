@@ -40,9 +40,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
 	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
-	${OBJECTDIR}/Event/EventListend.o \
-	${OBJECTDIR}/Event/UdpBrotcastEventListener.o \
-	${OBJECTDIR}/Event/UdpOnceEvent.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
 	${OBJECTDIR}/Exception/MaxSearchPort.o \
 	${OBJECTDIR}/FileSystem/AllocatedBlocks.o \
@@ -60,7 +57,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Network/TcpSession.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
-	${OBJECTDIR}/Network/UdpServer.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/redis/RedisAdaptor.o \
 	${OBJECTDIR}/redis/RedisConnection.o \
@@ -85,11 +81,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -115,21 +111,6 @@ ${OBJECTDIR}/DataBase/Tables/ServerFiles.o: DataBase/Tables/ServerFiles.cpp
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/ServerFiles.o DataBase/Tables/ServerFiles.cpp
-
-${OBJECTDIR}/Event/EventListend.o: Event/EventListend.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/EventListend.o Event/EventListend.cpp
-
-${OBJECTDIR}/Event/UdpBrotcastEventListener.o: Event/UdpBrotcastEventListener.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpBrotcastEventListener.o Event/UdpBrotcastEventListener.cpp
-
-${OBJECTDIR}/Event/UdpOnceEvent.o: Event/UdpOnceEvent.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpOnceEvent.o Event/UdpOnceEvent.cpp
 
 ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o: Exception/ExceptionFileNotOpened.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Exception
@@ -216,11 +197,6 @@ ${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
 
-${OBJECTDIR}/Network/UdpServer.o: Network/UdpServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpServer.o Network/UdpServer.cpp
-
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -247,7 +223,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
 # Subprojects
 .clean-subprojects:

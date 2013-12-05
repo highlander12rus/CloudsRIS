@@ -15,14 +15,6 @@
       <itemPath>DataBase/SingletoneConn.cpp</itemPath>
       <itemPath>DataBase/SingletoneConn.h</itemPath>
     </logicalFolder>
-    <logicalFolder name="Event" displayName="Event" projectFiles="true">
-      <itemPath>Event/EventListend.cpp</itemPath>
-      <itemPath>Event/EventListend.h</itemPath>
-      <itemPath>Event/UdpBrotcastEventListener.cpp</itemPath>
-      <itemPath>Event/UdpBrotcastEventListener.h</itemPath>
-      <itemPath>Event/UdpOnceEvent.cpp</itemPath>
-      <itemPath>Event/UdpOnceEvent.h</itemPath>
-    </logicalFolder>
     <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
       <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
       <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
@@ -73,8 +65,6 @@
       <itemPath>Network/UdpBroatcast.h</itemPath>
       <itemPath>Network/UdpOnce.cpp</itemPath>
       <itemPath>Network/UdpOnce.h</itemPath>
-      <itemPath>Network/UdpServer.cpp</itemPath>
-      <itemPath>Network/UdpServer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="redis" displayName="redis" projectFiles="true">
       <itemPath>redis/RedisAdaptor.cpp</itemPath>
@@ -113,14 +103,14 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>DataBase</Elem>
-    <Elem>Event</Elem>
-    <Elem>Exception</Elem>
-    <Elem>FileSystem</Elem>
-    <Elem>Helper</Elem>
-    <Elem>Interface</Elem>
-    <Elem>Network</Elem>
-    <Elem>redis</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/DataBase</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Event</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Exception</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/FileSystem</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Helper</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Interface</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Network</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/redis</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -132,6 +122,30 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+          <commandLine>-lmysqlcppconn -lrt</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/local/lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>/usr/local/lib/libboost_date_time.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_filesystem.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_serialization.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_system.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_thread.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_timer.a</linkerLibFileItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_random.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_log.a</linkerLibFileItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -154,18 +168,6 @@
       <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
@@ -258,10 +260,6 @@
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -325,18 +323,6 @@
       </item>
       <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Event/EventListend.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/EventListend.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpBrotcastEventListener.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Event/UdpOnceEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Exception/ExceptionFileNotOpened.cpp"
             ex="false"
             tool="1"
@@ -428,10 +414,6 @@
       <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/UdpServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
