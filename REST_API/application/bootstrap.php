@@ -136,13 +136,33 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
-Route::set('folder_get', 'folder/<path>')
-    ->filter(function($route, $params, $request){
-        $params['action'] = strtolower($request->method());
-        return $params;
-    })
+Route::set('cabineet_change_paswd', 'change_paswd')
     ->defaults(array(
-            'controller' => 'Folder',
+            'controller' => 'Cabinet',
+            'action' => 'change_paswd',
+        ));
+Route::set('cabineet_exit', 'exit')
+    ->defaults(array(
+            'controller' => 'Cabinet',
+            'action' => 'exit',
+        ));
+
+Route::set('cabineet_autorization', 'autorization')
+    ->defaults(array(
+            'controller' => 'Cabinet',
+            'action' => 'autorization',
+        ));
+
+Route::set('cabineet', 'cabinet')
+    ->defaults(array(
+            'controller' => 'Cabinet',
+            'action' => 'index',
+        ));
+
+
+Route::set('site_index', '')
+    ->defaults(array(
+            'controller' => 'Site',
             'action' => 'index',
         ));
 
@@ -158,6 +178,6 @@ Route::set('api', '(<controller>(/<action>(/<id>)))')
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
         ->defaults(array(
-            'controller' => 'welcome',
+            'controller' => 'Site',
             'action' => 'index',
         ));

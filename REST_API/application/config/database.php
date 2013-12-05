@@ -21,7 +21,7 @@ return array
 			'hostname'   => 'localhost',
 			'database'   => 'cloudsris',
 			'username'   => 'root',
-			'password'   => 'root',
+			'password'   => '',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
@@ -41,7 +41,7 @@ return array
 			 */
 			'dsn'        => 'mysql:host=localhost;dbname=cloudsris',
 			'username'   => 'root',
-			'password'   => 'root',
+			'password'   => '',
 			'persistent' => FALSE,
 		),
 		/**

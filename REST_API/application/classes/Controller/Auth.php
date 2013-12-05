@@ -13,7 +13,7 @@ class Controller_Auth extends Controller_JSON
         //Проверяем заголовок
         $auth = $this->request->headers('authorization');
         if ($auth === NULL) { //авторизация не указана. передаем способ авторизации
-            throw HTTP_Exception::factory(401)->authenticate('CloudsRIS');
+            throw HTTP_Exception::factory(401)->authenticate('Basic');
         } else {
             //пробуем разобрать заголовок
             if(UTF8::strpos($auth, 'Login') === FALSE) {
