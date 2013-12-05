@@ -40,23 +40,25 @@ OBJECTFILES= \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
 	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
-	${OBJECTDIR}/Event/EventListend.o \
-	${OBJECTDIR}/Event/UdpBrotcastEventListener.o \
-	${OBJECTDIR}/Event/UdpOnceEvent.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
+	${OBJECTDIR}/Exception/MaxSearchPort.o \
 	${OBJECTDIR}/FileSystem/AllocatedBlocks.o \
 	${OBJECTDIR}/FileSystem/Block.o \
 	${OBJECTDIR}/FileSystem/FileStream.o \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
+<<<<<<< HEAD
 	${OBJECTDIR}/Helper/StringExtended.o \
 	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o \
 	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o \
+=======
+	${OBJECTDIR}/Helper/Network.o \
+	${OBJECTDIR}/Network/SearchServer.o \
+>>>>>>> 88a73150fc8faed6030b6521124c1cd09c2457aa
 	${OBJECTDIR}/Network/TcpServer.o \
 	${OBJECTDIR}/Network/TcpSession.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
 	${OBJECTDIR}/Network/UdpOnce.o \
-	${OBJECTDIR}/Network/UdpServer.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/redis/RedisAdaptor.o \
 	${OBJECTDIR}/redis/RedisConnection.o \
@@ -81,11 +83,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -112,25 +114,15 @@ ${OBJECTDIR}/DataBase/Tables/ServerFiles.o: DataBase/Tables/ServerFiles.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/ServerFiles.o DataBase/Tables/ServerFiles.cpp
 
-${OBJECTDIR}/Event/EventListend.o: Event/EventListend.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/EventListend.o Event/EventListend.cpp
-
-${OBJECTDIR}/Event/UdpBrotcastEventListener.o: Event/UdpBrotcastEventListener.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpBrotcastEventListener.o Event/UdpBrotcastEventListener.cpp
-
-${OBJECTDIR}/Event/UdpOnceEvent.o: Event/UdpOnceEvent.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Event
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Event/UdpOnceEvent.o Event/UdpOnceEvent.cpp
-
 ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o: Exception/ExceptionFileNotOpened.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Exception
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o Exception/ExceptionFileNotOpened.cpp
+
+${OBJECTDIR}/Exception/MaxSearchPort.o: Exception/MaxSearchPort.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Exception
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/MaxSearchPort.o Exception/MaxSearchPort.cpp
 
 ${OBJECTDIR}/FileSystem/AllocatedBlocks.o: FileSystem/AllocatedBlocks.cpp 
 	${MKDIR} -p ${OBJECTDIR}/FileSystem
@@ -157,6 +149,7 @@ ${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/Helper/StringExtended.o: Helper/StringExtended.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Helper
 	${RM} $@.d
@@ -171,6 +164,17 @@ ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o: Inte
 	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp
+=======
+${OBJECTDIR}/Helper/Network.o: Helper/Network.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Network.o Helper/Network.cpp
+
+${OBJECTDIR}/Network/SearchServer.o: Network/SearchServer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Network
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchServer.o Network/SearchServer.cpp
+>>>>>>> 88a73150fc8faed6030b6521124c1cd09c2457aa
 
 ${OBJECTDIR}/Network/TcpServer.o: Network/TcpServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
@@ -191,11 +195,6 @@ ${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
-
-${OBJECTDIR}/Network/UdpServer.o: Network/UdpServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -lmysqlcppconn -lboost_system -lboost_thread -lboost_serialization -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpServer.o Network/UdpServer.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -223,7 +222,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
 # Subprojects
 .clean-subprojects:

@@ -10,6 +10,7 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
+<<<<<<< HEAD
                 <sourceRootElem>DataBase</sourceRootElem>
                 <sourceRootElem>Exception</sourceRootElem>
                 <sourceRootElem>FileSystem</sourceRootElem>
@@ -19,6 +20,15 @@
                 <sourceRootElem>redis</sourceRootElem>
                 <sourceRootElem>Interface</sourceRootElem>
                 <sourceRootElem>Helper</sourceRootElem>
+=======
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/DataBase</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Exception</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/FileSystem</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Network</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Event</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/redis</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Helper</sourceRootElem>
+>>>>>>> 88a73150fc8faed6030b6521124c1cd09c2457aa
             </sourceRootList>
             <confList>
                 <confElem>

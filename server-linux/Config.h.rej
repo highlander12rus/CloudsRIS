@@ -1,0 +1,9 @@
+diff a/server-linux/Config.h b/server-linux/Config.h	(rejected hunks)
+@@ -20,6 +20,5 @@
+  * PORTS for listen 
+ **/
+ #define PORT_LISTEN 45788
+-#define PORT_BROATCAST 45782
+\ No newline at end of file
+ #define PORT_BROATCAST 45782
+ 
