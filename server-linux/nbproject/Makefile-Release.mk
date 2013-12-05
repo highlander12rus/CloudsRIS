@@ -81,11 +81,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -223,7 +223,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
 # Subprojects
 .clean-subprojects:

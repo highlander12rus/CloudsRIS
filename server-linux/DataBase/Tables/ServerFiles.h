@@ -41,7 +41,22 @@ namespace Database {
              * @return 
              */
             ResultSet* GetInfoByFileId(uint32_t fileId,std::string ip);
-            
+            /**
+             * вызывает хранимую процедуру для файлов размером превыщающих
+             * размер блока в системе, дробит записи на части.
+             * @param fileId
+             * @param blockId
+             * @param writeSize
+             * @return 
+             */
+            bool fileSpliter(uint32_t fileId, uint32_t blockId, uint32_t writeSize);
+            /**
+             * вставка сдвига файла в блоке в таблицу
+             * @param fileId
+             * @param order
+             * @return 
+             */
+            bool updateFileOffsetByIdAndOrder(uint32_t fileId, uint32_t order);
             ~ServerFiles();
         };
     }

@@ -81,31 +81,31 @@ LDLIBSOPTIONS=-L/usr/local/lib /usr/local/lib/libboost_date_time.a /usr/local/li
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_date_time.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_date_time.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_filesystem.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_filesystem.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_serialization.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_serialization.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_system.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_system.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_thread.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_thread.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_timer.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_timer.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_random.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_random.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_signals.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_signals.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_signals.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_signals.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_log.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_log.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -243,7 +243,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
 # Subprojects
 .clean-subprojects:

@@ -36,10 +36,10 @@ namespace Network {
 
         }
 
-        void TcpSession::send(std::string msg) {
+        void TcpSession::send(char msg) {
 
-
-            boost::asio::async_write(socket_, boost::asio::buffer(msg),
+            this->requestMessage[0] = msg;
+            boost::asio::async_write(socket_, boost::asio::buffer(requestMessage,1),
                     boost::bind(&TcpSession::handle_write, shared_from_this(),
                     boost::asio::placeholders::error,
                     boost::asio::placeholders::bytes_transferred));
@@ -53,6 +53,7 @@ namespace Network {
             this->blockThis = 0;
             this->byte_write_block = 0;
             this->conn = connect;
+            this->requestMessage = new char[1];
 
         }
 
@@ -116,6 +117,7 @@ namespace Network {
                 delete strWrite;
                 if ((bytes_transferred - HEADER_TCP_LENGTH) == file_size) {
                     Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
+                    
                     if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
                         this->send(ERROR_TCP_SOCKET);
                         delete blockDB;
@@ -231,6 +233,7 @@ namespace Network {
             for (int i = 0; i < blockMass->getVectors().size(); i++) {
                 delete blockMass->getVectors()[i];
             }
+            delete this->requestMessage;
         }
 
         unsigned long long TcpSession::htonll(unsigned long long src) {

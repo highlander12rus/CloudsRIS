@@ -19,9 +19,7 @@ namespace Database {
             delete prep_stmt;
             return res;
         }
-        
-        
-        
+
         ResultSet* ServerFiles::getByFileId(uint32_t fileId) {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
@@ -45,6 +43,29 @@ namespace Database {
             return res;
         }
 
+        bool ServerFiles::fileSpliter(uint32_t fileId, uint32_t blockId, uint32_t writeSize) {
+            sql::PreparedStatement* prep_stmt;
+            prep_stmt = conn-> prepareStatement("CALL `cloudsris`.`fileSpliter`(?,?,?);");
+            prep_stmt->setUInt(1, fileId);
+            prep_stmt->setUInt(2, blockId);
+            prep_stmt->setUInt(3, writeSize);
+            bool res = prep_stmt->execute();
+            delete prep_stmt;
+            return res;
+        }
+        
+        bool updateFileOffsetByIdAndOrder(uint32_t fileId,uint32_t order)
+        {
+            sql::PreparedStatement* prep_stmt;
+            prep_stmt = conn-> prepareStatement("UPDATE `cloudsris`.`server_files` SEt col='value'");
+            prep_stmt->setUInt(1, fileId);
+            prep_stmt->setUInt(2, order);
+            
+            bool res = prep_stmt->execute();
+            delete prep_stmt;
+            return res;
+        }
+        
         ServerFiles::~ServerFiles() {
         }
     }

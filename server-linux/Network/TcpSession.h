@@ -38,7 +38,7 @@ namespace Network {
         private:
 
             TcpSession(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect);
-            void send(std::string msg);
+            void send(char msg);
 
             /**
              *
@@ -88,6 +88,7 @@ namespace Network {
             unsigned long long byte_write_block;
             Connection* conn;
             unsigned int idFile;
+            char* requestMessage;
         };
     }
 }
