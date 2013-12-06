@@ -40,28 +40,22 @@ namespace Client.Classes
 
         public bool DeleteFolder(string path, string token)
         {
-           try
+            try
             {
 
-                var Request = HttpWebRequest.Create(URL_API_FOLDER) as HttpWebRequest;
-
-                Request.Method = "DELETE";
-                UTF8Encoding encoding = new UTF8Encoding();
-                Request.Credentials = CredentialCache.DefaultCredentials;
-                //Request.ContentLength = encoding.GetByteCount("name=" + path);
-                Request.Headers.Set(HttpRequestHeader.Authorization, "Basic " + token);
-                //Request.Headers.Add("Authorization", "Basic " + token);
-                //Request.Accept = "application/x-www-form-urlencoded";
-                Request.ContentType = "application/x-www-form-urlencoded";
-                
-                using (Stream requestStream = Request.GetRequestStream())
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL_API_FOLDER);
+                request.Method = "DELETE";
+                request.Headers.Add(@"Authorization: Basic " + token);
+                request.ContentType = "application/x-www-form-urlencoded";
+                string inputData = @"name=" + path;
+                byte[] requestBytes = new ASCIIEncoding().GetBytes(inputData);
+                using (Stream requestStream = request.GetRequestStream())
                 {
-                    requestStream.Write(encoding.GetBytes("name=" + path), 0,
-                        encoding.GetByteCount("name=" + path));
+                    requestStream.Write(requestBytes, 0, requestBytes.Length);
                 }
 
 
-                using (HttpWebResponse Response = Request.GetResponse() as HttpWebResponse)
+                using (HttpWebResponse Response = request.GetResponse() as HttpWebResponse)
                 {
                     if (Response.StatusCode == HttpStatusCode.NoContent)
                     {
@@ -69,9 +63,9 @@ namespace Client.Classes
                     }
                     return false;
                 }
-                
+
             }
-            catch 
+            catch (Exception e)
             {
                 return false;
             }

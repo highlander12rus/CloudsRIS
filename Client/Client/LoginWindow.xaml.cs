@@ -29,8 +29,8 @@ namespace Client
             Folder f = new Folder();
             User user = new User();
             var token = user.Authorize("ilia12r@gmail.com", "ilya");
-           // f.CreateFolder("/example",token );
-            f.DeleteFolder("/example", token);
+            f.CreateFolder("/example1",token );
+            f.DeleteFolder("/example1", token);
             InitializeComponent();
         }
 
