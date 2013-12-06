@@ -29,9 +29,16 @@ class Controller_File extends Controller_REST {
             throw new HTTP_Exception_404;
         }
        
+        $file_size = $file->getSize($file->id);
+        
+        
+        $rediska = new Rediska($options);
+        $key = new Rediska_Key($token);
+        $data = $valid->data();
+        $key->setValue('r ' . $file_size. ' ' . $file->id);
         
         $this->json->token_operation = Auth::instance()->generateUniqId();
-        $this->json->file_size = $file->getSize($file->id);
+        $this->json->file_size = $file_size;
         $this->json->chheck_sum = $file->getCheckSumm($file->id);
         $this->json->server_download = $file->getFilesLocationIp($file->id);
         
