@@ -97,12 +97,49 @@ class Model_File extends ORM {
                ->as_array();
        $sec_menhod_id = $sec_menhod[0]['id'];
        
-       DB::insert('server_files', array('file_id', 'lenght', 'check', 'security_method_id'))
-               ->values(array($file->id, $data['file_size'], $data['check'], $sec_menhod_id))
+       DB::insert('server_files', array('file_id', 'lenght', 'check', 'security_method_id', 'order'))
+               ->values(array($file->id, $data['file_size'], $data['check'], $sec_menhod_id, 0))
                ->execute();
        
        return $file->id; 
        
     }
+    
+    /**
+     * Получает размер файла
+     * @param int $file_id
+     * @return int - размер файл
+     */
+    public function getSize($file_id) {
+        
+        $result = DB::query(Database::SELECT, "SELECT SUM(`lenght`) as sum FROM `server_files` "
+                . "WHERE `file_id` = :file_id")
+            ->param(':file_id', $file_id)
+                ->execute()->as_array();
+       
+        return $result[0]['sum'];
+    }
 
+    public function getCheckSumm($file_id) {
+        $result = DB::select('check')
+                ->from('server_files')
+                ->where('order', '=', 0)
+                ->where('file_id', '=', $file_id)
+                ->execute()->as_array();
+    
+        return $result[0]['check'];
+                
+    }
+    
+    public function getFilesLocationIp($file_id) {
+        $res = Db::select('ip')
+                ->from('server_files')
+                ->join('address_blocks')
+                ->on('block_id', '=', 'blok_id')
+                ->where('file_id', '=', $file_id)
+                ->where('order', '=', 0)
+                ->execute();
+        return $res[0]['ip'];
+    }
+    
 }

@@ -4,8 +4,41 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Controller_File extends Controller_REST {
 
+    public function action_get() {
+        $get = Arr::map('urldecode', $_GET);
+        $folder = Arr::get($get, 'folder', NULL);
+        $file = Arr::get($get, 'file_name', NULL);
+        
+         $folder = $folder[UTF8::strlen($folder) - 1] != '/' ? $folder . '/' : $folder;
+        
+        if(!isset($file, $folder)) {
+            throw new HTTP_Exception_404;
+        }
+        
+        $folder = ORM::factory('Folder')
+                ->where('name', '=', $folder)
+                ->find();
+        if(!$folder->loaded()) {
+            throw new HTTP_Exception_404;
+        }
+        
+        $file = $folder->files
+                ->where('name', '=', $file)
+                ->find();
+        if(!$file->loaded()) {
+            throw new HTTP_Exception_404;
+        }
+       
+        
+        $this->json->token_operation = Auth::instance()->generateUniqId();
+        $this->json->file_size = $file->getSize($file->id);
+        $this->json->chheck_sum = $file->getCheckSumm($file->id);
+        $this->json->server_download = $file->getFilesLocationIp($file->id);
+        
+        
+    }
+    
     public function action_create() {
-
         //проверем корректност ьвведеных данных
         $valid;
         $fileModel = new Model_File();
