@@ -54,7 +54,7 @@ namespace Database {
             return res;
         }
         
-        bool updateFileOffsetByIdAndOrder(uint32_t fileId,uint32_t order)
+       /* bool updateFileOffsetByIdAndOrder(uint32_t fileId,uint32_t order)
         {
             sql::PreparedStatement* prep_stmt;
             prep_stmt = conn-> prepareStatement("UPDATE `cloudsris`.`server_files` SEt col='value'");
@@ -64,7 +64,7 @@ namespace Database {
             bool res = prep_stmt->execute();
             delete prep_stmt;
             return res;
-        }
+        }*/
         
         ServerFiles::~ServerFiles() {
         }
