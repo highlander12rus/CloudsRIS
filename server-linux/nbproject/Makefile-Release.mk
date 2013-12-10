@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/_ext/2022052277/Crypto.o \
+	${OBJECTDIR}/_ext/703227641/TcpBackupClient.o \
 	${OBJECTDIR}/DataBase/SingletoneConn.o \
 	${OBJECTDIR}/DataBase/Tables/AddressBlocks.o \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
@@ -81,11 +83,21 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/_ext/2022052277/Crypto.o: /home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2022052277
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/2022052277/Crypto.o /home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp
+
+${OBJECTDIR}/_ext/703227641/TcpBackupClient.o: /home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/703227641
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/703227641/TcpBackupClient.o /home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -223,7 +235,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
 
 # Subprojects
 .clean-subprojects:

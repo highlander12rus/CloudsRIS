@@ -34,16 +34,31 @@ void broatcastTaskRecive() {
     io_service.run();
 
 }
-
+#include <boost/uuid/uuid.hpp>            // uuid class
+#include <boost/uuid/uuid_generators.hpp> // generators
+#include <boost/uuid/uuid_io.hpp>         // streaming operators etc.
+#include <boost/lexical_cast.hpp>
+#include "Helper/Crypto.h"
 
 int main(int argc, char *argv[]) { 
-    BOOST_LOG_TRIVIAL(debug) << "Hello World";
+    
+    boost::uuids::uuid uuid = boost::uuids::random_generator()(); // тут не опечатка!
+    std::string str_unique = boost::lexical_cast<std::string> (uuid); 
+    Helper::Crypto crypto(str_unique);
+    unsigned char* hash = crypto.getHashSha512();
+    std::cout << crypto.sha512ToString(hash) << std::endl; 
+    
+    //std::cout << uuid << std::endl;
+    
+   /* BOOST_LOG_TRIVIAL(debug) << "Hello World";
     boost::thread_group threads;
     //threads.create_thread(boost::bind(broatcastTaskRecive, boost::cref(io_service)));
             threads.create_thread(broatcastTaskRecive);
     threads.create_thread(searchServe);
 
-    threads.join_all();
+    threads.join_all();*/
+    
+    
 
     return 0;
 }
