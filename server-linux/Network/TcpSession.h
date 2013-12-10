@@ -4,8 +4,10 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
+#include <boost/log/trivial.hpp>
 #include <sstream>
 #include <stdlib.h>
+#include "../FileSystem/Block.h"
 #include "../FileSystem/AllocatedBlocks.h"
 #include"../FileSystem/FileStreamWrite.h"
 #include "../DataBase/SingletoneConn.h"
@@ -89,6 +91,41 @@ namespace Network {
             Connection* conn;
             unsigned int idFile;
             char* requestMessage;
+            
+            //virable and function for read file and send clinet
+            FileSystem::StreamRead *sreadBock = NULL;   
+            /**
+             * Количесво байтов которые было прочитано перед отправкой из sreadBock
+             */
+            unsigned long long  bytes_last_read = 0;
+            
+            /**
+             * Количество байтов которое было отправленно после чтения sreadBock
+             */
+            unsigned long long  bytes_last_transferred = 0;
+            
+            /**
+             * Блкои скачиваемого файла из БД
+             */
+            ResultSet* result_read = NULL;
+            
+            /**
+             * Размер который осталось послать до завершение чтение из блока
+             */
+           // unsigned long long block_length = 0;
+            
+            char* buffer_for_read = new char[BUFFER_SIZE];
+            
+            /**
+             * Устанавливает sreadBlock  bytes_last_read и bytes_last_transferred
+             * для нового чтени блока
+             */
+            void set_virable_for_read_block ();
+            
+            /**
+             * Отправялет клиенту новый кусок данных
+             */
+            void sendToClientNewPartionData();
         };
     }
 }

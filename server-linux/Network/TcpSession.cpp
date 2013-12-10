@@ -39,7 +39,7 @@ namespace Network {
         void TcpSession::send(char msg) {
 
             this->requestMessage[0] = msg;
-            boost::asio::async_write(socket_, boost::asio::buffer(requestMessage,1),
+            boost::asio::async_write(socket_, boost::asio::buffer(requestMessage, 1),
                     boost::bind(&TcpSession::handle_write, shared_from_this(),
                     boost::asio::placeholders::error,
                     boost::asio::placeholders::bytes_transferred));
@@ -117,7 +117,7 @@ namespace Network {
                 delete strWrite;
                 if ((bytes_transferred - HEADER_TCP_LENGTH) == file_size) {
                     Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
-                    
+
                     if (!blockDB->updateOccuredSize(blockMass->getVectors()[0]->pathToBlockID, byte_write_block)) {
                         this->send(ERROR_TCP_SOCKET);
                         delete blockDB;
@@ -182,10 +182,55 @@ namespace Network {
             }
         }
 
-        void TcpSession::sendFile() {
+        void TcpSession::set_virable_for_read_block() {
+            std::string pathToBlock = result_read->getString(3);
+            unsigned int offset = result_read->getUInt(2);
+            unsigned int length = result_read->getUInt(4);
 
-            Database::Tables::ServerFiles* serverFilesTablet =new  Database::Tables::ServerFiles(conn);
-            ResultSet* res = serverFilesTablet->GetInfoByFileId(idFile, SELF_IP);
+            FileSystem::Block::Block block(pathToBlock, 0); //0т.к не важен размер дял нас
+            sreadBock = block.readFile(offset, length);
+        }
+
+        void TcpSession::sendToClientNewPartionData() {
+            if (result_read->next()) {
+                BOOST_LOG_TRIVIAL(debug) << "read next block";
+                //есть перезагружаем данные на отправку следующего блока
+                set_virable_for_read_block();
+                bytes_last_read = sreadBock->read(&(buffer_for_read[0]), BUFFER_SIZE);
+            } else {
+                //если данных нету то отправится bytes_last_read == 0 и мы закончим отправлять 
+                bytes_last_read = 0;
+            }
+        }
+
+        void TcpSession::sendFile() {
+            if (result_read == NULL) {
+                //first launch function =>init send file
+                Database::Tables::ServerFiles* serverFilesTablet = new Database::Tables::ServerFiles(conn);
+                result_read = serverFilesTablet->GetInfoByFileId(idFile, SELF_IP);
+                //read first bolck
+                set_virable_for_read_block();
+                BOOST_LOG_TRIVIAL(debug) << "first launch function";
+            }
+
+            if (bytes_last_transferred >= bytes_last_read) {
+                //read next partion or block
+                bytes_last_transferred = 0;
+                bytes_last_read = sreadBock->read(buffer_for_read, BUFFER_SIZE);
+                BOOST_LOG_TRIVIAL(debug) << "bytes was read in sendFile()" << bytes_last_read;
+
+                if (bytes_last_read == 0) {
+                    //Похоже что читать блок мы закончили
+                    sendToClientNewPartionData();
+                }
+
+                this->sendBinary(buffer_for_read, bytes_last_read);
+            } else {
+                BOOST_LOG_TRIVIAL(debug) << "Sending data has not been completed";
+                //Данные не были до отправленны сокетом
+                unsigned int residue = bytes_last_read - bytes_last_read;
+                this->sendBinary(&(buffer_for_read[bytes_last_read]), residue); //отправлем с bytes_last_read даныне) хак:)
+            }
 
         }
 
@@ -234,6 +279,11 @@ namespace Network {
                 delete blockMass->getVectors()[i];
             }
             delete this->requestMessage;
+            delete buffer_for_read;
+            if (sreadBock != NULL)
+                delete sreadBock;
+            if (result_read != NULL)
+                delete result_read;
         }
 
         unsigned long long TcpSession::htonll(unsigned long long src) {
