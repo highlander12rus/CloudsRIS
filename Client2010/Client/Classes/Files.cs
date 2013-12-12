@@ -55,13 +55,21 @@ namespace Client.Classes
         private bool sendFileTCP(string server_uplouds, string token_operation, Stream stream, ulong  fileSize)
         {
             TcpClient client = new TcpClient(server_uplouds, PORT_CONN_TCP);
-            byte[] buf= new byte[stream.Length+136];
-            (new ASCIIEncoding().GetBytes(token_operation)).CopyTo(buf,0);
+            byte[] buf= new byte[stream.Length];
+            //(new ASCIIEncoding().GetBytes(token_operation)).CopyTo(buf,0);
             //token_operation.ToCharArray().CopyTo(buf,0);
-            BitConverter.GetBytes(fileSize).CopyTo(buf,128);
-            BitConverter.3
-            var t = sizeof (ulong);
-            stream.Read(buf, 136, (int)stream.Length);
+            //BitConverter.GetBytes(fileSize).CopyTo(buf,128);
+
+
+            var utf8bytes = Encoding.UTF8.GetBytes(token_operation);
+            var ascii = Encoding.Convert(
+                            Encoding.UTF8, Encoding.GetEncoding("ASCII"), utf8bytes);
+
+            client.GetStream().Write(ascii, 0, 128);
+            client.GetStream().Write(BitConverter.GetBytes(fileSize), 0, sizeof(ulong));
+
+           // var t = sizeof (ulong);
+            stream.Read(buf, 0, (int)stream.Length);
             client.GetStream().Write(buf,0,(int)stream.Length);
             byte[] b = new byte[1];
             
