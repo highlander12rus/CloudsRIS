@@ -34,8 +34,8 @@
       <itemPath>FileSystem/FileStreamWrite.h</itemPath>
     </logicalFolder>
     <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
-      <itemPath>/home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp</itemPath>
-      <itemPath>/home/vfs/CloudsRIS/server-linux/Helper/Crypto.h</itemPath>
+      <itemPath>Helper/Crypto.cpp</itemPath>
+      <itemPath>Helper/Crypto.h</itemPath>
       <itemPath>Helper/Network.cpp</itemPath>
       <itemPath>Helper/Network.h</itemPath>
       <itemPath>Helper/StringExtended.cpp</itemPath>
@@ -59,8 +59,8 @@
       <itemPath>Network/StructServersResponce.h</itemPath>
       <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
       <itemPath>Network/StructUdpReceiveOtherServer.h</itemPath>
-      <itemPath>/home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp</itemPath>
-      <itemPath>/home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.h</itemPath>
+      <itemPath>Network/TcpBackupClient.cpp</itemPath>
+      <itemPath>Network/TcpBackupClient.h</itemPath>
       <itemPath>Network/TcpServer.cpp</itemPath>
       <itemPath>Network/TcpServer.h</itemPath>
       <itemPath>Network/TcpSession.cpp</itemPath>
@@ -128,6 +128,7 @@
       <compileType>
         <ccTool>
           <standard>8</standard>
+          <commandlineTool>g++</commandlineTool>
           <incDir>
             <pElem>/usr/local/include</pElem>
           </incDir>
@@ -152,26 +153,6 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="/home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="/home/vfs/CloudsRIS/server-linux/Helper/Crypto.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="/home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="/home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
@@ -225,6 +206,10 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/Crypto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Crypto.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
@@ -269,6 +254,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -318,6 +307,7 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
+          <standard>8</standard>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -326,26 +316,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="/home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="/home/vfs/CloudsRIS/server-linux/Helper/Crypto.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="/home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="/home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="Config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
@@ -399,6 +369,10 @@
       </item>
       <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Helper/Crypto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Crypto.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
@@ -443,6 +417,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
       </item>

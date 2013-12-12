@@ -11,7 +11,9 @@
 
 #include <iostream>
 #include <boost/array.hpp>
-
+#include "redis/RedisAdaptor.h"
+#include "Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+#include "Network/TcpServer.h"
 using boost::asio::ip::udp;
 
 void searchServe() {
@@ -34,31 +36,34 @@ void broatcastTaskRecive() {
     io_service.run();
 
 }
+
+void startTcpServer() {
+    boost::asio::io_service io_service;
+
+    IBaseEditor * IRedis = new redis::RedisAdaptor(&redis::RedisConnection::Instance());
+    
+    Network::Tcp::TcpServer serv(&io_service, IRedis, Database::SingletoneConn::Instance().getConnection());
+    io_service.run();
+}
+
 #include <boost/uuid/uuid.hpp>            // uuid class
 #include <boost/uuid/uuid_generators.hpp> // generators
 #include <boost/uuid/uuid_io.hpp>         // streaming operators etc.
 #include <boost/lexical_cast.hpp>
 #include "Helper/Crypto.h"
 
-int main(int argc, char *argv[]) { 
-    
-    boost::uuids::uuid uuid = boost::uuids::random_generator()(); // тут не опечатка!
-    std::string str_unique = boost::lexical_cast<std::string> (uuid); 
-    Helper::Crypto crypto(str_unique);
-    unsigned char* hash = crypto.getHashSha512();
-    std::cout << crypto.sha512ToString(hash) << std::endl; 
-    
-    //std::cout << uuid << std::endl;
-    
-   /* BOOST_LOG_TRIVIAL(debug) << "Hello World";
+int main(int argc, char *argv[]) {
+   
+    BOOST_LOG_TRIVIAL(debug) << "Start Server";
     boost::thread_group threads;
     //threads.create_thread(boost::bind(broatcastTaskRecive, boost::cref(io_service)));
-            threads.create_thread(broatcastTaskRecive);
-    threads.create_thread(searchServe);
+    threads.create_thread(broatcastTaskRecive);
+    threads.create_thread(startTcpServer);
+    
 
-    threads.join_all();*/
-    
-    
+    threads.join_all();
+
+
 
     return 0;
 }

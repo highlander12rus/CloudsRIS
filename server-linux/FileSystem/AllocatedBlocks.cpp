@@ -49,7 +49,7 @@ namespace FileSystem {
             sql::Connection* con = Database::SingletoneConn::Instance().getConnection();
             Database::Tables::AddressBlocks addresBlock(con);
             ResultSet* res = addresBlock.getBlokFreeSpaceId(ip, sizeFile);
-
+             
             if (res->next())
                 blocks.push_back(new Block(res->getString(1),strtoul(res->getString(2).c_str(),NULL,0)));
             else {

@@ -1,17 +1,18 @@
 #pragma once
 
 /*   		 DataBase Define	  	    */
-#define DBHOST "tcp://127.0.0.1:3306"
+#define DBHOST "tcp://192.168.89.129:3306"
 #define USER "root"
-#define PASSWORD "root"
+#define PASSWORD ""
 #define DATABASE "cloudsris"
 
+#define REDIS_HOST "192.168.89.129"
 
 /*
 			FILE SYSTEM CONFIG
 */
 #define BLOCK_SIZE 536870912
-#define PATH_TO_BLOCK "/home/vfs/CloudsRIS/server-linux/blockWareHouse/"
+#define PATH_TO_BLOCK "/home/vfs/NetBeansProjects/CloudsRis/blockWareHouse/"
 
 
 
@@ -45,7 +46,7 @@
 //   Network
 #define BUFFER_SIZE 8192
 #define TCP_PORT_SERVER 6454
-#define SELF_IP "127.0.0.1"
+#define SELF_IP "192.168.89.128"
 #define HEADER_TCP_LENGTH 136
 #define ERROR_TCP_SOCKET 11
 #define TCP_SOCKET_OK 1

@@ -73,15 +73,16 @@ namespace Network {
             for (int i = 0; i < 128; i++) {
                 token << g[i];
             }
-
+                BOOST_LOG_TRIVIAL(debug) <<"token = "<<token.str();
             //считывание размера файла
             char* tmpSize = new char[8];
             for (int i = 0; i < 8; i++) {
                 tmpSize[i] = g[i + 128];
             }
-
+            BOOST_LOG_TRIVIAL(debug) <<"tmpsize= "<<*((unsigned long long*)tmpSize);
             //конвертация
             file_size = this->htonll(*tmpSize);
+            BOOST_LOG_TRIVIAL(debug) <<"tmpsize= "<<file_size;
             delete[] tmpSize;
 
             //проверка на существование токена в базе
@@ -90,6 +91,7 @@ namespace Network {
                 return;
             }
             std::string value = this->redisInstance->get(token.str());
+            BOOST_LOG_TRIVIAL(debug) <<"redis token = " << value;
             std::vector<std::string> spVect = Helper::StringExtended::split(value, ' ');
 
             std::string sizeFile = spVect[1];
@@ -110,9 +112,12 @@ namespace Network {
 
         void TcpSession::wModeWorkFirst(size_t bytes_transferred) {
             //поиск места под файл
+             BOOST_LOG_TRIVIAL(debug) << "wModeFirst";
             this->blockMass = new FileSystem::Block::AllocatedBlocks(file_size, SELF_IP);
             if (blockMass->getVectors().size() == 1) {
+                
                 unsigned long long sizeFileOrBuff = (((BUFFER_SIZE - HEADER_TCP_LENGTH) < file_size) ? (BUFFER_SIZE - HEADER_TCP_LENGTH) : file_size);
+                 BOOST_LOG_TRIVIAL(debug) << "sizeFile or buf " << sizeFileOrBuff;
                 strWrite = blockMass->getVectors()[0]->writeFile(blockMass->getVectors()[0]->occupied_space, sizeFileOrBuff);
                 char * tmp_buf = new char[sizeFileOrBuff];
                 memcpy(tmp_buf, &g + HEADER_TCP_LENGTH, sizeof (char)*(sizeFileOrBuff));
@@ -120,6 +125,7 @@ namespace Network {
                 delete[] tmp_buf;
                 delete strWrite;
                 if ((bytes_transferred - HEADER_TCP_LENGTH) == file_size) {
+                    BOOST_LOG_TRIVIAL(debug) << "((bytes_transferred - HEADER_TCP_LENGTH) == file_size) (126)";
                     Database::Tables::Blocks* blockDB = new Database::Tables::Blocks(conn);
                     //вставка сдвига файла в блоке в таблицу файлов
                     Database::Tables::ServerFiles* servFile = new Database::Tables::ServerFiles(conn);
@@ -302,10 +308,12 @@ namespace Network {
                 if (byte_read_count == 0 || bytes_transferred > (128 + 8)) {
 
                     this->parseHeaders();
+                     BOOST_LOG_TRIVIAL(debug) << "parse headers " << mod <<" " << mod.compare("w");
                     if (mod.compare("r")) {
                         sendFile();
                     }
                     if (mod.compare("w")) {
+                         BOOST_LOG_TRIVIAL(debug) << "mod w start";
                         this->wModeWorkFirst(bytes_transferred);
                     }
                     if (mod.compare("s")) {

@@ -35,8 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/2022052277/Crypto.o \
-	${OBJECTDIR}/_ext/703227641/TcpBackupClient.o \
 	${OBJECTDIR}/DataBase/SingletoneConn.o \
 	${OBJECTDIR}/DataBase/Tables/AddressBlocks.o \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
@@ -49,12 +47,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileSystem/FileStream.o \
 	${OBJECTDIR}/FileSystem/FileStreamRead.o \
 	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
+	${OBJECTDIR}/Helper/Crypto.o \
 	${OBJECTDIR}/Helper/Network.o \
 	${OBJECTDIR}/Helper/StringExtended.o \
 	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o \
 	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o \
 	${OBJECTDIR}/Network/SearchServer.o \
 	${OBJECTDIR}/Network/SearchSpace.o \
+	${OBJECTDIR}/Network/TcpBackupClient.o \
 	${OBJECTDIR}/Network/TcpServer.o \
 	${OBJECTDIR}/Network/TcpSession.o \
 	${OBJECTDIR}/Network/UdpBroatcast.o \
@@ -83,41 +83,31 @@ LDLIBSOPTIONS=-L/usr/local/lib /usr/local/lib/libboost_date_time.a /usr/local/li
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_date_time.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_date_time.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_filesystem.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_filesystem.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_serialization.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_serialization.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_system.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_system.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_thread.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_thread.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_timer.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_timer.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_random.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_random.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_signals.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_signals.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_signals.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_signals.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: /usr/local/lib/libboost_log.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: /usr/local/lib/libboost_log.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/_ext/2022052277/Crypto.o: /home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/2022052277
-	${RM} $@.d
-	$(COMPILE.cc) -g -I/usr/local/include -std=c++11 -lmysqlcppconn -lrt -lcrypto -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/2022052277/Crypto.o /home/vfs/CloudsRIS/server-linux/Helper/Crypto.cpp
-
-${OBJECTDIR}/_ext/703227641/TcpBackupClient.o: /home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/703227641
-	${RM} $@.d
-	$(COMPILE.cc) -g -I/usr/local/include -std=c++11 -lmysqlcppconn -lrt -lcrypto -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/703227641/TcpBackupClient.o /home/vfs/CloudsRIS/server-linux/Network/TcpBackupClient.cpp
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase
@@ -179,6 +169,11 @@ ${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/usr/local/include -std=c++11 -lmysqlcppconn -lrt -lcrypto -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
 
+${OBJECTDIR}/Helper/Crypto.o: Helper/Crypto.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/usr/local/include -std=c++11 -lmysqlcppconn -lrt -lcrypto -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Crypto.o Helper/Crypto.cpp
+
 ${OBJECTDIR}/Helper/Network.o: Helper/Network.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Helper
 	${RM} $@.d
@@ -208,6 +203,11 @@ ${OBJECTDIR}/Network/SearchSpace.o: Network/SearchSpace.cpp
 	${MKDIR} -p ${OBJECTDIR}/Network
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/usr/local/include -std=c++11 -lmysqlcppconn -lrt -lcrypto -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchSpace.o Network/SearchSpace.cpp
+
+${OBJECTDIR}/Network/TcpBackupClient.o: Network/TcpBackupClient.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Network
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/usr/local/include -std=c++11 -lmysqlcppconn -lrt -lcrypto -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpBackupClient.o Network/TcpBackupClient.cpp
 
 ${OBJECTDIR}/Network/TcpServer.o: Network/TcpServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Network
@@ -255,7 +255,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/server-linux
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
 
 # Subprojects
 .clean-subprojects:
