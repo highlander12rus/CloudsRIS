@@ -79,9 +79,9 @@ namespace Network {
             for (int i = 0; i < 8; i++) {
                 tmpSize[i] = g[i + 128];
             }
-            BOOST_LOG_TRIVIAL(debug) <<"tmpsize= "<<*((unsigned long long*)tmpSize);
+           
             //конвертация
-            file_size = this->htonll(*tmpSize);
+            file_size = *((unsigned long long*)tmpSize);
             BOOST_LOG_TRIVIAL(debug) <<"tmpsize= "<<file_size;
             delete[] tmpSize;
 
@@ -95,18 +95,21 @@ namespace Network {
             std::vector<std::string> spVect = Helper::StringExtended::split(value, ' ');
 
             std::string sizeFile = spVect[1];
-
+            BOOST_LOG_TRIVIAL(debug) <<"size file red = " << sizeFile;
             idFile = strtoul(spVect[2].c_str(), NULL, 0);
-
+            BOOST_LOG_TRIVIAL(debug) <<"redis id file = " << idFile;
+            BOOST_LOG_TRIVIAL(debug) <<"redis strout = " << strtoul(sizeFile.c_str(), NULL, 0);
             //проверка на соответствие размера файла
             if (strtoul(sizeFile.c_str(), NULL, 0) != file_size) {
                 this->send(ERROR_TCP_SOCKET);
                 return;
             }
-            if (spVect[0].compare("s")) {
+            if (!spVect[0].compare("s")) {
                 this->order = strtoul(spVect[3].c_str(), NULL, 0);
                 this->offset = strtoul(spVect[4].c_str(), NULL, 0);
             }
+            BOOST_LOG_TRIVIAL(debug) <<"redis mod = " << mod;
+            BOOST_LOG_TRIVIAL(debug) <<"compare w= "<<spVect[0].compare("w");
             mod = spVect[0];
         }
 
@@ -309,14 +312,14 @@ namespace Network {
 
                     this->parseHeaders();
                      BOOST_LOG_TRIVIAL(debug) << "parse headers " << mod <<" " << mod.compare("w");
-                    if (mod.compare("r")) {
+                    if (!mod.compare("r")) {
                         sendFile();
                     }
-                    if (mod.compare("w")) {
+                    if (!mod.compare("w")) {
                          BOOST_LOG_TRIVIAL(debug) << "mod w start";
                         this->wModeWorkFirst(bytes_transferred);
                     }
-                    if (mod.compare("s")) {
+                    if (!mod.compare("s")) {
                         this->sModeWorkFirst(bytes_transferred);
                     }
                     byte_read_count += bytes_transferred;
@@ -325,7 +328,7 @@ namespace Network {
 
                 }
                 //дальше идет магия, без понятия что она делает
-                if (mod.compare("w")) {
+                if (!mod.compare("w")) {
 
                     this->wModeWork(bytes_transferred);
 
@@ -337,7 +340,7 @@ namespace Network {
                     }
                     this->start();
                 } else {
-                    if (mod.compare("s")) {
+                    if (!mod.compare("s")) {
 
                         this->sModeWork(bytes_transferred);
 
