@@ -24,7 +24,21 @@ namespace Database {
              */
             uint32_t insertBlock(std::string ip);
             
+            /**
+             * Запрос ip адресса блока 
+             * @param ip -адресс котоырй извлеч из выборки
+             * @param block_id 
+             * @return 
+             */
+            ResultSet* getOtherServerForBlock(std::string ip, unsigned int block_id);
             
+            /**
+             * Смотри есть ли дургие блоки у которых поле ip не равно ip
+             * @param block_id блоки котыре ищем на дургих серваках
+             * @param ip ip котоырй исключить из выборки
+             * @return  кол-во серверов
+             */
+            int countIssetOtherServers(unsigned int block_id, std::string ip);
             
             ~AddressBlocks();
 

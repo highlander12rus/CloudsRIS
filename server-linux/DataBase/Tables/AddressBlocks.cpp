@@ -34,6 +34,34 @@ namespace Database {
             
         }
         
+        
+        ResultSet* AddressBlocks::getOtherServerForBlock(std::string ip, unsigned int block_id) {
+            ResultSet* res;
+            sql::PreparedStatement* prep_stmt;
+            
+            std::string query = "SELECT `address_blocks`.`blok_id` FROM `address_blocks` WHERE `address_blocks`.`ip` != ?  AND `address_blocks`.`blok_id` = ?";
+            prep_stmt = conn-> prepareStatement(query);
+            prep_stmt->setString(1, ip);
+            prep_stmt->setUInt(2, block_id);
+            res = prep_stmt->executeQuery();
+            return res;
+        }
+        
+        int AddressBlocks::countIssetOtherServers(unsigned int block_id, std::string ip) {
+            ResultSet* res;
+            sql::PreparedStatement* prep_stmt;
+            
+            std::string query = "SELECT `address_blocks`.`blok_id` FROM `address_blocks` WHERE `address_blocks`.`ip` != ?  AND `address_blocks`.`blok_id` = ?";
+            prep_stmt = conn-> prepareStatement(query);
+            prep_stmt->setString(1, ip);
+            prep_stmt->setUInt(2, block_id);
+            res = prep_stmt->executeQuery();
+            
+            int count = res->rowsCount();
+            delete res, prep_stmt;
+            return count;
+        }
+        
         AddressBlocks::~AddressBlocks() {
         }
     }

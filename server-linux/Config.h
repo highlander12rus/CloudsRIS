@@ -37,6 +37,10 @@
  */
 #define WAITING_RESPONSE_TIME_UDP 3
 
+/**
+ * На сколкьо серваков делать бекап
+ */
+#define COUNT_SERVER_BACKUP 3
 
 //   Network
 #define BUFFER_SIZE 8192
