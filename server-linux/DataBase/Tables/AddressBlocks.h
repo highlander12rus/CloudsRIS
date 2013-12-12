@@ -22,6 +22,7 @@ namespace Database {
              * Вставлчет даныне блока, в 2 таблицы
              * @return 
              */
+
             uint32_t insertBlock(std::string ip);
             
             /**
@@ -39,7 +40,11 @@ namespace Database {
              * @return  кол-во серверов
              */
             int countIssetOtherServers(unsigned int block_id, std::string ip);
+
+            bool insertBlock(std::string ip,uint32_t idBlock);
             
+            bool isCreateBlock(std::string ip,uint32_t idBlock);
+
             ~AddressBlocks();
 
         private:

@@ -64,7 +64,7 @@ namespace Database {
              */
             bool updateOccuredSize(std::string path, uint32_t occured);
 
-
+            std::string GetPathToBlockByBlockId(uint32_t block_id);
             ~Blocks();
         private:
             Connection* conn;

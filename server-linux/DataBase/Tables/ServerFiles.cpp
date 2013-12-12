@@ -52,19 +52,36 @@ namespace Database {
             delete prep_stmt;
             return res;
         }
-        
-       /* bool updateFileOffsetByIdAndOrder(uint32_t fileId,uint32_t order)
-        {
+
+        bool ServerFiles::updateFileOffsetByIdAndOrder(uint32_t fileId, uint32_t order, uint32_t offset) {
             sql::PreparedStatement* prep_stmt;
-            prep_stmt = conn-> prepareStatement("UPDATE `cloudsris`.`server_files` SEt col='value'");
-            prep_stmt->setUInt(1, fileId);
-            prep_stmt->setUInt(2, order);
-            
+            prep_stmt = conn-> prepareStatement("UPDATE `server_files` SEt `offset`=? WHERE `file_id`=? AND `order`=?;'");
+            prep_stmt->setUInt(1, offset);
+            prep_stmt->setUInt(2, fileId);
+            prep_stmt->setUInt(3, order);
+
             bool res = prep_stmt->execute();
             delete prep_stmt;
             return res;
-        }*/
-        
+        }
+
+        uint32_t ServerFiles::GetBlockIdByFileIdAndOrder(uint32_t fileId, uint32_t order) {
+            ResultSet* res;
+            uint32_t id = 0;
+            sql::PreparedStatement* prep_stmt;
+            prep_stmt = conn-> prepareStatement("Select block_id from " + TABLE_NAME +
+                    "where file_id = ? AND order = ?");
+            prep_stmt->setUInt(1, fileId);
+            prep_stmt->setUInt(2, order);
+            res = prep_stmt->executeQuery();
+            delete prep_stmt;
+            if (res->next()) {
+                id = res->getInt(1);
+            }
+            delete res;
+            return id;
+        }
+
         ServerFiles::~ServerFiles() {
         }
     }
