@@ -54,9 +54,18 @@ namespace Database {
              * вставка сдвига файла в блоке в таблицу
              * @param fileId
              * @param order
+             * @param offset
              * @return 
              */
-            bool updateFileOffsetByIdAndOrder(uint32_t fileId, uint32_t order);
+            bool updateFileOffsetByIdAndOrder(uint32_t fileId,uint32_t order,uint32_t offset);
+            /**
+             * возвращает идинтификатор блока по  ид файла и номеру кусочка
+             * @param fileId
+             * @param order
+             * @return 
+             */
+            uint32_t GetBlockIdByFileIdAndOrder(uint32_t fileId,uint32_t order);
+            
             ~ServerFiles();
         };
     }

@@ -57,6 +57,17 @@ namespace Network {
              * @param bytes_transferred
              */
             void wModeWork(size_t bytes_transferred);
+            /**
+             * первый проход с модом s
+             * @param bytes_transferred
+             */
+            void sModeWorkFirst(size_t bytes_transferred);
+            /**
+             * действие с входящим параметром "s"
+             * @param bytes_transferred
+             */
+            void sModeWork(size_t bytes_transferred);
+            
             void handle_write(const boost::system::error_code& /*error*/, size_t /*bytes_transferred*/);
             /**
              * функция преобразующая из сетевого порядка байт в число
@@ -91,7 +102,10 @@ namespace Network {
             Connection* conn;
             unsigned int idFile;
             char* requestMessage;
-            
+            unsigned long long offset;
+            int order;
+            unsigned long long block_id;
+            FileSystem::Block::Block* BlockSMode;
             //virable and function for read file and send clinet
             FileSystem::StreamRead *sreadBock = NULL;   
             /**

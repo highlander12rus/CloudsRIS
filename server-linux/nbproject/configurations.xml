@@ -123,6 +123,8 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <standard>8</standard>
+          <commandlineTool>g++</commandlineTool>
           <incDir>
             <pElem>/usr/local/include</pElem>
           </incDir>
@@ -293,6 +295,7 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
+          <standard>8</standard>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>

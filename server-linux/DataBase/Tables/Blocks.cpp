@@ -92,6 +92,24 @@ namespace Database {
             delete prep_stmt;
             return result;
         }
+        
+        std::string Blocks::GetPathToBlockByBlockId(uint32_t block_id){
+            sql::PreparedStatement* prep_stmt;
+
+            std::string path = "";
+            ResultSet* res;
+            prep_stmt = conn->prepareStatement("select address "+ TABLE_NAME +
+                    "where id =?;");
+            
+            prep_stmt->setUInt(1, block_id);
+           
+            res = prep_stmt->executeQuery();
+            res->next();
+            path = res->getString(1);
+
+            delete prep_stmt, res;
+            return path;
+        }
 
         Blocks::~Blocks() {
 
