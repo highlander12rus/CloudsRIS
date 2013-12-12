@@ -24,8 +24,7 @@ namespace Database {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
 
-            prep_stmt = conn-> prepareStatement("SELECT * FROM " + TABLE_NAME
-                    + " WHERE `file_id` = ?");
+            prep_stmt = conn-> prepareStatement("SELECT * FROM `server_files` JOIN blocks on blocks.id = block_id   WHERE `server_files`.`file_id` = ?");
             prep_stmt->setUInt(1, fileId);
             res = prep_stmt->executeQuery();
             delete prep_stmt;
