@@ -17,6 +17,7 @@ class Controller_File extends Controller_REST {
         
         $folder = ORM::factory('Folder')
                 ->where('name', '=', $folder)
+				->where('user_id', '=', Auth::instance()->get_user()->id)
                 ->find();
         if(!$folder->loaded()) {
             throw new HTTP_Exception_404;
@@ -24,6 +25,7 @@ class Controller_File extends Controller_REST {
         
         $file = $folder->files
                 ->where('name', '=', $file)
+				->where('user_id', '=', Auth::instance()->get_user()->id)
                 ->find();
         if(!$file->loaded()) {
             throw new HTTP_Exception_404;
@@ -31,6 +33,7 @@ class Controller_File extends Controller_REST {
        
         $file_size = $file->getSize($file->id);
         
+		$token = Auth::instance()->generateUniqId();
 		$options = array(
             'servers' => array(
                 'server1' => array('host' => '192.168.89.129', 'port' => 6379)
@@ -39,10 +42,9 @@ class Controller_File extends Controller_REST {
         
         $rediska = new Rediska($options);
         $key = new Rediska_Key($token);
-        $data = $valid->data();
         $key->setValue('r ' . $file_size. ' ' . $file->id);
         
-        $this->json->token_operation = Auth::instance()->generateUniqId();
+        $this->json->token_operation = $token;
         $this->json->file_size = $file_size;
         $this->json->chheck_sum = $file->getCheckSumm($file->id);
         $this->json->server_download = $file->getFilesLocationIp($file->id);
