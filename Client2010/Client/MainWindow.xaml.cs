@@ -23,11 +23,12 @@ namespace Client
     {
         public MainWindow()
         {
-            
-            BinaryReader br = new BinaryReader(File.OpenRead(@"E:\testFiles"));
+
+            BinaryReader br = new BinaryReader(File.OpenRead(@"E:\ROSE_ENTERPRISE.iso"));
             Files F = new Files();
-            F.CreateFile("testName", "/", "dfgsdfggs", 41234, "sdfvg",
-                @"d6d549f011e12404730ddee7053fab47a488262a370c1bfb7067382b4bed03a987025154544b0316079cc782c317a7056754b6f7b6189b6d10201d3559dd10ff",br.BaseStream);
+            var filesize = File.OpenRead(@"E:\ROSE_ENTERPRISE.iso").Length;
+            F.CreateFile("testNameRose", "/", "dfgsdfggs", (ulong)filesize, "sdfvg",
+                @"23388df93f7ee3a10324f7793dc3c5da1634bfb97ad639b72ebe755ce1579de9c7ffa3f54be0af2fd1b4a819b523cee2935e44cb964bbadb47f25d7ca0837596", br.BaseStream);
 
             InitializeComponent();
         }

@@ -54,25 +54,39 @@ namespace Client.Classes
 
         private bool sendFileTCP(string server_uplouds, string token_operation, Stream stream, ulong  fileSize)
         {
-            TcpClient client = new TcpClient(server_uplouds, PORT_CONN_TCP);
-            byte[] buf= new byte[stream.Length];
+           // TcpClient client = new TcpClient(server_uplouds, PORT_CONN_TCP);
+            byte[] buf= new byte[stream.Length+136];
             //(new ASCIIEncoding().GetBytes(token_operation)).CopyTo(buf,0);
             //token_operation.ToCharArray().CopyTo(buf,0);
             //BitConverter.GetBytes(fileSize).CopyTo(buf,128);
 
-
+            
             var utf8bytes = Encoding.UTF8.GetBytes(token_operation);
+            
             var ascii = Encoding.Convert(
                             Encoding.UTF8, Encoding.GetEncoding("ASCII"), utf8bytes);
-
-            client.GetStream().Write(ascii, 0, 128);
-            client.GetStream().Write(BitConverter.GetBytes(fileSize), 0, sizeof(ulong));
-
+            ascii.CopyTo(buf,0);
+            //client.GetStream().Write(ascii, 0, 128);
+            //client.GetStream().Write(BitConverter.GetBytes(fileSize), 0, sizeof(ulong));
+            BitConverter.GetBytes(fileSize).CopyTo(buf,128);
            // var t = sizeof (ulong);
-            stream.Read(buf, 0, (int)stream.Length);
-            client.GetStream().Write(buf,0,(int)stream.Length);
+            stream.Read(buf, 136, (int)stream.Length);
+            //client.GetStream().Write(buf,0,(int)stream.Length);
             byte[] b = new byte[1];
+            Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            var ip = IPAddress.Parse(server_uplouds);
+            IPEndPoint ipep = new IPEndPoint(ip, 6454);
+            soc.NoDelay = true;
+            soc.SendTimeout = 500;
+            soc.Connect(ipep);
+
+           // soc.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 0);
+
             
+            soc.Send(buf);
+           // soc.Disconnect(true);
+            soc.Receive(b);
+            soc.Close();
             //client.GetStream().Read(b, 0, 1);
             return true;
         }
