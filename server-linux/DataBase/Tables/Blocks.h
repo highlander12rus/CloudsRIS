@@ -1,6 +1,8 @@
 #pragma once
 #include "../SingletoneConn.h"
 #include <string>
+#include <boost/log/trivial.hpp>
+
 //@TODO: poveshat na path index
 //@TODO: export databases; she was update!
 namespace Database {
@@ -65,6 +67,9 @@ namespace Database {
             bool updateOccuredSize(std::string path, uint32_t occured);
 
             std::string GetPathToBlockByBlockId(uint32_t block_id);
+            
+            uint32_t GetIdByPathToBlock(std::string path);
+            
             ~Blocks();
         private:
             Connection* conn;

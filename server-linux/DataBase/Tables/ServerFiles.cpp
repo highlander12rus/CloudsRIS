@@ -55,7 +55,7 @@ namespace Database {
 
         bool ServerFiles::updateFileOffsetByIdAndOrder(uint32_t fileId, uint32_t order, uint32_t offset) {
             sql::PreparedStatement* prep_stmt;
-            prep_stmt = conn-> prepareStatement("UPDATE `server_files` SEt `offset`=? WHERE `file_id`=? AND `order`=?;'");
+            prep_stmt = conn-> prepareStatement("UPDATE `server_files` SEt `offset`=? WHERE `file_id`=? AND `order`=?;");
             prep_stmt->setUInt(1, offset);
             prep_stmt->setUInt(2, fileId);
             prep_stmt->setUInt(3, order);
@@ -69,8 +69,8 @@ namespace Database {
             ResultSet* res;
             uint32_t id = 0;
             sql::PreparedStatement* prep_stmt;
-            prep_stmt = conn-> prepareStatement("Select block_id from " + TABLE_NAME +
-                    "where file_id = ? AND order = ?");
+            prep_stmt = conn-> prepareStatement("Select `block_id` from " + TABLE_NAME +
+                    " where file_id = ? AND order = ?");
             prep_stmt->setUInt(1, fileId);
             prep_stmt->setUInt(2, order);
             res = prep_stmt->executeQuery();
@@ -81,6 +81,19 @@ namespace Database {
             delete res;
             return id;
         }
+        
+        bool ServerFiles::updateBlockIdByFileIdAndOrder(uint32_t block_id, uint32_t file_id, uint32_t order) {
+            sql::PreparedStatement* prep_stmt;
+            prep_stmt = conn-> prepareStatement("UPDATE `server_files` SET `block_id`=? WHERE `file_id`=? AND `order`=?;");
+            prep_stmt->setUInt(1, block_id);
+            prep_stmt->setUInt(2, file_id);
+            prep_stmt->setUInt(3, order);
+
+            bool res = prep_stmt->execute();
+            delete prep_stmt;
+            return res;
+        }
+        
 
         ServerFiles::~ServerFiles() {
         }

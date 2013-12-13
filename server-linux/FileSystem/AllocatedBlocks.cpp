@@ -51,7 +51,10 @@ namespace FileSystem {
             ResultSet* res = addresBlock.getBlokFreeSpaceId(ip, sizeFile);
              
             if (res->next())
-                blocks.push_back(new Block(res->getString(1),strtoul(res->getString(2).c_str(),NULL,0)));
+            {
+                std::cout<<"path to block = "<<res->getString(1)<<"occured = "<<res->getInt64(2)<<std::endl;
+                blocks.push_back(new Block(res->getString(1),res->getInt64(2)));
+            }
             else {
                 this->createBlock();
             }
