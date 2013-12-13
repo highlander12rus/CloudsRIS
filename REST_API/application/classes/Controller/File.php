@@ -31,6 +31,11 @@ class Controller_File extends Controller_REST {
        
         $file_size = $file->getSize($file->id);
         
+		$options = array(
+            'servers' => array(
+                'server1' => array('host' => '192.168.89.129', 'port' => 6379)
+            )
+        );
         
         $rediska = new Rediska($options);
         $key = new Rediska_Key($token);
@@ -56,7 +61,7 @@ class Controller_File extends Controller_REST {
         $token = Auth::instance()->generateUniqId();
         $options = array(
             'servers' => array(
-                'server1' => array('host' => '127.0.0.1', 'port' => 6379)
+                'server1' => array('host' => '192.168.89.129', 'port' => 6379)
             )
         );
         $rediska = new Rediska($options);
@@ -64,7 +69,7 @@ class Controller_File extends Controller_REST {
         $data = $valid->data();
         $key->setValue('w ' . $data['file_size']. ' ' . $file_id);
         
-        $this->json->server_uplouds = "localhost";
+        $this->json->server_uplouds = "192.168.89.129";
         $this->json->token_operation = $token;
     }
 
