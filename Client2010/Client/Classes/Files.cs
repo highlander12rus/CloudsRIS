@@ -117,8 +117,8 @@ namespace Client.Classes
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", token);
             var response = client.SendAsync(request);
             var result = response.Result.Content.ReadAsStringAsync();
-            if ("OK" == response.Status.ToString())
-            {
+         //   if ("OK" == response.Status.ToString())
+          //  {
 
                 dynamic json = JsonConvert.DeserializeObject(result.Result);
 
@@ -127,7 +127,7 @@ namespace Client.Classes
                 string server_download = json.server_download;
                 string chheck_sum = json.chheck_sum;
                 downloadFile(token_operation, server_download, fileSize);
-            }
+          //  }
 
 
 
@@ -148,11 +148,14 @@ namespace Client.Classes
             soc.NoDelay = true;
             soc.Connect(ipep);
             soc.Send(buf);
+            var t = soc.Available;
+            
             soc.Shutdown(SocketShutdown.Send);
             byte[] returnFile = new byte[fileSize];
             soc.Receive(returnFile);
             BinaryWriter br = new BinaryWriter(File.Create(@"E:\returnFile"));
             br.Write(returnFile);
+            soc.Shutdown(SocketShutdown.Both);
             soc.Close();
 
         }
