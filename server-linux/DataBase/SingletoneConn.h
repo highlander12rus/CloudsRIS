@@ -9,6 +9,10 @@
 #include <cppconn/resultset_metadata.h>
 #include <cppconn/exception.h>
 #include <cppconn/warning.h>
+
+#include <boost/thread/lock_guard.hpp> 
+#include <boost/thread/recursive_mutex.hpp>
+
 #include "../Config.h"
 using namespace sql;
 
@@ -28,10 +32,16 @@ namespace Database{
                  * @return 
                  */
                 Connection* getConnection();
+                
+                
+                //for critical sections
+                boost::recursive_mutex  m_guard;
+                
 	private:
 		Driver *driver;
 		Connection *con;
 		Statement *stmt;
+                
         
 		SingletoneConn();
 		SingletoneConn(const SingletoneConn&);

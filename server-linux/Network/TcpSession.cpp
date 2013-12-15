@@ -16,7 +16,7 @@ namespace Network {
             /**
              * http://www.boost.org/doc/libs/1_38_0/doc/html/boost_asio/example/http/client/async_client.cpp
              */
-
+            BOOST_LOG_TRIVIAL(debug) << "Start new client";
             boost::asio::async_read(socket_, boost::asio::buffer(g),
                     boost::bind(&TcpSession::handle_read, shared_from_this(),
                     boost::asio::placeholders::error,
@@ -48,6 +48,7 @@ namespace Network {
 
         TcpSession::TcpSession(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect)
         : socket_(io_service) {
+            BOOST_LOG_TRIVIAL(debug) << "Create new session user";
             this->redisInstance = rI;
             this->byte_read_count = 0;
             this->blockThis = 0;
@@ -245,7 +246,7 @@ namespace Network {
             buffer_curent_size = length > BUFFER_SIZE ? BUFFER_SIZE : length;
             BOOST_LOG_TRIVIAL(debug) << "set_virable_for_read_block: pathToBlock=" << pathToBlock;
             if (BlockSMode != NULL) {
-                 BOOST_LOG_TRIVIAL(debug) << "block not empty!";
+                BOOST_LOG_TRIVIAL(debug) << "block not empty!";
                 delete BlockSMode;
             }
             BlockSMode = new FileSystem::Block::Block(pathToBlock, 0);
@@ -265,20 +266,6 @@ namespace Network {
         }
 
         void TcpSession::sendFile() {
-            if (result_read == NULL) {
-                BOOST_LOG_TRIVIAL(debug) << "1";
-                //first launch function =>init send file
-                Database::Tables::ServerFiles* serverFilesTablet = new Database::Tables::ServerFiles(conn);
-                result_read = serverFilesTablet->GetInfoByFileId(idFile, SELF_IP);
-                //read first bolck
-                BOOST_LOG_TRIVIAL(debug) << "2";
-                result_read->next();
-                set_virable_for_read_block();
-                BOOST_LOG_TRIVIAL(debug) << "3";
-                BOOST_LOG_TRIVIAL(debug) << "first launch function";
-
-            }
-
             BOOST_LOG_TRIVIAL(debug) << "fbytes_last_transferred=" << bytes_last_transferred
                     << "bytes_last_read" << bytes_last_read;
 
@@ -298,8 +285,14 @@ namespace Network {
 
                 if (bytes_last_read > 0) {
                     this->sendBinary(buffer_for_read, bytes_last_read);
-                } else
+                } else {
+                    BOOST_LOG_TRIVIAL(debug) << "socet wa closed";
+                    delete serverFilesTablet;
+                    delete result_read;
+                    result_read = NULL;
+                    serverFilesTablet = NULL;
                     socket_.close();
+                }
             } else {
                 BOOST_LOG_TRIVIAL(debug) << "Sending data has not been completed";
                 //Данные не были до отправленны сокетом
@@ -364,6 +357,13 @@ namespace Network {
                     BOOST_LOG_TRIVIAL(debug) << "parse headers " << mod << " " << mod.compare("w");
                     byte_read_count += bytes_transferred;
                     if (!mod.compare("r")) {
+                        Database::Tables::ServerFiles serverFilesTablet(conn);
+                        result_read = serverFilesTablet.GetInfoByFileId(idFile, SELF_IP);
+                        BOOST_LOG_TRIVIAL(debug) << "3";
+                        //read first bolck
+                        result_read->next();
+                        set_virable_for_read_block();
+
                         sendFile();
                     }
                     if (!mod.compare("w")) {
@@ -433,6 +433,8 @@ namespace Network {
                 delete result_read;
             if (BlockSMode != NULL)
                 delete BlockSMode;
+            if (serverFilesTablet != NULL)
+                delete serverFilesTablet;
         }
 
         unsigned long long TcpSession::htonll(unsigned long long src) {

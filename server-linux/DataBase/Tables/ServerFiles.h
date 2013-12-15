@@ -76,6 +76,8 @@ namespace Database {
             bool updateBlockIdByFileIdAndOrder(uint32_t block_id, uint32_t file_id, uint32_t order);
             
             ~ServerFiles();
+            
+             
         };
     }
 }
