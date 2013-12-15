@@ -1,5 +1,6 @@
 #pragma once
 #include "FileStream.h"
+#include <boost/log/trivial.hpp>
 
 namespace FileSystem 
 {

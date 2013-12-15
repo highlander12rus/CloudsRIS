@@ -6,10 +6,12 @@ namespace FileSystem {
 
         Block::Block(std::string pathToBlock, unsigned long long oC) {
             this->occupied_space = oC;
-            this->pathToBlockID=pathToBlock;
-            file = new fstream();
-            file->open(pathToBlock.c_str(), ios::out | ios::binary | ios::in);
-            if (file->fail())
+            this->pathToBlockID = pathToBlock;
+    
+            file = new std::fstream();
+            file->open(pathToBlock, ios::out | ios::binary | ios::in);
+            BOOST_LOG_TRIVIAL(debug) << "FileSystem::Block: pathToBlock=" << pathToBlock;
+            if (!file->is_open()) 
                 throw new Exception::FileSystem::FileNotOpened();
 
         }
