@@ -47,7 +47,6 @@ namespace Network {
             udp::endpoint listenAddress;
             
             //for critical sections
- 
             boost::recursive_mutex  m_guard;
 
         };

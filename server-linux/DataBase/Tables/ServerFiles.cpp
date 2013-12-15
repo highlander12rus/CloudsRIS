@@ -23,7 +23,6 @@ namespace Database {
         ResultSet* ServerFiles::getByFileId(uint32_t fileId) {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
-
             prep_stmt = conn-> prepareStatement("SELECT * FROM `server_files` JOIN blocks on blocks.id = block_id   WHERE `server_files`.`file_id` = ?");
             prep_stmt->setUInt(1, fileId);
             res = prep_stmt->executeQuery();
@@ -34,7 +33,14 @@ namespace Database {
         ResultSet* ServerFiles::GetInfoByFileId(uint32_t fileId, std::string ip) {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
-            prep_stmt = conn-> prepareStatement("CALL `cloudsris`.`fileInfo`(?,?);");
+            prep_stmt = conn-> prepareStatement(string("SELECT `server_files`.`order`, `server_files`.`offset`, `blocks`.`address`, `server_files`.`lenght` ") +
+                    string("FROM (`cloudsris`.`blocks` INNER JOIN `cloudsris`.`address_blocks` ON `blocks`.`id` = `address_blocks`.`id`) ") +
+                    string("INNER JOIN `cloudsris`.`server_files` ON `blocks`.`id` = `server_files`.`block_id` ") +
+                    string("where ") +
+                    string("`server_files`.`file_id` = ? ") +
+                    string("AND ") +
+                    string("`address_blocks`.`ip` = ? ") +
+                    string("order by server_files.order"));
             prep_stmt->setUInt(1, fileId);
             prep_stmt->setString(2, ip);
             res = prep_stmt->executeQuery();
@@ -81,7 +87,7 @@ namespace Database {
             delete res;
             return id;
         }
-        
+
         bool ServerFiles::updateBlockIdByFileIdAndOrder(uint32_t block_id, uint32_t file_id, uint32_t order) {
             sql::PreparedStatement* prep_stmt;
             prep_stmt = conn-> prepareStatement("UPDATE `server_files` SET `block_id`=? WHERE `file_id`=? AND `order`=?;");
@@ -93,7 +99,6 @@ namespace Database {
             delete prep_stmt;
             return res;
         }
-        
 
         ServerFiles::~ServerFiles() {
         }

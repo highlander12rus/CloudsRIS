@@ -37,9 +37,10 @@ namespace Network {
 
             void start();
             ~TcpSession();
+             TcpSession(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect);
         private:
 
-            TcpSession(boost::asio::io_service& io_service, IBaseEditor * rI, Connection* connect);
+           
             void send(char msg);
 
             /**
@@ -106,7 +107,13 @@ namespace Network {
             int order;
             unsigned long long block_id;
             FileSystem::Block::Block* BlockSMode = NULL;
+            
+            
+            
             //virable and function for read file and send clinet
+            
+            Database::Tables::ServerFiles* serverFilesTablet = NULL;
+            
             FileSystem::StreamRead *sreadBock = NULL;   
             /**
              * Количесво байтов которые было прочитано перед отправкой из sreadBock
