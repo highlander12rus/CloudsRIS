@@ -7,23 +7,14 @@
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include "Network/UdpBroatcast.h"
-#include "Network/SearchServer.h"
 
 #include <iostream>
 #include <boost/array.hpp>
 #include "redis/RedisAdaptor.h"
 #include "Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
 #include "Network/TcpServer.h"
-using boost::asio::ip::udp;
 
-void searchServe() {
-    while (1) {
-        char ip[] = "127.0.0.1";
-        Network::SearchServer search(45, ip);
-        search.search();
-        sleep(10);
-    }
-}
+using boost::asio::ip::udp;
 
 /**
  * Поток котоырй слушает broatcast и ждет приема на него
@@ -46,11 +37,6 @@ void startTcpServer() {
     io_service.run();
 }
 
-#include <boost/uuid/uuid.hpp>            // uuid class
-#include <boost/uuid/uuid_generators.hpp> // generators
-#include <boost/uuid/uuid_io.hpp>         // streaming operators etc.
-#include <boost/lexical_cast.hpp>
-#include "Helper/Crypto.h"
 
 int main(int argc, char *argv[]) {
    
@@ -62,8 +48,6 @@ int main(int argc, char *argv[]) {
     
 
     threads.join_all();
-
-
 
     return 0;
 }

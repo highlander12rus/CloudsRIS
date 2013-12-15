@@ -2,6 +2,10 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <boost/log/trivial.hpp>
+#include <system_error>
+
+
 #include "../Exception/ExceptionFileNotOpened.h"
 #include "FileStreamRead.h"
 #include "FileStreamWrite.h"
@@ -11,7 +15,7 @@ namespace FileSystem {
     namespace Block {
 
         class Block {
-            fstream* file;
+            std::fstream* file;
         public:
             Block(std::string pathToBlock, unsigned long long oC);
             Block(std::string pathToBlock, void* createBlock, void* create2);

@@ -62,6 +62,12 @@ namespace Network {
 
         void TcpSession::handle_write_binary(const boost::system::error_code& error,
                 size_t bytes_transferred) {
+            if (!error || error == boost::asio::error::message_size || bytes_transferred != 0) {
+                bytes_last_transferred += bytes_transferred;
+                sendFile();
+            } else {
+                BOOST_LOG_TRIVIAL(debug) << "handle_write_binary: connection close";
+            }
         }
 
         void TcpSession::handle_write(const boost::system::error_code& /*error*/,
@@ -221,11 +227,11 @@ namespace Network {
                     unsigned int blockId = Bl.GetIdByPathToBlock(blockMass->getVectors()[this->blockThis]->pathToBlockID);
                     Database::Tables::ServerFiles* servFile = new Database::Tables::ServerFiles(conn);
                     servFile->fileSpliter(idFile, blockId, this->byte_write_block);
-                            delete servFile;
+                    delete servFile;
                     byte_write_block = 0;
                     blockThis++;
 
-                    
+
                     Database::Tables::ServerFiles SF1(conn);
                     SF1.updateBlockIdByFileIdAndOrder(blockId, this->idFile, this->blockThis);
                 }
@@ -236,9 +242,14 @@ namespace Network {
             std::string pathToBlock = result_read->getString(3);
             unsigned int offset = result_read->getUInt(2);
             unsigned int length = result_read->getUInt(4);
-
-            FileSystem::Block::Block block(pathToBlock, 0); //0т.к не важен размер дял нас
-            sreadBock = block.readFile(offset, length);
+            buffer_curent_size = length > BUFFER_SIZE ? BUFFER_SIZE : length;
+            BOOST_LOG_TRIVIAL(debug) << "set_virable_for_read_block: pathToBlock=" << pathToBlock;
+            if (BlockSMode != NULL) {
+                 BOOST_LOG_TRIVIAL(debug) << "block not empty!";
+                delete BlockSMode;
+            }
+            BlockSMode = new FileSystem::Block::Block(pathToBlock, 0);
+            sreadBock = BlockSMode->readFile(offset, length);
         }
 
         void TcpSession::sendToClientNewPartionData() {
@@ -246,7 +257,7 @@ namespace Network {
                 BOOST_LOG_TRIVIAL(debug) << "read next block";
                 //есть перезагружаем данные на отправку следующего блока
                 set_virable_for_read_block();
-                bytes_last_read = sreadBock->read(&(buffer_for_read[0]), BUFFER_SIZE);
+                bytes_last_read = sreadBock->read(buffer_for_read, buffer_curent_size);
             } else {
                 //если данных нету то отправится bytes_last_read == 0 и мы закончим отправлять 
                 bytes_last_read = 0;
@@ -255,31 +266,45 @@ namespace Network {
 
         void TcpSession::sendFile() {
             if (result_read == NULL) {
+                BOOST_LOG_TRIVIAL(debug) << "1";
                 //first launch function =>init send file
                 Database::Tables::ServerFiles* serverFilesTablet = new Database::Tables::ServerFiles(conn);
                 result_read = serverFilesTablet->GetInfoByFileId(idFile, SELF_IP);
                 //read first bolck
+                BOOST_LOG_TRIVIAL(debug) << "2";
+                result_read->next();
                 set_virable_for_read_block();
+                BOOST_LOG_TRIVIAL(debug) << "3";
                 BOOST_LOG_TRIVIAL(debug) << "first launch function";
+
             }
+
+            BOOST_LOG_TRIVIAL(debug) << "fbytes_last_transferred=" << bytes_last_transferred
+                    << "bytes_last_read" << bytes_last_read;
+
 
             if (bytes_last_transferred >= bytes_last_read) {
                 //read next partion or block
                 bytes_last_transferred = 0;
-                bytes_last_read = sreadBock->read(buffer_for_read, BUFFER_SIZE);
-                BOOST_LOG_TRIVIAL(debug) << "bytes was read in sendFile()" << bytes_last_read;
+                BOOST_LOG_TRIVIAL(debug) << "buffer_curent_size=" << buffer_curent_size;
+                bytes_last_read = sreadBock->read(buffer_for_read, buffer_curent_size);
+                //BOOST_LOG_TRIVIAL(debug) << "buffer=" << buffer_for_read;
+                BOOST_LOG_TRIVIAL(debug) << "bytes was read in sendFile()=" << bytes_last_read;
 
                 if (bytes_last_read == 0) {
                     //Похоже что читать блок мы закончили
                     sendToClientNewPartionData();
                 }
 
-                this->sendBinary(buffer_for_read, bytes_last_read);
+                if (bytes_last_read > 0) {
+                    this->sendBinary(buffer_for_read, bytes_last_read);
+                } else
+                    socket_.close();
             } else {
                 BOOST_LOG_TRIVIAL(debug) << "Sending data has not been completed";
                 //Данные не были до отправленны сокетом
                 unsigned int residue = bytes_last_read - bytes_last_read;
-                this->sendBinary(&(buffer_for_read[bytes_last_read]), residue); //отправлем с bytes_last_read даныне) хак:)
+                this->sendBinary(buffer_for_read + bytes_last_read, residue); //отправлем с bytes_last_read даныне) хак:)
             }
 
         }
@@ -333,7 +358,7 @@ namespace Network {
                 //std::cout << "handle read" << std::endl << "g=" << *g << std::endl;
                 BOOST_LOG_TRIVIAL(debug) << "byte_read_count " << byte_read_count;
                 //начальная проверка соединения
-                if (byte_read_count == 0 && bytes_transferred > (128 + 8)) {
+                if (byte_read_count == 0 && bytes_transferred > (127)) {
 
                     this->parseHeaders();
                     BOOST_LOG_TRIVIAL(debug) << "parse headers " << mod << " " << mod.compare("w");
@@ -362,9 +387,9 @@ namespace Network {
                     if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
                         Database::Tables::Blocks Bl(conn);
                         unsigned int blockId = Bl.GetIdByPathToBlock(blockMass->getVectors()[this->blockThis]->pathToBlockID);
-                        Bl.updateOccuredSize(blockMass->getVectors()[blockThis]->pathToBlockID,this->byte_write_block);
+                        Bl.updateOccuredSize(blockMass->getVectors()[blockThis]->pathToBlockID, this->byte_write_block);
                         Database::Tables::ServerFiles SF(conn);
-                        SF.updateBlockIdByFileIdAndOrder(blockId,idFile,blockThis);
+                        SF.updateBlockIdByFileIdAndOrder(blockId, idFile, blockThis);
                         BOOST_LOG_TRIVIAL(debug) << "TCP OK";
                         this->send(TCP_SOCKET_OK);
                         this->redisInstance->del(token.str());
@@ -406,6 +431,8 @@ namespace Network {
                 delete sreadBock;
             if (result_read != NULL)
                 delete result_read;
+            if (BlockSMode != NULL)
+                delete BlockSMode;
         }
 
         unsigned long long TcpSession::htonll(unsigned long long src) {

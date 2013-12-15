@@ -105,7 +105,7 @@ namespace Network {
             unsigned long long offset;
             int order;
             unsigned long long block_id;
-            FileSystem::Block::Block* BlockSMode;
+            FileSystem::Block::Block* BlockSMode = NULL;
             //virable and function for read file and send clinet
             FileSystem::StreamRead *sreadBock = NULL;   
             /**
@@ -129,6 +129,11 @@ namespace Network {
            // unsigned long long block_length = 0;
             
             char* buffer_for_read = new char[BUFFER_SIZE];
+            
+            /**
+             * Сколько отправлять в текущий момент
+             */
+            unsigned int buffer_curent_size = 0;
             
             /**
              * Устанавливает sreadBlock  bytes_last_read и bytes_last_transferred

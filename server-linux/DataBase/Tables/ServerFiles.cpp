@@ -36,7 +36,7 @@ namespace Database {
             sql::PreparedStatement* prep_stmt;
             prep_stmt = conn-> prepareStatement("CALL `cloudsris`.`fileInfo`(?,?);");
             prep_stmt->setUInt(1, fileId);
-            prep_stmt->setString(1, ip);
+            prep_stmt->setString(2, ip);
             res = prep_stmt->executeQuery();
             delete prep_stmt;
             return res;
