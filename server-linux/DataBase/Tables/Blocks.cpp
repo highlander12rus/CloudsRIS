@@ -99,7 +99,7 @@ BOOST_LOG_TRIVIAL(debug) << "Block : start GetPathToBlockByBlockId= ";
             std::string path = "";
             ResultSet* res;
             prep_stmt = conn->prepareStatement("select address FROM "+ TABLE_NAME +
-                    " where id =?;");
+                    " where id =?");
             
             prep_stmt->setUInt(1, block_id);
            

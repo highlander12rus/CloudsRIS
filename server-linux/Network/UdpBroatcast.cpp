@@ -23,7 +23,7 @@ namespace Network {
 
         void UdpBroatcast::sendFreeSpaceRequest(UdpBroatcastRecive& reciver) {
             char* ipString = Helper::Network::ipIntToString(reciver.ip);
-
+             BOOST_LOG_TRIVIAL(debug) << "broat cast recive^ ip addres sending" << ipString << " and port=" << reciver.port;
             boost::asio::ip::udp::endpoint sender_ep(boost::asio::ip::address::from_string(ipString), reciver.port);
 
             //опредяем свободынй размер
@@ -60,7 +60,7 @@ namespace Network {
 
         void UdpBroatcast::handle_receive(const boost::system::error_code& error,
                 std::size_t bytes_transferred) {
-
+            BOOST_LOG_TRIVIAL(debug) << "broat cast recive";
             if (!error || error == boost::asio::error::message_size) {
                 UdpBroatcastRecive reciver = *((UdpBroatcastRecive*) recv_buffer_); //hack преобразование из байтов в стурктуру
                 sendFreeSpaceRequest(reciver);

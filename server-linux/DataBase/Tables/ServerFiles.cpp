@@ -76,7 +76,7 @@ namespace Database {
             uint32_t id = 0;
             sql::PreparedStatement* prep_stmt;
             prep_stmt = conn-> prepareStatement("Select `block_id` from " + TABLE_NAME +
-                    " where file_id = ? AND order = ?");
+                    " where `file_id` = ? AND `order` = ?");
             prep_stmt->setUInt(1, fileId);
             prep_stmt->setUInt(2, order);
             res = prep_stmt->executeQuery();

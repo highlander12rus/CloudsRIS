@@ -28,11 +28,12 @@ namespace Network {
         BOOST_LOG_TRIVIAL(debug) << "stop waaiting receive";
          
          //Поулчаем список серверов
-        std::vector<ServersResponce> servers = once->getServers();
+        servers_ = once->getServers();
         BOOST_LOG_TRIVIAL(debug) << "start print servers";
-        for(std::vector<ServersResponce>::iterator it = servers.begin(); it != servers.end(); it++) {
-            BOOST_LOG_TRIVIAL(debug) << "iteration servers ip =" << (*it).ip;
+        for(std::vector<ServersResponce>::iterator it = servers_.begin(); it != servers_.end(); it++) {
+            BOOST_LOG_TRIVIAL(debug) << "iteration servers ip =" << it->ip;
         }
+        
         BOOST_LOG_TRIVIAL(debug) << "end print servers";
         
         delete once;
@@ -86,7 +87,7 @@ namespace Network {
         boost::random::uniform_int_distribution<> dist(5000, 65000);
 
         int port = dist(gen);
-        boost::asio::ip::udp::endpoint receiver_endpoint(boost::asio::ip::address_v4::from_string("127.0.0.1"),
+        boost::asio::ip::udp::endpoint receiver_endpoint(boost::asio::ip::address_v4::from_string(SELF_IP),
                 port);
         Udp::UdpOnce* once = new Udp::UdpOnce(io_service, receiver_endpoint);
         return once;

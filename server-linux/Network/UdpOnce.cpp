@@ -25,10 +25,13 @@ namespace Network {
 
         void UdpOnce::handle_receive(const boost::system::error_code& error,
                 std::size_t bytes_transferred) {
+            BOOST_LOG_TRIVIAL(debug) << "udp once recive";
             if (!error || error == boost::asio::error::message_size) {
+                BOOST_LOG_TRIVIAL(debug) << "Parse responce udp once";
                 UdpReceiveOtherServer reciver = *((UdpReceiveOtherServer*) recv_buffer_);
+                BOOST_LOG_TRIVIAL(debug) << "udp once^ responce was parsed!";
                 BOOST_LOG_TRIVIAL(debug) << "handle_receive Udp Once, fileSize=" << reciver.freeSpace;
-
+                
                 {
                     //critial section
                     boost::lock_guard<boost::recursive_mutex> lock(m_guard);
