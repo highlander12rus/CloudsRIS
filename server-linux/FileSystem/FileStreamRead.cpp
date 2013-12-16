@@ -21,10 +21,7 @@ namespace FileSystem {
 
         BOOST_LOG_TRIVIAL(debug) << "stream reader: offset=" << offset
                 << " dOffset" << dOffset << " lengthBuffer=" << lengthBuffer;
-        BOOST_LOG_TRIVIAL(debug) << "buffer read in stream reader" << buffer;
         dOffset += lengthBuffer;
-
-        //file->close();
 
         return lengthBuffer;
     }
