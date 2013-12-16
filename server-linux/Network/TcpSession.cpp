@@ -264,9 +264,6 @@ namespace Network {
         }
 
         void TcpSession::sendFile() {
-            /*BOOST_LOG_TRIVIAL(debug) << "fbytes_last_transferred=" << bytes_last_transferred
-                    << "bytes_last_read" << bytes_last_read;*/
-
             if (bytes_last_transferred >= bytes_last_read) {
                 //read next partion or block
                 bytes_last_transferred = 0;
@@ -410,7 +407,10 @@ namespace Network {
                 }
 
             } else {
-
+                if (blockMass != NULL)
+                for (int i = 0; i < blockMass->getVectors().size(); i++) {
+                    delete blockMass->getVectors()[i];
+                }
                 BOOST_LOG_TRIVIAL(debug) << "connection clouse";
 
             }
