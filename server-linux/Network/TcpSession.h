@@ -125,6 +125,8 @@ namespace Network {
              */
             unsigned long long  bytes_last_transferred = 0;
             
+            unsigned long long bytes_all_sending = 0;
+            
             /**
              * Блкои скачиваемого файла из БД
              */

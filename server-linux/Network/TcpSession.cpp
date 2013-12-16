@@ -21,14 +21,9 @@ namespace Network {
                     boost::bind(&TcpSession::handle_read, shared_from_this(),
                     boost::asio::placeholders::error,
                     boost::asio::placeholders::bytes_transferred));
-
-
-
         }
 
         void TcpSession::sendBinary(char* buff, unsigned int n) {
-
-
             boost::asio::async_write(socket_, boost::asio::buffer(buff, n),
                     boost::bind(&TcpSession::handle_write_binary, shared_from_this(),
                     boost::asio::placeholders::error,
@@ -37,7 +32,6 @@ namespace Network {
         }
 
         void TcpSession::send(char msg) {
-
             this->requestMessage[0] = msg;
             boost::asio::async_write(socket_, boost::asio::buffer(requestMessage, 1),
                     boost::bind(&TcpSession::handle_write, shared_from_this(),
@@ -65,6 +59,9 @@ namespace Network {
                 size_t bytes_transferred) {
             if (!error || error == boost::asio::error::message_size || bytes_transferred != 0) {
                 bytes_last_transferred += bytes_transferred;
+                bytes_all_sending +=bytes_transferred;
+                BOOST_LOG_TRIVIAL(debug) << "all data sending=" << bytes_all_sending;
+                BOOST_LOG_TRIVIAL(debug) << "всего отправленно bytes_last_transferred=" <<  bytes_last_transferred;
                 sendFile();
             } else {
                 BOOST_LOG_TRIVIAL(debug) << "handle_write_binary: connection close";
@@ -244,7 +241,8 @@ namespace Network {
             unsigned int offset = result_read->getUInt(2);
             unsigned int length = result_read->getUInt(4);
             buffer_curent_size = length > BUFFER_SIZE ? BUFFER_SIZE : length;
-            BOOST_LOG_TRIVIAL(debug) << "set_virable_for_read_block: pathToBlock=" << pathToBlock;
+            BOOST_LOG_TRIVIAL(debug) << "set_virable_for_read_block: pathToBlock=" << pathToBlock
+                    << " block length=" << length;
             if (BlockSMode != NULL) {
                 BOOST_LOG_TRIVIAL(debug) << "block not empty!";
                 delete BlockSMode;
@@ -266,17 +264,15 @@ namespace Network {
         }
 
         void TcpSession::sendFile() {
-            BOOST_LOG_TRIVIAL(debug) << "fbytes_last_transferred=" << bytes_last_transferred
-                    << "bytes_last_read" << bytes_last_read;
-
+            /*BOOST_LOG_TRIVIAL(debug) << "fbytes_last_transferred=" << bytes_last_transferred
+                    << "bytes_last_read" << bytes_last_read;*/
 
             if (bytes_last_transferred >= bytes_last_read) {
                 //read next partion or block
                 bytes_last_transferred = 0;
-                BOOST_LOG_TRIVIAL(debug) << "buffer_curent_size=" << buffer_curent_size;
+                BOOST_LOG_TRIVIAL(debug) << "buffer_curent_size=" 
+                        << buffer_curent_size << "bytes was read in sendFile()=" << bytes_last_read;
                 bytes_last_read = sreadBock->read(buffer_for_read, buffer_curent_size);
-                //BOOST_LOG_TRIVIAL(debug) << "buffer=" << buffer_for_read;
-                BOOST_LOG_TRIVIAL(debug) << "bytes was read in sendFile()=" << bytes_last_read;
 
                 if (bytes_last_read == 0) {
                     //Похоже что читать блок мы закончили
@@ -294,10 +290,10 @@ namespace Network {
                     socket_.close();
                 }
             } else {
-                BOOST_LOG_TRIVIAL(debug) << "Sending data has not been completed";
                 //Данные не были до отправленны сокетом
-                unsigned int residue = bytes_last_read - bytes_last_read;
+                unsigned int residue = bytes_last_read - bytes_last_transferred;
                 this->sendBinary(buffer_for_read + bytes_last_read, residue); //отправлем с bytes_last_read даныне) хак:)
+                BOOST_LOG_TRIVIAL(debug) << "Sending data has not been completed" << " residue=" << residue;
             }
 
         }
