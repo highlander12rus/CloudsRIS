@@ -59,9 +59,9 @@ namespace Network {
                 size_t bytes_transferred) {
             if (!error || error == boost::asio::error::message_size || bytes_transferred != 0) {
                 bytes_last_transferred += bytes_transferred;
-                bytes_all_sending +=bytes_transferred;
+                bytes_all_sending += bytes_transferred;
                 BOOST_LOG_TRIVIAL(debug) << "all data sending=" << bytes_all_sending;
-                BOOST_LOG_TRIVIAL(debug) << "всего отправленно bytes_last_transferred=" <<  bytes_last_transferred;
+                BOOST_LOG_TRIVIAL(debug) << "всего отправленно bytes_last_transferred=" << bytes_last_transferred;
                 sendFile();
             } else {
                 BOOST_LOG_TRIVIAL(debug) << "handle_write_binary: connection close";
@@ -153,7 +153,17 @@ namespace Network {
                         return;
                     }
                     BOOST_LOG_TRIVIAL(debug) << "  бЛЕАТЬ!!!! =  " << (sizeFileOrBuff + blockMass->getVectors()[0]->occupied_space);
+                    BOOST_LOG_TRIVIAL(debug) << "coun blocks " << blockMass->getVectors().size();
                     this->send(TCP_SOCKET_OK);
+                    if (blockMass != NULL) {
+                        delete blockMass;
+                        blockMass = NULL;
+                    }
+                    BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
+                    TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
+                    tcpBackup.start();
+                    BOOST_LOG_TRIVIAL(debug) << "end backup";
+                    BOOST_LOG_TRIVIAL(debug) << "1";
                     this->redisInstance->del(token.str());
                     delete blockDB;
                     return;
@@ -199,6 +209,15 @@ namespace Network {
                         return;
                     }
                     this->send(TCP_SOCKET_OK);
+                    if (blockMass != NULL) {
+                        delete blockMass;
+                        blockMass = NULL;
+                    }
+                    BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
+                    TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
+                    tcpBackup.start();
+                    BOOST_LOG_TRIVIAL(debug) << "end backup";
+                    
                     delete blockDB;
                     this->redisInstance->del(token.str());
                     return;
@@ -267,7 +286,7 @@ namespace Network {
             if (bytes_last_transferred >= bytes_last_read) {
                 //read next partion or block
                 bytes_last_transferred = 0;
-                BOOST_LOG_TRIVIAL(debug) << "buffer_curent_size=" 
+                BOOST_LOG_TRIVIAL(debug) << "buffer_curent_size="
                         << buffer_curent_size << "bytes was read in sendFile()=" << bytes_last_read;
                 bytes_last_read = sreadBock->read(buffer_for_read, buffer_curent_size);
 
@@ -386,6 +405,12 @@ namespace Network {
                         BOOST_LOG_TRIVIAL(debug) << "TCP OK";
                         this->send(TCP_SOCKET_OK);
                         this->redisInstance->del(token.str());
+
+                        BOOST_LOG_TRIVIAL(debug) << "start backup for long file other server";
+                        TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
+                        tcpBackup.start();
+                        BOOST_LOG_TRIVIAL(debug) << "end backup for long file";
+
                         return;
                     }
                     this->start();
@@ -407,9 +432,9 @@ namespace Network {
                 }
 
             } else {
-                if (blockMass != NULL)
-                for (int i = 0; i < blockMass->getVectors().size(); i++) {
-                    delete blockMass->getVectors()[i];
+                if (blockMass != NULL) {
+                    delete blockMass;
+                    blockMass = NULL;
                 }
                 BOOST_LOG_TRIVIAL(debug) << "connection clouse";
 
@@ -417,10 +442,10 @@ namespace Network {
         }
 
         TcpSession::~TcpSession() {
-            if (blockMass != NULL)
-                for (int i = 0; i < blockMass->getVectors().size(); i++) {
-                    delete blockMass->getVectors()[i];
-                }
+            if (blockMass != NULL) {
+                delete blockMass;
+                blockMass = NULL;
+            }
             delete this->requestMessage;
             delete buffer_for_read;
             if (sreadBock != NULL)

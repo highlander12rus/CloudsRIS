@@ -28,12 +28,12 @@ namespace FileSystem {
             for (int i = 0; i < blockCount; i++) {
                 //@todo: подумать с базой мб как то лучше можно а не обращатся к ней в цикле
 
-                uint32_t idInsert = block.insertBlocks(PATH_TO_BLOCK, 0,ip);
-         
+                uint32_t idInsert = block.insertBlocks(PATH_TO_BLOCK, 0, ip);
+
                 std::stringstream pathToFile;
                 pathToFile << PATH_TO_BLOCK << "block_" << idInsert << ".blb";
                 string path = pathToFile.str();
-                blocks.push_back(new Block(path, NULL,NULL));
+                blocks.push_back(new Block(path, NULL, NULL));
             }
         }
 
@@ -49,18 +49,20 @@ namespace FileSystem {
             sql::Connection* con = Database::SingletoneConn::Instance().getConnection();
             Database::Tables::AddressBlocks addresBlock(con);
             ResultSet* res = addresBlock.getBlokFreeSpaceId(ip, sizeFile);
-             
-            if (res->next())
-            {
-                std::cout<<"path to block = "<<res->getString(1)<<"occured = "<<res->getInt64(2)<<std::endl;
-                blocks.push_back(new Block(res->getString(1),res->getInt64(2)));
-            }
-            else {
+
+            if (res->next()) {
+                std::cout << "path to block = " << res->getString(1) << "occured = " << res->getInt64(2) << std::endl;
+                blocks.push_back(new Block(res->getString(1), res->getInt64(2)));
+            } else {
                 this->createBlock();
             }
         }
 
         AllocatedBlocks::~AllocatedBlocks() {
+            for (int i = 0; i < blocks.size(); i++) {
+                delete blocks[i];
+                blocks[i] = NULL;
+            }
         }
 
     }

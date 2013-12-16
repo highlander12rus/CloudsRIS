@@ -35,7 +35,7 @@ namespace Database {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
             bool ret=false;
-            std::string query = "Select ip from `address_blocks` where ip = ? AND blok_id = ?;";         
+            std::string query = "Select ip from `address_blocks` where ip = ? AND blok_id = ?";         
             
             prep_stmt = conn-> prepareStatement(query);
             prep_stmt->setUInt(2, idBlock);
@@ -53,7 +53,7 @@ namespace Database {
             bool res;
             sql::PreparedStatement* prep_stmt;
             bool ret=false;
-            std::string query = "Insert into addres_blocks (`ip`,`blok_id`) VALUES (?,?);";         
+            std::string query = "Insert into address_blocks (`ip`,`blok_id`) VALUES (?,?);";         
             
             prep_stmt = conn-> prepareStatement(query);
             prep_stmt->setUInt(2, idBlock);

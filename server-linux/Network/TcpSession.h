@@ -15,6 +15,8 @@
 #include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
 #include "../Helper/StringExtended.h"
 #include"../DataBase/Tables/ServerFiles.h"
+#include "TcpBackupClient.h"
+
 #include <string>
 #include <vector>
 #define TYP_INIT 0 
@@ -95,7 +97,7 @@ namespace Network {
             unsigned long long file_size;
             IBaseEditor * redisInstance;
             std::string mod;
-            FileSystem::Block::AllocatedBlocks* blockMass;
+            FileSystem::Block::AllocatedBlocks* blockMass = NULL;
             //текущий обрабатываемый блока
             int blockThis;
             FileSystem::StreamWrite* strWrite;

@@ -4,6 +4,7 @@
 
 namespace Network {
     struct ServersResponce {
+    public:
         unsigned long long sizeFree;
         std::string ip;
         
