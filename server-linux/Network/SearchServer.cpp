@@ -25,6 +25,8 @@ namespace Network {
         sleep(WAITING_RESPONSE_TIME_UDP);
         BOOST_LOG_TRIVIAL(debug) << "sleep complited, stop hreads reciver";
         io_service.stopped();
+        reciverThread.interrupt();
+        once->getService().stopped();
         BOOST_LOG_TRIVIAL(debug) << "stop waaiting receive";
          
          //Поулчаем список серверов
@@ -84,7 +86,7 @@ namespace Network {
         }
 
         boost::random::mt19937 gen;
-        boost::random::uniform_int_distribution<> dist(5000, 65000);
+        boost::random::uniform_int_distribution<> dist(5000, 64999);
 
         int port = dist(gen);
         boost::asio::ip::udp::endpoint receiver_endpoint(boost::asio::ip::address_v4::from_string(SELF_IP),

@@ -71,7 +71,7 @@ namespace Database {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
             
-            std::string query = "SELECT `address_blocks`.`blok_id` FROM `address_blocks` WHERE `address_blocks`.`ip` != ?  AND `address_blocks`.`blok_id` = ?";
+            std::string query = "SELECT `address_blocks`.`blok_id`, `address_blocks`.`ip` FROM `address_blocks` WHERE `address_blocks`.`ip` != ?  AND `address_blocks`.`blok_id` = ?";
             prep_stmt = conn-> prepareStatement(query);
             prep_stmt->setString(1, ip);
             prep_stmt->setUInt(2, block_id);
