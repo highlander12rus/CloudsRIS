@@ -33,14 +33,7 @@ namespace Database {
         ResultSet* ServerFiles::GetInfoByFileId(uint32_t fileId, std::string ip) {
             ResultSet* res;
             sql::PreparedStatement* prep_stmt;
-            prep_stmt = conn-> prepareStatement(string("SELECT `server_files`.`order`, `server_files`.`offset`, `blocks`.`address`, `server_files`.`lenght` ") +
-                    string("FROM (`cloudsris`.`blocks` INNER JOIN `cloudsris`.`address_blocks` ON `blocks`.`id` = `address_blocks`.`id`) ") +
-                    string("INNER JOIN `cloudsris`.`server_files` ON `blocks`.`id` = `server_files`.`block_id` ") +
-                    string("where ") +
-                    string("`server_files`.`file_id` = ? ") +
-                    string("AND ") +
-                    string("`address_blocks`.`ip` = ? ") +
-                    string("order by server_files.order"));
+            prep_stmt = conn-> prepareStatement(string("SELECT `server_files`.`order`, `server_files`.`offset`, `blocks`.`address`, `server_files`.`lenght`  FROM `cloudsris`.`server_files` INNER JOIN `cloudsris`.`blocks` ON `blocks`.`id` = `server_files`.`block_id` INNER JOIN `cloudsris`.`address_blocks` ON `blocks`.`id` = `address_blocks`.`blok_id` where `server_files`.`file_id` = ? AND `address_blocks`.`ip` = ?  order by server_files.order;"));
             prep_stmt->setUInt(1, fileId);
             prep_stmt->setString(2, ip);
             res = prep_stmt->executeQuery();
@@ -104,3 +97,4 @@ namespace Database {
         }
     }
 }
+

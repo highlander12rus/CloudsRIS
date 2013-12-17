@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <exception>
 
 #include "../Helper/Crypto.h"
 #include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
