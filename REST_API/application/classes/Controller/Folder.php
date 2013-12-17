@@ -23,7 +23,7 @@ class Controller_Folder extends Controller_REST {
             throw new HTTP_Exception_404;
 
         $foldes = ORM::factory('Folder')
-                ->where(DB::expr("(name REGEXP '{$path}[a-zA-z0-9]*[/]?$')"), '=', 1)
+                ->where(DB::expr("(name REGEXP '^{$path}[a-zA-z0-9]*[/]?$')"), '=', 1)
                 ->where('user_id', '=', Auth::instance()->get_user()->id)
                 ->find_all();
 
@@ -36,7 +36,8 @@ class Controller_Folder extends Controller_REST {
             if ($folder->name == $path) {
                 $folder_id_curent = $folder->id;
             }
-            $folders[] = $folder->name;
+            else
+                $folders[] = $folder->name;
         }
 
         $files_curent_dir = DB::select('name')
