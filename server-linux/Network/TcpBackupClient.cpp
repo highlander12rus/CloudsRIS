@@ -9,6 +9,7 @@ TcpBackupClient::TcpBackupClient(unsigned int file_id,
 
     Database::Tables::ServerFiles serverFilesTablet(conn);
     result_db = serverFilesTablet.getByFileId(file_id);
+    BOOST_LOG_TRIVIAL(debug) << "tcpBackup file_id=" << file_id;
 }
 
 std::string TcpBackupClient::generateAndSetDataInRedis(unsigned int length, unsigned int order, unsigned int offset) {
@@ -41,11 +42,14 @@ void TcpBackupClient::start() {
 }
 
 void TcpBackupClient::download_single_block() {
-    result_db->next();
+    if(!result_db->next()) {
+        BOOST_LOG_TRIVIAL(error) << "в базе пусто!!";
+        return;
+    }
     //Проверяем есть ли ip адрессов
     Database::Tables::AddressBlocks addres_block(conn);
     unsigned int block_id = result_db->getUInt(5);
-
+    
     if (addres_block.countIssetOtherServers(block_id, SELF_IP) > 1) {
         ResultSet* result_ip = addres_block.getOtherServerForBlock(SELF_IP, block_id);
         while (result_ip->next()) {
@@ -59,7 +63,7 @@ void TcpBackupClient::download_single_block() {
             } else {
                 BOOST_LOG_TRIVIAL(error) << "download_single_block: ошибка загрузка файла на серввак ip"
                         << ip;
-                result_db->previous();
+                //result_db->previous();
 
             }
         }
@@ -90,7 +94,7 @@ void TcpBackupClient::searchAndDownloads() {
         int countBackeuped = 0;
         BOOST_LOG_TRIVIAL(debug) << "end get servers in tcpBackup";
         
-        BOOST_LOG_TRIVIAL(debug) << "serers search=" << responce.size();
+        BOOST_LOG_TRIVIAL(debug) << "serers search=";
         
         for (vector<Network::ServersResponce>::iterator it = responce.begin();
                 it != responce.end() && countBackeuped < COUNT_SERVER_BACKUP; it++, countBackeuped++) {
@@ -160,13 +164,14 @@ bool TcpBackupClient::downloadBlock(std::string pathToBlock, unsigned int length
 
     }
     socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send);
-    char* buf_responce = new char;
+    char* buf_responce = new char[1];
     char res__buf;
     size_t len = socket.read_some(boost::asio::buffer(buf_responce, 1));
+    BOOST_LOG_TRIVIAL(debug) << "Количество принятых байт:" << len << " responce = " << *buf_responce;
     res__buf = *buf_responce;
-    delete buf, buf_responce;
+    delete[] buf, buf_responce;
 
-    return TCP_SOCKET_OK != res__buf;
+    return TCP_SOCKET_OK == res__buf;
 
 }
 

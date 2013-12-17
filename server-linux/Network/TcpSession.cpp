@@ -32,7 +32,9 @@ namespace Network {
         }
 
         void TcpSession::send(char msg) {
-            this->requestMessage[0] = msg;
+            BOOST_LOG_TRIVIAL(debug) << "send message" << msg;
+            
+            this->requestMessage[0] = msg;BOOST_LOG_TRIVIAL(debug) << "send message buff" << this->requestMessage[0];
             boost::asio::async_write(socket_, boost::asio::buffer(requestMessage, 1),
                     boost::bind(&TcpSession::handle_write, shared_from_this(),
                     boost::asio::placeholders::error,
@@ -70,6 +72,7 @@ namespace Network {
 
         void TcpSession::handle_write(const boost::system::error_code& /*error*/,
                 size_t /*bytes_transferred*/) {
+            //socket_.close();
         }
 
         void TcpSession::parseHeaders() {
@@ -159,13 +162,13 @@ namespace Network {
                         delete blockMass;
                         blockMass = NULL;
                     }
+                    this->redisInstance->del(token.str());
+                    delete blockDB;
+                                        
                     BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
                     TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                     tcpBackup.start();
                     BOOST_LOG_TRIVIAL(debug) << "end backup";
-                    BOOST_LOG_TRIVIAL(debug) << "1";
-                    this->redisInstance->del(token.str());
-                    delete blockDB;
                     return;
                 }
             } else {
@@ -406,11 +409,11 @@ namespace Network {
                         this->send(TCP_SOCKET_OK);
                         this->redisInstance->del(token.str());
 
-                        BOOST_LOG_TRIVIAL(debug) << "start backup for long file other server";
+                        BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
                         TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                         tcpBackup.start();
-                        BOOST_LOG_TRIVIAL(debug) << "end backup for long file";
-
+                        BOOST_LOG_TRIVIAL(debug) << "end backup";
+                        
                         return;
                     }
                     this->start();
