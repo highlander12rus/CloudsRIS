@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client.Classes;
 
 namespace Client
 {
@@ -26,7 +27,7 @@ namespace Client
 
         private void AuthButton_Click(object sender, RoutedEventArgs e)
         {
-      /*     
+           
             if (login_box.Text == "" || PasswordBox.Password == "")
             {
                 label_errors.Visibility = Visibility.Visible;
@@ -34,15 +35,15 @@ namespace Client
             }
             else
             {
-                if (!work.Autorization(login_box.Text, PasswordBox.Password))
+                if (!Worker.Autorization(login_box.Text, PasswordBox.Password))
                 {
                     label_errors.Visibility = Visibility.Visible;
                     label_errors.Content = "Логин и пароль не найдены";
                     return;
                 }
-                AwtorizationStackPanel.Visibility = Visibility.Hidden;
+               
             }
-          */
+          
         }
         
     }
