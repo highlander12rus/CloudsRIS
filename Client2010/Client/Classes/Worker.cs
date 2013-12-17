@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -10,7 +11,7 @@ using Microsoft.Win32;
 
 namespace Client.Classes
 {
-    static class Worker
+    internal static class Worker
     {
         public static IUser userClass = User.getIUser();
         public static IFile fileClass = Files.getInterface();
@@ -44,7 +45,7 @@ namespace Client.Classes
             return folderClass.GetFolderContent(path, tokenAuth);
         }
 
-        public static bool createFile(string name,string pathToFolder,string cryptMethod)
+        public static bool createFile(string name, string pathToFolder, string cryptMethod)
         {
             FileDialog openFileDialog1 = new OpenFileDialog();
             Nullable<bool> result = openFileDialog1.ShowDialog();
@@ -58,11 +59,12 @@ namespace Client.Classes
                 long size = file.Length;
                 using (BinaryReader br = new BinaryReader(File.Open(cryptFilePath, FileMode.Open)))
                 {
-                     res = fileClass.CreateFile(name, pathToFolder, md5, (ulong)size, cryptMethod, tokenAuth, br.BaseStream);
+                    res = fileClass.CreateFile(name, pathToFolder, md5, (ulong) size, cryptMethod, tokenAuth,
+                        br.BaseStream);
                 }
                 File.Delete(cryptFilePath);
             }
-            
+
             return res;
         }
 
@@ -73,14 +75,15 @@ namespace Client.Classes
             bool res = false;
             if (result == true)
             {
-                 string filename = openFileDialog1.FileName;
-                using (BinaryReader br = new BinaryReader(File.Open(filename+"TMP", FileMode.Create)))
+                string filename = openFileDialog1.FileName;
+                using (BinaryReader br = new BinaryReader(File.Open(filename + "TMP", FileMode.Create)))
                 {
-                   res = fileClass.GetFile(name, pathToFolder, tokenAuth, br.BaseStream);
+                    res = fileClass.GetFile(name, pathToFolder, tokenAuth, br.BaseStream);
                 }
                 res = cryptClass.FileDecrypt(filename + "TMP", filename);
-                File.Delete(filename+"TMP");
+                File.Delete(filename + "TMP");
             }
             return res;
         }
+    }
 }
