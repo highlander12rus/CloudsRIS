@@ -354,11 +354,7 @@ namespace Network {
             strWrite->write(tmp_buf, sizeFileOrBuff);
             delete[] tmp_buf;
             delete strWrite;
-            if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
-                this->send(TCP_SOCKET_OK);
-                this->redisInstance->del(token.str());
-                return;
-            }
+       
         }
 
         void TcpSession::handle_read(const boost::system::error_code& error, size_t bytes_transferred) {
@@ -372,13 +368,14 @@ namespace Network {
                     BOOST_LOG_TRIVIAL(debug) << "parse headers " << mod << " " << mod.compare("w");
                     byte_read_count += bytes_transferred;
                     if (!mod.compare("r")) {
+			if(result_read ==NULL){
                         Database::Tables::ServerFiles serverFilesTablet(conn);
                         result_read = serverFilesTablet.GetInfoByFileId(idFile, SELF_IP);
                         BOOST_LOG_TRIVIAL(debug) << "3";
                         //read first bolck
                         result_read->next();
                         set_virable_for_read_block();
-
+			}
                         sendFile();
                     }
                     if (!mod.compare("w")) {
