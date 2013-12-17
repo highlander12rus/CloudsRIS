@@ -124,7 +124,7 @@ namespace Client.Classes
 
                 ulong fileSize = json.file_size;
                 string token_operation = json.token_operation;
-                string server_download = json.server_download;
+            string server_download = "192.168.89.131";//json.server_download;
                 string chheck_sum = json.chheck_sum;
                 downloadFile(token_operation, server_download, fileSize);
           //  }
@@ -149,12 +149,23 @@ namespace Client.Classes
             soc.Connect(ipep);
             soc.Send(buf);
             var t = soc.Available;
-            
+
             soc.Shutdown(SocketShutdown.Send);
-            byte[] returnFile = new byte[fileSize];
-            soc.Receive(returnFile);
-            BinaryWriter br = new BinaryWriter(File.Create(@"E:\returnFile"));
-            br.Write(returnFile);
+            byte[] returnFile = new byte[8192];
+            BinaryWriter br = new BinaryWriter(File.Create(@"E:\returnFiles"));
+
+            int recivedAllButes = 0;
+
+            while (recivedAllButes < (int)fileSize)
+            {
+                int recivetBytes = soc.Receive(returnFile);
+                br.Write(returnFile, 0, recivetBytes);
+                recivedAllButes += recivetBytes;
+                Console.WriteLine("recive data " + recivedAllButes);
+            }
+
+
+
             soc.Shutdown(SocketShutdown.Both);
             soc.Close();
 

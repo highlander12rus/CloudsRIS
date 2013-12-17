@@ -24,13 +24,13 @@ namespace Client
         public MainWindow()
         {
 
-        //    BinaryReader br = new BinaryReader(File.OpenRead(@"E:\testFiles"));
+            //BinaryReader br = new BinaryReader(File.OpenRead(@"E:\testFiles"));
             Files F = new Files();
-        //    var filesize = File.OpenRead(@"E:\testFiles").Length;
-        //    F.CreateFile("testFiles", "/", "dfgsdfggs", (ulong)filesize, "sdfvg",
-        //        @"23388df93f7ee3a10324f7793dc3c5da1634bfb97ad639b72ebe755ce1579de9c7ffa3f54be0af2fd1b4a819b523cee2935e44cb964bbadb47f25d7ca0837596", br.BaseStream);
+            //var filesize = File.OpenRead(@"E:\testFiles").Length;
+            //F.CreateFile("testFiles", "/", "dfgsdfggs", (ulong)filesize, "sdfvg",
+             //   @"0bfa12a55252c3b723471a89b189063ad3060345da10096064f2c0c1fa29685ecaff94416bd1bf3d893c1134ec64f1c68ea9055661434a5d7e9a9c9cb385c254", br.BaseStream);
             F.GetFile("testFiles", @"/",
-                @"23388df93f7ee3a10324f7793dc3c5da1634bfb97ad639b72ebe755ce1579de9c7ffa3f54be0af2fd1b4a819b523cee2935e44cb964bbadb47f25d7ca0837596");
+                 @"0bfa12a55252c3b723471a89b189063ad3060345da10096064f2c0c1fa29685ecaff94416bd1bf3d893c1134ec64f1c68ea9055661434a5d7e9a9c9cb385c254");
             InitializeComponent();
         }
     }
