@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Client.Interfaces;
 using Newtonsoft.Json;
+using System.Web;
 
 namespace Client.Classes
 {
@@ -21,7 +22,7 @@ namespace Client.Classes
             {
                 HttpClient client = new HttpClient { BaseAddress = new Uri(URL_API_FOLDER) };
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", token);
-                string content = @"name="+path;
+                string content = @"name=" + System.Uri.EscapeUriString(path);// PCLWebUtility.WebUtility.UrlEncode(path);
                 HttpContent httpContent = new StringContent(content);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
                 var status = client.PostAsync("/folder/", httpContent).Result.StatusCode;
@@ -81,13 +82,12 @@ namespace Client.Classes
                 request.Headers.Add("Authorization", "Basic " + token);
 
                 var response = client.SendAsync(request);
+                response.Wait(2000);
                 var result = response.Result.Content.ReadAsStringAsync();
 
                 //dynamic jsonAnswer = JsonConvert.DeserializeObject(result.Result);
                 dynamic jsonAnswer = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(result.Result);
-
-
-
+                if (jsonAnswer == null) throw new Exception();
                 return jsonAnswer;//.folders+"!"+jsonAnswer.files;
             }
             catch

@@ -1,0 +1,8 @@
+﻿<Window x:Class="Client.FileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Файлы и папки"  Height="350" Width="525">
+    <Grid>
+        <TreeView Name="treeView" Loaded="TreeView_Loaded"/>
+    </Grid>
+</Window>

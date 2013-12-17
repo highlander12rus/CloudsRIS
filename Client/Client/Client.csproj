@@ -37,6 +37,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RequestStrap">
+      <HintPath>..\packages\RequestStrap.0.2\lib\RequestStrap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO">
@@ -82,11 +85,18 @@
     <Compile Include="Classes\Crypt.cs" />
     <Compile Include="Classes\Folder.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="FileWindow.xaml.cs">
+      <DependentUpon>FileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\ICrypt.cs" />
     <Compile Include="Interfaces\IFile.cs" />
     <Compile Include="Interfaces\IFolder.cs" />
     <Compile Include="Interfaces\INet.cs" />
     <Compile Include="Interfaces\IUser.cs" />
+    <Page Include="FileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
