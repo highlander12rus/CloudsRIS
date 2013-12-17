@@ -14,17 +14,20 @@ class Controller_Folder extends Controller_REST {
 
         $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
 
+
+
         $isFolder = ORM::factory('Folder')
                 ->where('name', '=', $path)
                 ->find();
-        if(!$isFolder->loaded())
+        if (!$isFolder->loaded())
             throw new HTTP_Exception_404;
 
-
-            $foldes = ORM::factory('Folder')
-                ->where(DB::expr("(name REGEXP '{$path}[a-zA-z0-9]*[/]?$')"), '=', 1)     
+        $foldes = ORM::factory('Folder')
+                ->where(DB::expr("(name REGEXP '{$path}[a-zA-z0-9]*[/]?$')"), '=', 1)
                 ->where('user_id', '=', Auth::instance()->get_user()->id)
                 ->find_all();
+
+
 
         //hack ищем файлы  данной дириктории
         $folder_id_curent = -1;
@@ -32,11 +35,10 @@ class Controller_Folder extends Controller_REST {
         foreach ($foldes as $folder) {
             if ($folder->name == $path) {
                 $folder_id_curent = $folder->id;
-                break;
             }
             $folders[] = $folder->name;
         }
-        
+
         $files_curent_dir = DB::select('name')
                 ->from('files')
                 ->where('folder_id', '=', $folder_id_curent)
@@ -45,7 +47,7 @@ class Controller_Folder extends Controller_REST {
         foreach ($files_curent_dir as $file) {
             $files_array[] = $file['name'];
         }
-        
+
         $this->json->folders = $folders;
         $this->json->files = $files_array;
     }

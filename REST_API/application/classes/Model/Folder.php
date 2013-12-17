@@ -29,6 +29,7 @@ class Model_Folder extends ORM {
         return array(
             TRUE => array(
                 array('UTF8::trim', array(':value')),
+                array('urldecode', array(':value')),
                 array('HTML::chars', array(':value')),
             ),
         );
