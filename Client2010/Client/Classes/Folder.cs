@@ -11,10 +11,15 @@ using Newtonsoft.Json;
 
 namespace Client.Classes
 {
-    public class Folder : IFolder
+    class Folder : IFolder
     {
         private const string URL_API_FOLDER = @"http://90.157.18.190/folder/";
 
+        public static IFolder getInterface()
+        {
+            return new Folder();
+        }
+    
         public bool CreateFolder(string path, string token)
         {
             try
