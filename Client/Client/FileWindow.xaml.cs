@@ -1,179 +1,221 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
 using Client.Classes;
 
 namespace Client
 {
-    /// <summary>
-    /// Interaction logic for FileWindow.xaml
-    /// </summary>
-    public partial class FileWindow : Window
+
+    public partial class FileWindow : Page
     {
-        public FileWindow(string token)
+        private Client.Model.Directory filesfolderObj;
+        private List<Client.Model.Directory> files;
+        private List<Client.Model.Directory> folders;
+        private bool WasSetFileName;
+
+        public FileWindow()
         {
             InitializeComponent();
-            
-            Folder folder = new Folder();
-            var folders_and_files = folder.GetFolderContent("/", token);
-            if (!folders_and_files.ContainsKey("error")) MessageBox.Show(folders_and_files["files"].Count.ToString());
-            else MessageBox.Show(folders_and_files["error"][0]);
+            CurFolder.Content += Worker.currentFolder;
+            LoadListView();
         }
 
-        #region TreeView Control
-        void TreeView_Loaded(object sender, RoutedEventArgs e)
+
+        private void LoadListView()
         {
-            /// Create main expanded node of TreeView
-            treeView.Items.Add(TreeView_CreateComputerItem());
-            /// Update open directories every 5 second
-            DispatcherTimer timer = new DispatcherTimer(TimeSpan.FromSeconds(5),
-                DispatcherPriority.Background, TreeView_Update, Dispatcher);
-        }
-        void TreeView_Update(object sender, EventArgs e)
-        {
-            Stopwatch s = new Stopwatch();
-            s.Start();
-            /// Update drives and folders in Computer
-            /// create copy for detect what item was expanded
-            TreeView oldTreeView = CloneUsingXaml(treeView) as TreeView;
-            /// populate items from scratch
-            treeView.Items.Clear();
-            /// add computer expanded node with all drives
-            treeView.Items.Add(TreeView_CreateComputerItem());
-            TreeViewItem newComputerItem = treeView.Items[0] as TreeViewItem;
-            TreeViewItem oldComputerItem = oldTreeView.Items[0] as TreeViewItem;
-            /// Save old state of item
-            newComputerItem.IsExpanded = oldComputerItem.IsExpanded;
-            newComputerItem.IsSelected = oldComputerItem.IsSelected;
-            /// check all drives for creating it's root folders
-            foreach (TreeViewItem newDrive in (treeView.Items[0] as TreeViewItem).Items)
-                if (newDrive.Items.Contains(null))
-                    /// Find relative old item for newDrive
-                    foreach (TreeViewItem oldDrive in oldComputerItem.Items)
-                        if (oldDrive.Tag as string == newDrive.Tag as string)
-                        {
-                            newDrive.IsSelected = oldDrive.IsSelected;
-                            if (oldDrive.IsExpanded)
-                            {
-                                newDrive.Items.Clear();
-                                TreeView_AddDirectoryItems(oldDrive, newDrive);
-                            }
-                            break;
-                        }
-            s.Stop();
-            Debug.WriteLine(String.Format("TreeView_Update finished with {0} ms.", s.ElapsedMilliseconds));
-        }
-        void TreeView_AddDirectoryItems(TreeViewItem oldItem, TreeViewItem newItem)
-        {
-            newItem.IsExpanded = oldItem.IsExpanded;
-            newItem.IsSelected = oldItem.IsSelected;
-            /// add folders in this drive
-            string[] directories = Directory.GetDirectories(newItem.Tag as string);
-            /// for each folder create TreeViewItem
-            foreach (string directory in directories)
+
+            Dictionary<string, List<string>> files_folders = Worker.GetFolderContent(Worker.currentFolder);//new Dictionary<string, List<string>>());
+            if (files_folders != null)
             {
-                TreeViewItem treeViewItem = new TreeViewItem();
-                treeViewItem.Header = new DirectoryInfo(directory).Name;
-                treeViewItem.Tag = directory;
-                try
+                files =
+                    (from f in files_folders["files"] select new Client.Model.Directory { Name = f, Type = "Файл" })
+                        .ToList();
+                folders =
+                    (from f in files_folders["folders"]
+                     select new Client.Model.Directory { Name = f.Substring(1), Type = "Папка" }).ToList();
+                foreach (var folder in folders)
                 {
-                    if (Directory.GetDirectories(directory).Length > 0)
-                        /// find respective old folder
-                        foreach (TreeViewItem oldDir in oldItem.Items)
-                            if (oldDir.Tag as string == directory)
-                            {
-                                if (oldDir.IsExpanded)
-                                {
-                                    TreeView_AddDirectoryItems(oldDir, treeViewItem);
-                                }
-                                else
-                                {
-                                    treeViewItem.Items.Add(null);
-                                }
-                                break;
-                            }
+                    filesfolderslistView.Items.Add(folder);
                 }
-                catch { }
-                treeViewItem.Expanded += TreeViewItem_Expanded;
-                newItem.Items.Add(treeViewItem);
-            }
-        }
-        TreeViewItem TreeView_CreateComputerItem()
-        {
-            TreeViewItem computer = new TreeViewItem { Header = "Computer", IsExpanded = true };
-            foreach (var drive in DriveInfo.GetDrives())
-            {
-                TreeViewItem driveItem = new TreeViewItem();
-                if (drive.IsReady)
+                foreach (var file in files)
                 {
-                    driveItem.Header = String.Format("{0} ({1}:)", drive.VolumeLabel, drive.Name[0]);
-                    if (Directory.GetDirectories(drive.Name).Length > 0)
-                        driveItem.Items.Add(null);
+                    filesfolderslistView.Items.Add(file);
+                }
+            }
+
+        }
+
+        // добавить файл
+        private void AddFileContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            TextBoxNewName.Visibility = System.Windows.Visibility.Visible;
+            LabelNewName.Visibility = System.Windows.Visibility.Visible;
+
+            if (filesfolderslistView.SelectedIndex > -1)
+            {
+                filesfolderObj = new Client.Model.Directory();
+                filesfolderObj = (Client.Model.Directory)filesfolderslistView.SelectedItem;
+
+                if (filesfolderObj.Type == "Файл")
+                {
+                    Worker.pathForCreation = Worker.currentFolder;
+                    Worker.isCreationFile = true;
+                    Worker.isOperationInCurFolder = true;
+
                 }
                 else
                 {
-                    driveItem.Header = String.Format("{0} ({1}:)", drive.DriveType, drive.Name[0]);
+                    Worker.pathForCreation = Worker.currentFolder + filesfolderObj.Name + "/";
+                    Worker.isCreationFile = true;
+                    Worker.isOperationInCurFolder = false;
+
                 }
-                driveItem.Tag = drive.Name;
-                driveItem.Expanded += TreeViewItem_Expanded;
-                computer.Items.Add(driveItem);
+
             }
-            return computer;
-        }
-        void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem rootItem = (TreeViewItem)sender;
-
-            if (rootItem.Items.Count == 1 && rootItem.Items[0] == null)
+            else
             {
-                rootItem.Items.Clear();
+                Worker.pathForCreation = Worker.currentFolder;
+                Worker.isCreationFile = true;
+                Worker.isOperationInCurFolder = true;
 
-                string[] dirs;
-                try
+            }
+        }
+
+        // добавить папку
+        private void AddFolderContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            TextBoxNewName.Visibility = System.Windows.Visibility.Visible;
+            LabelNewName.Visibility = System.Windows.Visibility.Visible;
+
+            if (filesfolderslistView.SelectedIndex > -1)
+            {
+                filesfolderObj = new Client.Model.Directory();
+                filesfolderObj = (Client.Model.Directory)filesfolderslistView.SelectedItem;
+
+                if (filesfolderObj.Type == "Файл")
                 {
-                    dirs = Directory.GetDirectories((string)rootItem.Tag);
+                    Worker.pathForCreation = Worker.currentFolder;
+                    Worker.isCreationFile = false;
+                    Worker.isOperationInCurFolder = true;
+
                 }
-                catch
+                else
                 {
+                    Worker.pathForCreation = Worker.currentFolder + filesfolderObj.Name + "/";
+                    Worker.isCreationFile = false;
+                    Worker.isOperationInCurFolder = false;
+
+                }
+
+            }
+            else
+            {
+                Worker.pathForCreation = Worker.currentFolder;
+                Worker.isCreationFile = false;
+                Worker.isOperationInCurFolder = true;
+
+            }
+        }
+
+        // удалить папку
+        private void DeleteContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (filesfolderslistView.SelectedIndex > -1)
+            {
+                filesfolderObj = new Client.Model.Directory();
+                filesfolderObj = (Client.Model.Directory)filesfolderslistView.SelectedItem;
+
+                if (filesfolderObj.Type == "Папка")
+                {
+                    bool result = Worker.DeleteFolder(Worker.currentFolder + filesfolderObj.Name);
+                    if (result)
+                    {
+                        filesfolderslistView.Items.Remove(filesfolderslistView.SelectedItem);// remove the selected Item
+                        filesfolderslistView.Items.Refresh();
+                        State.Content = "Папка была успешно удалена";
+                    }
+                    else State.Content = "Папка не была удалена";
+
+                }
+            }
+        }
+
+        //Скачать файл
+        private void DownloadFileContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (filesfolderslistView.SelectedIndex > -1)
+            {
+                filesfolderObj = new Client.Model.Directory();
+                filesfolderObj = (Client.Model.Directory)filesfolderslistView.SelectedItem;
+
+
+                if (filesfolderObj.Type == "Файл")
+                {
+                    bool result = Worker.DownloadFile(filesfolderObj.Name, Worker.currentFolder);
+                    if (result) State.Content = "Файл был успешно скачан";
+                    else State.Content = "Произошла ошибка во время скачивания файла";
+                }
+            }
+        }
+
+        private void TextBoxNewName_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+
+            if (e.Key != Key.Enter) return;
+            TextBoxNewName.Visibility = System.Windows.Visibility.Hidden;
+            LabelNewName.Visibility = System.Windows.Visibility.Hidden;
+            if (Worker.isCreationFile)
+            {
+                if (TextBoxNewName.Text.StartsWith("/"))
+                {
+                    State.Content = "Имя не должно начинаться с символа /";
                     return;
                 }
-
-                foreach (var dir in dirs)
-                {
-                    TreeViewItem subItem = new TreeViewItem();
-                    subItem.Header = new DirectoryInfo(dir).Name;
-                    subItem.Tag = dir;
-                    try
-                    {
-                        if (Directory.GetDirectories(dir).Length > 0)
-                            subItem.Items.Add(null);
-                    }
-                    catch { }
-                    subItem.Expanded += TreeViewItem_Expanded;
-                    rootItem.Items.Add(subItem);
-                }
+                var result = Worker.CreateFile(TextBoxNewName.Text, Worker.pathForCreation, "AES");
+                if (result) State.Content = "Файл был успешно добавлен";
+                else State.Content = "Произошла ошибка при добавлении файла";
+                if (result && Worker.isOperationInCurFolder) filesfolderslistView.Items.Add(new Client.Model.Directory { Name = TextBoxNewName.Text, Type = "Файл" });
             }
+            else
+            {
+                if (TextBoxNewName.Text.StartsWith("/"))
+                {
+                    State.Content = "Имя не должно начинаться с символа /";
+                    return;
+                }
+                var result = Worker.CreateFolder(Worker.pathForCreation + TextBoxNewName.Text);
+                if (result) State.Content = "Папка была успешно создана";
+                else State.Content = "Произошла ошибка при создании папки";
+                if (result && Worker.isOperationInCurFolder) filesfolderslistView.Items.Add(new Client.Model.Directory { Name = TextBoxNewName.Text, Type = "Папка" });
+            }
+            filesfolderslistView.Items.Refresh();
         }
-        #endregion
-
-        object CloneUsingXaml(object obj)
+        protected void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string xaml = XamlWriter.Save(obj);
-            return XamlReader.Load(new XmlTextReader(new StringReader(xaml)));
+            filesfolderObj = new Client.Model.Directory();
+            filesfolderObj = (Client.Model.Directory)filesfolderslistView.SelectedItem;
+
+            if (filesfolderObj.Type == "Папка")
+            {
+                filesfolderslistView.Items.Clear();
+                CurFolder.Content += filesfolderObj.Name;
+                Worker.currentFolder += filesfolderObj.Name;
+                LoadListView();
+                Worker.currentFolder += "/";
+                //MessageBox.Show(filesfolderObj.Name);
+            }
+
         }
     }
 }

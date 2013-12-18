@@ -16,43 +16,6 @@ namespace TestClient
             Assert.AreNotEqual("Логин или пароль неверны",token);
         }
 
-        [TestMethod]
-        public void TestGetFolderContent()
-        {
-            var user = new User();
-            var folder = new Folder();
-
-            var token = user.Authorize("ilia12r@gmail.com", "ilya");
-            var folderContent = folder.GetFolderContent("/", token);
-            if (folderContent.ContainsKey("error")) Assert.Fail("Запрашиваемая папка недоступна или не найдена");
-            if (folderContent.ContainsKey("folders")) Assert.AreEqual(0,folderContent["folders"].Count);
-            if (folderContent.ContainsKey("files")) Assert.AreEqual(0, folderContent["files"].Count);
-        }
-
-        [TestMethod]
-        public void TestCreateFolder()
-        {
-            var user = new User();
-            var folder = new Folder();
-            bool containsFolderExample = false;
-            var token = user.Authorize("ilia12r@gmail.com", "ilya");
-            var folderContent = folder.GetFolderContent("/", token);
-            if (folderContent.ContainsKey("error")) Assert.Fail("Запрашиваемая папка недоступна или не найдена");
-            if (folderContent.ContainsKey("folders"))
-            {
-                if (folderContent["folders"].Contains("example")) containsFolderExample = true;
-            }
-
-            if (containsFolderExample)
-            {
-                if (!folder.DeleteFolder("/example", token)) Assert.Fail("Не удалось удалить папку"); 
-            }
-            else
-            {
-                if (!folder.CreateFolder("/example", token)) Assert.Fail("Не удалось создать папку"); 
-            }
-            
-        }
 
     }
 }
