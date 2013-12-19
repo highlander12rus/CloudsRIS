@@ -15,6 +15,7 @@
 #include "../Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
 #include "../Helper/StringExtended.h"
 #include"../DataBase/Tables/ServerFiles.h"
+#include "../DataBase/Tables/Files.h"
 #include "TcpBackupClient.h"
 
 #include <string>
