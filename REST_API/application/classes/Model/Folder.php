@@ -27,6 +27,9 @@ class Model_Folder extends ORM {
 
     public function filters() {
         return array(
+	    'name' => array(
+	    	array('Model_Folder::filteAddShaslEnd', array(':value')),
+	    ),
             TRUE => array(
                 array('UTF8::trim', array(':value')),
                 array('urldecode', array(':value')),
@@ -43,5 +46,7 @@ class Model_Folder extends ORM {
             ),
         );
     }
-
+   public static function filteAddShaslEnd($path) {
+   	return $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
+   }
 }

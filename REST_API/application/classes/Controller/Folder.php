@@ -14,8 +14,6 @@ class Controller_Folder extends Controller_REST {
 
         $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
 
-
-
         $isFolder = ORM::factory('Folder')
                 ->where('name', '=', $path)
                 ->find();
@@ -37,7 +35,7 @@ class Controller_Folder extends Controller_REST {
                 $folder_id_curent = $folder->id;
             }
             else
-                $folders[] = $folder->name;
+                $folders[] = str_replace($path, '/', $folder->name);
         }
 
         $files_curent_dir = DB::select('name')

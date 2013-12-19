@@ -18,7 +18,7 @@ return array
 			 *
 			 * Ports and sockets may be appended to the hostname.
 			 */
-			'hostname'   => 'localhost',
+			'hostname'   => '192.168.89.129',
 			'database'   => 'cloudsris',
 			'username'   => 'root',
 			'password'   => '',
