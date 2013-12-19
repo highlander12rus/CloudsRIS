@@ -25,7 +25,8 @@ class Controller_File extends Controller_REST {
         
         $file = $folder->files
                 ->where('name', '=', $file)
-                                ->where('user_id', '=', Auth::instance()->get_user()->id)
+                ->where('user_id', '=', Auth::instance()->get_user()->id)
+                ->where('is_loaded', '=', 1)
                 ->find();
         if(!$file->loaded()) {
             throw new HTTP_Exception_404;

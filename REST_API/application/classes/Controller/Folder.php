@@ -41,6 +41,7 @@ class Controller_Folder extends Controller_REST {
         $files_curent_dir = DB::select('name')
                 ->from('files')
                 ->where('folder_id', '=', $folder_id_curent)
+                ->where('is_loaded', '=', 1)
                 ->execute();
         $files_array = array();
         foreach ($files_curent_dir as $file) {
@@ -83,6 +84,11 @@ class Controller_Folder extends Controller_REST {
             throw new HTTP_Exception_400;
         $name = HTML::chars($name);
 
+        $name = urldecode($name);
+        $name = HTML::chars($name);
+
+        $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
+        
         $folder = ORM::factory('Folder')
                 ->where('name', '=', $name)
                 ->where('user_id', '=', Auth::instance()->get_user()->id)
