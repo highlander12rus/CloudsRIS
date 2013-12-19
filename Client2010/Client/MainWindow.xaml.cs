@@ -21,7 +21,7 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        static Worker work = new Worker();
+        
 
   
         public MainWindow()

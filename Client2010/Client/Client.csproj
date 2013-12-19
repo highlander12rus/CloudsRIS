@@ -106,6 +106,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FileManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,6 +126,9 @@
     <Compile Include="Classes\Folder.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Worker.cs" />
+    <Compile Include="FileManager.xaml.cs">
+      <DependentUpon>FileManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\ICrypt.cs" />
     <Compile Include="Interfaces\IFile.cs" />
     <Compile Include="Interfaces\IFolder.cs" />

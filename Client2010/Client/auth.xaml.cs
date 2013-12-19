@@ -41,8 +41,10 @@ namespace Client
                     label_errors.Content = "Логин и пароль не найдены";
                     return;
                 }
+                NavigationService.Navigate((new Uri("FileManager.xaml", UriKind.Relative)));
                
             }
+            
           
         }
         
