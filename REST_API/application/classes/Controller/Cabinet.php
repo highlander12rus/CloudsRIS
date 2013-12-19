@@ -77,6 +77,12 @@ class Controller_Cabinet extends Controller_Core {
             $user->password = $password_hash;
             $user->name = $name;
             $user->save();
+            //create root folder for user
+            $folder = ORM::factory('Folder');
+            $folder->name = '/';
+            $folder->user_id = $user->id;
+            $folder->save();
+            
             $this->auth->login($email, $password_hash);
             $this->response->headers('location', '/');
         } else {
