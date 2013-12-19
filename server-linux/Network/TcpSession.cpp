@@ -33,8 +33,9 @@ namespace Network {
 
         void TcpSession::send(char msg) {
             BOOST_LOG_TRIVIAL(debug) << "send message" << msg;
-            
-            this->requestMessage[0] = msg;BOOST_LOG_TRIVIAL(debug) << "send message buff" << this->requestMessage[0];
+
+            this->requestMessage[0] = msg;
+            BOOST_LOG_TRIVIAL(debug) << "send message buff" << this->requestMessage[0];
             boost::asio::async_write(socket_, boost::asio::buffer(requestMessage, 1),
                     boost::bind(&TcpSession::handle_write, shared_from_this(),
                     boost::asio::placeholders::error,
@@ -164,7 +165,7 @@ namespace Network {
                     }
                     this->redisInstance->del(token.str());
                     delete blockDB;
-                                        
+
                     BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
                     TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                     tcpBackup.start();
@@ -220,7 +221,7 @@ namespace Network {
                     TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                     tcpBackup.start();
                     BOOST_LOG_TRIVIAL(debug) << "end backup";
-                    
+
                     delete blockDB;
                     this->redisInstance->del(token.str());
                     return;
@@ -306,6 +307,7 @@ namespace Network {
                     delete result_read;
                     result_read = NULL;
                     serverFilesTablet = NULL;
+                    socket_.shutdown(boost::asio::socket_base::shutdown_send);
                     socket_.close();
                 }
             } else {
@@ -354,7 +356,7 @@ namespace Network {
             strWrite->write(tmp_buf, sizeFileOrBuff);
             delete[] tmp_buf;
             delete strWrite;
-       
+
         }
 
         void TcpSession::handle_read(const boost::system::error_code& error, size_t bytes_transferred) {
@@ -368,22 +370,35 @@ namespace Network {
                     BOOST_LOG_TRIVIAL(debug) << "parse headers " << mod << " " << mod.compare("w");
                     byte_read_count += bytes_transferred;
                     if (!mod.compare("r")) {
-			if(result_read ==NULL){
-                        Database::Tables::ServerFiles serverFilesTablet(conn);
-                        result_read = serverFilesTablet.GetInfoByFileId(idFile, SELF_IP);
-                        BOOST_LOG_TRIVIAL(debug) << "3";
-                        //read first bolck
-                        result_read->next();
-                        set_virable_for_read_block();
-			}
+                        if (result_read == NULL) {
+                            Database::Tables::ServerFiles serverFilesTablet(conn);
+                            result_read = serverFilesTablet.GetInfoByFileId(idFile, SELF_IP);
+                            BOOST_LOG_TRIVIAL(debug) << "3";
+                            //read first bolck
+                            result_read->next();
+                            set_virable_for_read_block();
+                        }
                         sendFile();
+                        return;
                     }
                     if (!mod.compare("w")) {
                         BOOST_LOG_TRIVIAL(debug) << "mod w start";
                         this->wModeWorkFirst(bytes_transferred);
+
+                        if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
+                            BOOST_LOG_TRIVIAL(debug) << "TCP OK";
+                            this->send(TCP_SOCKET_OK);
+                            this->redisInstance->del(token.str());
+                        }
                     }
-                    if (!mod.compare("s")) {
-                        this->sModeWorkFirst(bytes_transferred);
+                }
+                if (!mod.compare("s")) {
+                    this->sModeWorkFirst(bytes_transferred);
+
+                    if ((byte_read_count - HEADER_TCP_LENGTH) == file_size) {
+                        BOOST_LOG_TRIVIAL(debug) << "TCP OK";
+                        this->send(TCP_SOCKET_OK);
+                        this->redisInstance->del(token.str());
                     }
 
 
@@ -410,7 +425,7 @@ namespace Network {
                         TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                         tcpBackup.start();
                         BOOST_LOG_TRIVIAL(debug) << "end backup";
-                        
+
                         return;
                     }
                     this->start();
