@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Client.Interfaces;
@@ -14,8 +12,8 @@ namespace Client.Classes
     class Crypt : ICrypt
     {
         private const int BLOCK_SIZE = 8192;
-        private const string PATH_TO_KEY = "E://key";
-        private const string PATH_TO_IV = "E://iv";
+        private const string PATH_TO_KEY = "key";
+        private const string PATH_TO_IV = "iv";
         private static byte[] KEY;
         private static byte[] IV;
 

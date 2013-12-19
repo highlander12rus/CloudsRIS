@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Threading;
-using System.Xml;
 using Client.Classes;
 
 namespace Client
@@ -36,14 +28,14 @@ namespace Client
         {
 
             Dictionary<string, List<string>> files_folders = Worker.GetFolderContent(Worker.currentFolder);//new Dictionary<string, List<string>>());
-            if (files_folders != null)
+            if (files_folders != null && !files_folders.ContainsKey("error"))
             {
                 files =
                     (from f in files_folders["files"] select new Client.Model.Directory { Name = f, Type = "Файл" })
                         .ToList();
                 folders =
                     (from f in files_folders["folders"]
-                     select new Client.Model.Directory { Name = f.Substring(1), Type = "Папка" }).ToList();
+                     select new Client.Model.Directory { Name = f.Substring(1,f.Length-2), Type = "Папка" }).ToList();
                 foreach (var folder in folders)
                 {
                     filesfolderslistView.Items.Add(folder);
@@ -213,9 +205,49 @@ namespace Client
                 Worker.currentFolder += filesfolderObj.Name;
                 LoadListView();
                 Worker.currentFolder += "/";
+                CurFolder.Content += "/";
                 //MessageBox.Show(filesfolderObj.Name);
             }
 
+        }
+
+        private void GoToHome_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.Equals(Worker.currentFolder, "/"))
+            {
+                filesfolderslistView.Items.Clear();
+                CurFolder.Content = "Текущая директория:/";
+                Worker.currentFolder = "/";
+                LoadListView();
+            }
+        }
+
+        private void GoToPrevFolder_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.Equals(Worker.currentFolder, "/"))
+            {
+                if (Worker.currentFolder.Substring(0, Worker.currentFolder.LastIndexOf('/')).LastIndexOf('/') != 0)
+                {
+                    filesfolderslistView.Items.Clear();
+                    string nameDestFolder = Worker.currentFolder;
+                    nameDestFolder = nameDestFolder.Substring(0, nameDestFolder.LastIndexOf('/'));
+                    nameDestFolder = nameDestFolder.Substring(0, nameDestFolder.LastIndexOf('/'));
+                    CurFolder.Content = nameDestFolder;
+                        //CurFolder.Content.ToString().Substring(0, CurFolder.Content.ToString().LastIndexOf('/') - 1);
+                    Worker.currentFolder = nameDestFolder;
+                    LoadListView();
+                    Worker.currentFolder += "/";
+                    CurFolder.Content = "Текущая директория:" + Worker.currentFolder;
+                }
+                else
+                {
+                    filesfolderslistView.Items.Clear();
+                    CurFolder.Content = "Текущая директория:/";
+                    Worker.currentFolder = "/";
+                    LoadListView();
+                }
+
+            }
         }
     }
 }

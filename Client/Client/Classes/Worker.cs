@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Windows;
 using Client.Interfaces;
 using Microsoft.Win32;
 
@@ -82,20 +78,29 @@ namespace Client.Classes
 
         public static bool DownloadFile(string name, string pathToFolder)
         {
-            FileDialog openFileDialog1 = new SaveFileDialog();
-            Nullable<bool> result = openFileDialog1.ShowDialog();
-            bool res = false;
-            if (result == true)
+            try
             {
-                string filename = openFileDialog1.FileName;
-                using (BinaryReader br = new BinaryReader(File.Open(filename + "TMP", FileMode.Create)))
+                FileDialog openFileDialog1 = new SaveFileDialog();
+                Nullable<bool> result = openFileDialog1.ShowDialog();
+                bool res = false;
+                if (result == true)
                 {
-                    res = fileClass.GetFile(name, pathToFolder, tokenAuth, br.BaseStream);
+                    string filename = openFileDialog1.FileName;
+                    using (BinaryReader br = new BinaryReader(File.Open(filename + "TMP", FileMode.Create)))
+                    {
+                        res = fileClass.GetFile(name, pathToFolder, tokenAuth, br.BaseStream);
+                    }
+                    res = cryptClass.FileDecrypt(filename + "TMP", filename);
+                    File.Delete(filename + "TMP");
                 }
-                res = cryptClass.FileDecrypt(filename + "TMP", filename);
-                File.Delete(filename + "TMP");
+                return res;
             }
-            return res;
+            catch (Exception)
+            {
+
+                return false;
+            }
+            
         }
     }
 }

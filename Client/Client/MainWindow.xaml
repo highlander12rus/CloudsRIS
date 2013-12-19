@@ -1,7 +1,9 @@
 ﻿<Window x:Class="Client.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CloudRIS" Height="350" Width="525">
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        Title="CloudRIS" Height="405" Width="530">
     <Grid Background="#FFDBEEFF">
         <Frame Grid.Column="1" Source="LoginWindow.xaml" Margin="3" Name="mainFrame"
                 IsTabStop="True" IsHitTestVisible="True" IsManipulationEnabled="False" IsEnabled="True" Focusable="True" NavigationUIVisibility="Hidden"></Frame>
