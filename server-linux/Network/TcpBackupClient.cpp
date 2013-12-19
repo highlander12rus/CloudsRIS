@@ -148,20 +148,25 @@ bool TcpBackupClient::downloadBlock(std::string pathToBlock, unsigned int length
     char* buf = new char[BUFFER_SIZE];
     int buffer_curent = length > BUFFER_SIZE ? BUFFER_SIZE : length;
     unsigned int sendAllBytes = 0;
-    while (sendAllBytes < length) {
-        FileSystem::Block::Block block(pathToBlock, 0);
-        FileSystem::StreamRead* sread = block.readFile(offset, length);
-        int was_read = sread->read(buf, buffer_curent);
-        if (was_read == 0) {
-            delete sread;
-            break;
-        }
-        size_t len_send = socket.write_some(boost::asio::buffer(buf, was_read));
-        sendAllBytes += len_send;
-        BOOST_LOG_TRIVIAL(debug) << "socket write " << len_send << " bytes";
-        if (len_send != buffer_curent)
-            BOOST_LOG_TRIVIAL(error) << "колчиество отправленных не равно буферу";
 
+    try {
+        while (sendAllBytes < length) {
+            FileSystem::Block::Block block(pathToBlock, 0);
+            FileSystem::StreamRead* sread = block.readFile(offset, length);
+            int was_read = sread->read(buf, buffer_curent);
+            if (was_read == 0) {
+                delete sread;
+                break;
+            }
+            size_t len_send = socket.write_some(boost::asio::buffer(buf, was_read));
+            sendAllBytes += len_send;
+            BOOST_LOG_TRIVIAL(debug) << "socket write " << len_send << " bytes";
+            if (len_send != buffer_curent)
+                BOOST_LOG_TRIVIAL(error) << "колчиество отправленных не равно буферу";
+
+        }
+    } catch (std::exception &e) {
+        BOOST_LOG_TRIVIAL(error) << "backup NOT loading in ip"<< ip << e.what();
     }
     socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send);
     char* buf_responce = new char[1];
@@ -176,7 +181,7 @@ bool TcpBackupClient::downloadBlock(std::string pathToBlock, unsigned int length
     res__buf = *buf_responce;
     delete[] buf, buf_responce;
 
-    return true;//TCP_SOCKET_OK == res__buf;
+    return true; //TCP_SOCKET_OK == res__buf;
 
 }
 

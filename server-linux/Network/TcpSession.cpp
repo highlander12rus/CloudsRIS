@@ -166,6 +166,9 @@ namespace Network {
                     this->redisInstance->del(token.str());
                     delete blockDB;
 
+                    BOOST_LOG_TRIVIAL(debug) << "update fields is_loaded";
+                    Database::Tables::Files files(this->conn);
+                    files.setFieldIsLoadedFilesInTrue(this->idFile);
                     BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
                     TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                     tcpBackup.start();
@@ -217,6 +220,9 @@ namespace Network {
                         delete blockMass;
                         blockMass = NULL;
                     }
+                    BOOST_LOG_TRIVIAL(debug) << "update fields is_loaded";
+                    Database::Tables::Files files(this->conn);
+                    files.setFieldIsLoadedFilesInTrue(this->idFile);
                     BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
                     TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                     tcpBackup.start();
@@ -421,6 +427,9 @@ namespace Network {
                         this->send(TCP_SOCKET_OK);
                         this->redisInstance->del(token.str());
 
+                        BOOST_LOG_TRIVIAL(debug) << "update fields is_loaded";
+                        Database::Tables::Files files(this->conn);
+                        files.setFieldIsLoadedFilesInTrue(this->idFile);
                         BOOST_LOG_TRIVIAL(debug) << "start backup file other server";
                         TcpBackupClient tcpBackup(this->idFile, this->redisInstance, this->conn);
                         tcpBackup.start();
