@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="DataBase" displayName="DataBase" projectFiles="true">
+      <logicalFolder name="Tables" displayName="Tables" projectFiles="true">
+        <itemPath>DataBase/Tables/AddressBlocks.cpp</itemPath>
+        <itemPath>DataBase/Tables/AddressBlocks.h</itemPath>
+        <itemPath>DataBase/Tables/Blocks.cpp</itemPath>
+        <itemPath>DataBase/Tables/Blocks.h</itemPath>
+        <itemPath>DataBase/Tables/SecurityMethod.cpp</itemPath>
+        <itemPath>DataBase/Tables/SecurityMethod.h</itemPath>
+        <itemPath>DataBase/Tables/ServerFiles.cpp</itemPath>
+        <itemPath>DataBase/Tables/ServerFiles.h</itemPath>
+      </logicalFolder>
+      <itemPath>DataBase/SingletoneConn.cpp</itemPath>
+      <itemPath>DataBase/SingletoneConn.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
+      <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
+      <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
+      <itemPath>Exception/MaxSearchPort.cpp</itemPath>
+      <itemPath>Exception/MaxSearchPort.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="FileSystem" displayName="FileSystem" projectFiles="true">
+      <itemPath>FileSystem/AllocatedBlocks.cpp</itemPath>
+      <itemPath>FileSystem/AllocatedBlocks.h</itemPath>
+      <itemPath>FileSystem/Block.cpp</itemPath>
+      <itemPath>FileSystem/Block.h</itemPath>
+      <itemPath>FileSystem/FileStream.cpp</itemPath>
+      <itemPath>FileSystem/FileStream.h</itemPath>
+      <itemPath>FileSystem/FileStreamRead.cpp</itemPath>
+      <itemPath>FileSystem/FileStreamRead.h</itemPath>
+      <itemPath>FileSystem/FileStreamWrite.cpp</itemPath>
+      <itemPath>FileSystem/FileStreamWrite.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
+      <itemPath>Helper/Crypto.cpp</itemPath>
+      <itemPath>Helper/Crypto.h</itemPath>
+      <itemPath>Helper/Network.cpp</itemPath>
+      <itemPath>Helper/Network.h</itemPath>
+      <itemPath>Helper/StringExtended.cpp</itemPath>
+      <itemPath>Helper/StringExtended.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="Interface" displayName="Interface" projectFiles="true">
+      <logicalFolder name="CurrentBaseOperations"
+                     displayName="CurrentBaseOperations"
+                     projectFiles="true">
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp</itemPath>
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperation.h</itemPath>
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp</itemPath>
+        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="Network" displayName="Network" projectFiles="true">
+      <itemPath>Network/SearchServer.cpp</itemPath>
+      <itemPath>Network/SearchServer.h</itemPath>
+      <itemPath>Network/SearchSpace.cpp</itemPath>
+      <itemPath>Network/SearchSpace.h</itemPath>
+      <itemPath>Network/StructServersResponce.h</itemPath>
+      <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
+      <itemPath>Network/StructUdpReceiveOtherServer.h</itemPath>
+      <itemPath>Network/TcpBackupClient.cpp</itemPath>
+      <itemPath>Network/TcpBackupClient.h</itemPath>
+      <itemPath>Network/TcpServer.cpp</itemPath>
+      <itemPath>Network/TcpServer.h</itemPath>
+      <itemPath>Network/TcpSession.cpp</itemPath>
+      <itemPath>Network/TcpSession.h</itemPath>
+      <itemPath>Network/UdpBroatcast.cpp</itemPath>
+      <itemPath>Network/UdpBroatcast.h</itemPath>
+      <itemPath>Network/UdpOnce.cpp</itemPath>
+      <itemPath>Network/UdpOnce.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="redis" displayName="redis" projectFiles="true">
+      <itemPath>redis/RedisAdaptor.cpp</itemPath>
+      <itemPath>redis/RedisAdaptor.h</itemPath>
+      <itemPath>redis/RedisConnection.cpp</itemPath>
+      <itemPath>redis/RedisConnection.h</itemPath>
+      <itemPath>redis/anet.cpp</itemPath>
+      <itemPath>redis/anet.h</itemPath>
+      <itemPath>redis/fmacros.h</itemPath>
+      <itemPath>redis/redisclient.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Исходные файлы"
+                   projectFiles="true">
+      <itemPath>Config.h</itemPath>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Файлы заголовков"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Файлы ресурсов"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Файлы тестов"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Важные файлы"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>/home/vfs/CloudsRIS/server-linux/DataBase</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Event</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Exception</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/FileSystem</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Helper</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Interface</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/Network</Elem>
+    <Elem>/home/vfs/CloudsRIS/server-linux/redis</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <commandlineTool>g++</commandlineTool>
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+          </incDir>
+          <commandLine>-lmysqlcppconn -lrt -lcrypto</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/local/lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>/usr/local/lib/libboost_date_time.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_filesystem.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_serialization.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_system.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_thread.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_timer.a</linkerLibFileItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_random.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_log.a</linkerLibFileItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="Config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/AddressBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/AddressBlocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Helper/Crypto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Crypto.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Helper/StringExtended.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/StringExtended.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/SearchSpace.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchSpace.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructServersResponce.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/RedisConnection.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisConnection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/anet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/anet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/fmacros.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/redisclient.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>8</standard>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="Config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/AddressBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/AddressBlocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/SecurityMethod.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/AllocatedBlocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamRead.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Helper/Crypto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Crypto.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Helper/StringExtended.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Helper/StringExtended.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/SearchSpace.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/SearchSpace.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructServersResponce.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpBackupClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisAdaptor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/RedisConnection.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/RedisConnection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/anet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="redis/anet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/fmacros.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="redis/redisclient.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

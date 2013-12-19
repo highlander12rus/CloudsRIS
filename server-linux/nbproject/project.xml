@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.cnd.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>CloudsRis</name>
+            <c-extensions/>
+            <cpp-extensions>cpp</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <sourceEncoding>UTF-8</sourceEncoding>
+            <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/DataBase</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Event</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Exception</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/FileSystem</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Helper</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Interface</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/Network</sourceRootElem>
+                <sourceRootElem>/home/vfs/CloudsRIS/server-linux/redis</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>Debug</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Release</name>
+                    <type>1</type>
+                </confElem>
+            </confList>
+        </data>
+    </configuration>
+</project>
