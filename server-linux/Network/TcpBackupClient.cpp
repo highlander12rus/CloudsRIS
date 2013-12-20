@@ -148,7 +148,9 @@ bool TcpBackupClient::downloadBlock(std::string pathToBlock, unsigned int length
     char* buf = new char[BUFFER_SIZE];
     int buffer_curent = length > BUFFER_SIZE ? BUFFER_SIZE : length;
     unsigned int sendAllBytes = 0;
-
+  char* buf_responce = new char[1];
+    char res__buf;
+    size_t len;
     try {
         while (sendAllBytes < length) {
             FileSystem::Block::Block block(pathToBlock, 0);
@@ -165,14 +167,11 @@ bool TcpBackupClient::downloadBlock(std::string pathToBlock, unsigned int length
                 BOOST_LOG_TRIVIAL(error) << "колчиество отправленных не равно буферу";
 
         }
-    } catch (std::exception &e) {
-        BOOST_LOG_TRIVIAL(error) << "backup NOT loading in ip"<< ip << e.what();
-    }
+    
+      
     socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send);
-    char* buf_responce = new char[1];
-    char res__buf;
-    size_t len;
-    try {
+  
+    
         len = socket.read_some(boost::asio::buffer(buf_responce, 1));
     } catch (std::exception &e) {
         BOOST_LOG_TRIVIAL(error) << e.what();

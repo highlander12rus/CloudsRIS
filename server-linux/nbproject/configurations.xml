@@ -7,6 +7,8 @@
         <itemPath>DataBase/Tables/AddressBlocks.h</itemPath>
         <itemPath>DataBase/Tables/Blocks.cpp</itemPath>
         <itemPath>DataBase/Tables/Blocks.h</itemPath>
+        <itemPath>DataBase/Tables/Files.cpp</itemPath>
+        <itemPath>DataBase/Tables/Files.h</itemPath>
         <itemPath>DataBase/Tables/SecurityMethod.cpp</itemPath>
         <itemPath>DataBase/Tables/SecurityMethod.h</itemPath>
         <itemPath>DataBase/Tables/ServerFiles.cpp</itemPath>
@@ -166,6 +168,10 @@
       <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Files.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Files.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -329,6 +335,10 @@
       <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Files.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataBase/Tables/Files.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/DataBase/SingletoneConn.o \
 	${OBJECTDIR}/DataBase/Tables/AddressBlocks.o \
 	${OBJECTDIR}/DataBase/Tables/Blocks.o \
+	${OBJECTDIR}/DataBase/Tables/Files.o \
 	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
 	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
 	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
@@ -103,6 +104,11 @@ ${OBJECTDIR}/DataBase/Tables/Blocks.o: DataBase/Tables/Blocks.cpp
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/Blocks.o DataBase/Tables/Blocks.cpp
+
+${OBJECTDIR}/DataBase/Tables/Files.o: DataBase/Tables/Files.cpp 
+	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/Files.o DataBase/Tables/Files.cpp
 
 ${OBJECTDIR}/DataBase/Tables/SecurityMethod.o: DataBase/Tables/SecurityMethod.cpp 
 	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
