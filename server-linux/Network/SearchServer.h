@@ -1,15 +1,16 @@
 #pragma once
 
-#include "../Config.h"
-#include "../Exception/MaxSearchPort.h"
 #include "StructUdpBroatcastRecive.h"
 #include "StructUdpReceiveOtherServer.h"
 #include "UdpOnce.h"
 
 #include "StructServersResponce.h"
 #include "../Helper/Network.h"
+#include "../Config.h"
 
+#include <time.h>
 #include <exception>
+#include <algorithm> 
 #include <iostream>
 #include <vector>
 #include <string>
@@ -21,6 +22,8 @@
 //для генерации случайного порта
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
+
+#define NANO_SECOND_MULTIPLIER  1000000  // 1 millisecond = 1,000,000 Nanoseconds
 
 //typedef unsigned int uint32_t;
 namespace Network {
@@ -36,12 +39,12 @@ namespace Network {
          * 
          * @param fileSize размер файла котоырй требуется найти @todo: мб убрать из pапросить из базы?
          * @param curentIp ip адрес текущего компьтера
+         * @param config
          */
-        SearchServer(unsigned long fileSize, char* curentIp);
+        SearchServer(unsigned long fileSize, char* curentIp, Config* config);
 
         /**
          * Запуск поиска
-         * @throws Exception::Network::Udp::MaxSearchPort
          * @todo: в будущем будет возращать список серверов
          */
         void search();
@@ -51,6 +54,8 @@ namespace Network {
         ~SearchServer();
         
     private:
+        Config* m_Config;
+        
         unsigned long fileSize;
         char* curentIp;
 
@@ -68,6 +73,12 @@ namespace Network {
          */
         void sendBrotcast(unsigned short port);
 
+        
+        /**
+         * Создает паузу nanosleep. на время казанную в настройки 
+         */
+        void startPause();
+        
         /**
          * Устанавливает содениние и возращает номер порта. и обьект сокета в парамер
          * @return 

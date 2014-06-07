@@ -83,9 +83,10 @@ if (isset($_SERVER['SERVER_PROTOCOL'])) {
  */
 Kohana::$environment = Kohana::DEVELOPMENT;
 if (isset($_SERVER['KOHANA_ENV'])) {
+    
     Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
 }
-
+Kohana::$environment = Kohana::DEVELOPMENT;
 /**
  * Initialize Kohana, setting the default options.
  *
@@ -122,13 +123,13 @@ Kohana::modules(array(
     'auth' => MODPATH . 'auth', // Basic authentication
     // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
     'codebench' => MODPATH . 'codebench', // Benchmarking tool
-    'database' => MODPATH . 'database', // Database access
+    //'database' => MODPATH . 'database', // Database access
     // 'minion'     => MODPATH.'minion',     // CLI Tasks
-    'orm' => MODPATH . 'orm', // Object Relationship Mapping
+    //'orm' => MODPATH . 'orm', // Object Relationship Mapping
     // 'unittest'   => MODPATH.'unittest',   // Unit testing
     // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
     'restful' => MODPATH . 'restful',
-    'rediska' => MODPATH . 'rediska',
+    'mangodb' => MODPATH . 'mangodb',
 ));
 
 /**

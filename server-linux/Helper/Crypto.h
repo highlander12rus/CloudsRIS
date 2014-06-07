@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iomanip>  
 #include <openssl/sha.h>
-
+#include <stdio.h>
 
 /**
  * добави в параметры компиляции -lcrypto

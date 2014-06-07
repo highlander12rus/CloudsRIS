@@ -26,7 +26,7 @@ class Controller_Cabinet extends Controller_Core {
         $email = $post['email'];
         $password = $post['password'];
 
-        if (!$this->auth->login($email, hash('sha512', $password))) {
+        if (!$this->auth->login($email,  $password)) {
             $this->template->content->error = 'Такая комбинация логина и пароля не найдена';
         } else
             $this->response->headers('location', '/');
@@ -49,35 +49,56 @@ class Controller_Cabinet extends Controller_Core {
                     ->execute();
             $this->template->content->error = 'Пароль успешно изменен';
             $post = Arr::map('HTML::chars', $_POST);
-            $this->auth->get_user()->password = hash('sha512', $post['password']);
-            $this->auth->get_user()->save();
+
+            $token = Cookie::get('user_auth');
+            $user = MangoDB::instance()
+                    ->getDb('users')
+                    ->findOne(array(
+                'session_id' => $token,
+            ));
+print_r($user);
+            $newData = array('$set' => array(
+                    'password' => $post['password'],
+            ));
+
+            $usersNew = MangoDB::instance()
+                    ->getDb('users')
+                    ->update(array(
+                '_id' => $user['_id'],
+                    ), $newData);
         } else
             $this->response->headers('location', '/');
     }
 
     public function action_registration() {
         $this->template->content = ViewCore::factory('index');
-       
+
         $post = Arr::map('HTML::chars', $_POST);
         $email = $post['email'];
         $password = $post['password'];
         $name = $post['name'];
 
-        $user_isset = ORM::factory('User')
-                ->where('email', '=', $email)
-                ->find();
-        if($user_isset->loaded()) {
+
+        $user_isset = MangoDB::instance()
+                ->getDb('users')
+                ->count(array(
+            'email' => $email
+        ));
+
+
+        if ($user_isset > 1) {
             $this->template->content->error = 'Такой email уже существует';
-            
         } else if (!$this->auth->logged_in()) {
-            //лень делать по феншую :)
-            $password_hash = hash('sha512', $password);
-            $user = ORM::factory('User');
-            $user->email = $email;
-            $user->password = $password_hash;
-            $user->name = $name;
-            $user->save();
-            $this->auth->login($email, $password_hash);
+            MangoDB::instance()
+            ->getDb('users')
+            ->insert(array(
+            "lifetime" => time() + 3600*24*7,
+            "login" => $email,
+            "password" => $password,
+            "session_id" => ""
+            ));
+
+            $this->auth->login($email, $password);
             $this->response->headers('location', '/');
         } else {
             //user is logged
@@ -85,7 +106,6 @@ class Controller_Cabinet extends Controller_Core {
         }
         $this->template->content->auth = Request::factory('cabinet')
                 ->execute();
-        
     }
 
 }

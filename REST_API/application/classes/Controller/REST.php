@@ -29,10 +29,7 @@ class Controller_REST extends Controller_JSON
             list($type, $access_token) = explode(' ', $auth);
             $access_token = UTF8::trim($access_token);
 
-            if (Auth::instance()->logged_in($access_token)) {
-                //Обновляем время дествия токена
-                Auth::instance()->get_user()->lifetime = time() + Auth_REST::LIFETIME_TOKEN;
-                Auth::instance()->get_user()->save();
+            if (Auth::instance()->logged_in($access_token)) {                
                 $this->response->headers(array(
                     'expires' => date('r', Auth::instance()->getLeftTime()),
                 ));

@@ -10,10 +10,10 @@ namespace FileSystem
 			unsigned int offset;
 			unsigned int dOffset;  //отступ от отступа
 			unsigned int length;
-			fstream* file = NULL;
+			fstream* file;
 		public:
 			Stream(fstream* file, unsigned int offset, unsigned int length);	
 		
-		~Stream();	
+		virtual ~Stream();	
 	};
 }

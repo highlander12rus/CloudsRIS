@@ -1,55 +1,106 @@
 #pragma once
-#include "../Config.h"
-#include "../DataBase/SingletoneConn.h"
-#include "Block.h"
+
+#include <boost/log/trivial.hpp>
 #include <vector>
 #include  <math.h>
-#include <sstream>
-#include "../DataBase/Tables/Blocks.h"
-#include "../DataBase/Tables/AddressBlocks.h"
+#include <string>
+
+
+#include "Block.h"
+#include "../Config.h"
+#include "../Database/MongoDB.h"
+#include "../Database/Collection/Local/Blocks.h"
+#include "../Database/Collection/Local/Files.h"
+#include "../FileSystem/FileStreamWrite.h"
+#include "FileInformInBlock.h"
 
 namespace FileSystem {
     namespace Block {
 
+        using namespace std;
+        using namespace Database;
+        using namespace Database::Collection;
+        using namespace FileSystem;
+              
+        
         class AllocatedBlocks {
         public:
+           
             /**
              * 
              * @param sizeFile
              * @param ip
+             * @param config
+             * @param locaMongo
              */
-            AllocatedBlocks(uint64_t sizeFile, std::string ip);
+            AllocatedBlocks(uint64_t sizeFile, std::string ip,
+                Config* config, MongoLocal* locaMongo);
 
             /**
              * get vectors of found bloks
              * @return 
              */
-            std::vector<Block*> getVectors();
+            std::vector<Block*> getBlocks();
 
-            ~AllocatedBlocks();
-        private:
             /**
-             * округление вверх для больших чисел
+             * вовзращает блоки в которое можно записывать файлы
              * @return 
              */
-            int round();
-            uint64_t sizeFile;
+            vector<StreamWrite*> getStreamWriter();
+            
+            ~AllocatedBlocks();
+        private:
+            
+            /**
+             * потоки для запис в файл
+             */
+            vector<StreamWrite*> m_pStreamWriters;
+            
+            Config* m_pConfig;
+            
+            /**
+             * размер блока из файла конфигурации
+             */
+            uint_32 m_BlockSize;
+            
+            /**
+             * локальная база сервера
+             */
+            MongoLocal* m_pMongoLocal;
+            
+            /**
+             * считает количетво блокох исходя из объема
+             * @return количество нужных блоков
+             */
+            int caclCountBlocks();
 
-            //@TODO: fix this it shit
-            std::string ip;
 
-            std::vector<Block*> blocks;
+            uint64_t m_SizeFile;
+
+
+            //@TODO: fix this it shit? use uint_32
+            std::string m_Ip;
+            
+            std::vector<Block*> m_Blocks;
 
 
             /**
-             * search bloks for big files(files > BLOCK_SIZE)
+             * Создаем много блоков для заданого рамзмера файла
+             * @param fileSize
              */
-            void createBlock();
+            void createBlocks(uint_64 fileSize);
+            
+            /**
+             * Создает ОДИН блок
+             * @param fileSize
+             */
+            void createBlock(uint_64 fileSize);
 
             /**
-             * search bloks for smal files(files <= BLOCK_SIZE)
+             * Ищет свободное место в других блоках по базе, если не находит созадет новый
+             * @param fileSize
              */
-            void searchSmall();
+            void searchSmall(uint_64 fileSize);
 
 
         };

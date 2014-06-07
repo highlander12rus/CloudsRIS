@@ -1,52 +1,45 @@
-#pragma once
+#ifndef CONFIG_H
+#define	CONFIG_H
 
-/*   		 DataBase Define	  	    */
-#define DBHOST "tcp://192.168.89.129:3306"
-#define USER "root"
-#define PASSWORD ""
-#define DATABASE "cloudsris"
+#include <string>
 
-#define REDIS_HOST "192.168.89.129"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
-/*
-			FILE SYSTEM CONFIG
-*/
-#define BLOCK_SIZE 536870912
-#define PATH_TO_BLOCK "/home/vfs/NetBeansProjects/CloudsRis/blockWareHouse/"
-
-
+using namespace std;
 
 /**
- * PORTS for listen 
-**/
-//@doto: вроде не испоьзуется
-#define PORT_LISTEN 45788
-//@doto: вроде не испоьзуется
-#define PORT_LISTEN_UDP 45796
-#define PORT_BROATCAST 45782
-
-
-/**
- * Максимальное количество ошибок при поиске
- * порта дял UDP
+ * singleton class
  */
-#define MAX_CONNECTION_ERROR_PORT 100
+class Config {
+public:
 
-/**
- * Время ожидание ответов по udp от серверов
- * в сек
- */
-#define WAITING_RESPONSE_TIME_UDP 3
+    //access to options:
+    //std::cout << pt.get<std::string>("Section1.Value1") << std::endl;
+    //std::cout << pt.get<std::string>("Section1.Value2") << std::endl;
+    static Config& Instance();
+    
+    
+    /**
+     * Поулчение опции
+     * @param option_name имя опции которое поулчить из ini файла, например Databases.port
+     * @return тип в котором вернуть это значение
+     */
+    template <typename T>
+    T getProperty(string option_name) {
+        return pt.get<T>(option_name);
+    }
+    
+    ~Config();
 
-/**
- * На сколкьо серваков делать бекап
- */
-#define COUNT_SERVER_BACKUP 3
+private:
+    
+    boost::property_tree::ptree pt; 
+    
+    Config();
+    Config(const Config&);
+    Config& operator=(const Config&);
+};
 
-//   Network
-#define BUFFER_SIZE 8192
-#define TCP_PORT_SERVER 6454
-#define SELF_IP "192.168.89.128"
-#define HEADER_TCP_LENGTH 136
-#define ERROR_TCP_SOCKET 11
-#define TCP_SOCKET_OK 1
+#endif	/* CONFIG_H */
+

@@ -13,10 +13,8 @@ namespace Helper {
      * @return 512 бит хеша
      */
     unsigned char* Crypto::getHashSha512() {
-
         unsigned char* digest = new unsigned char[SHA512_DIGEST_LENGTH];
         char* str = (char *) string_cypto.c_str();
-
 
         SHA512((unsigned char*) &str, strlen(str),
                 (unsigned char*) digest);

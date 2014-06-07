@@ -2,9 +2,6 @@
 
 defined('SYSPATH') OR die('No direct access allowed.');
 
-/**
- * Authorization user use social network sush as Vkontakte, Facebook, Twitter for REST api
- */
 class Auth_REST {
 
     const LIFETIME_TOKEN = 86400; // 24 * 60 * 60;
@@ -18,19 +15,35 @@ class Auth_REST {
      * @return boolean авторизирован или нет
      */
     public function login($email, $password) {
-        $user = ORM::factory('User')
-                ->where('email', '=', $email)
-                ->where('password', '=', $password)
-                ->find();
+        $user = MangoDB::instance()
+                ->getDb('users')
+                ->findOne(array(
+            'login' => $email,
+            'password' => $password,
+        ));
 
-        if ($user->loaded()) {
-            $user->lifetime = time() + self::LIFETIME_TOKEN;
-            $user->session_id = $this->generateUniqId();
-            $user->save();
+        if (!empty($user)) {
+            $newData = array('$set' => array(
+                    'lifetime' => time() + self::LIFETIME_TOKEN,
+                    'session_id' => $this->generateUniqId()
+            ));
 
-            $this->user = $user;
+
+            $usersNew = MangoDB::instance()
+                    ->getDb('users')
+                    ->update(array(
+                '_id' => $user['_id'],
+                    ), $newData);
+
+            $user = MangoDB::instance()
+                    ->getDb('users')
+                    ->findOne(array(
+                'login' => $email,
+                'password' => $password,
+            ));
         }
-        return $user->loaded();
+        $this->user = $user;
+        return !empty($user);
     }
 
     public function get_user() {
@@ -39,9 +52,9 @@ class Auth_REST {
 
     public function logout() {
         //Меняем время досутпа у токена
-        DB::update(self::USER_TABLE)->parameters(array(
-            'lifetime' => time() - 3600
-        ))->execute();
+        $newData = array('$set' => array(
+                'lifetime' => time() - self::LIFETIME_TOKEN,
+        ));
 
         // Double check
         return !$this->logged_in();
@@ -55,21 +68,40 @@ class Auth_REST {
      * @throw HTTP_Exception_401 - пользователь не авторизирован
      */
     public function logged_in($token) {
-        $user = ORM::factory('User')
-                ->where('session_id', '=', $token)
-                ->find();
 
-        if (!$user->loaded() || $user->lifetime < time()) {
+        $user = MangoDB::instance()
+                ->getDb('users')
+                ->findOne(array(
+            'session_id' => $token,
+        ));
+
+        if (empty($user) || $user['lifetime'] < time()) {
             throw HTTP_Exception::factory(401)->authenticate('CloudsRIS');
         }
 
-        if (!$user)
+        if (empty($user))
             return FALSE;
+        
+        //Обвноялем время действия токена
+         $newData = array('$set' => array(
+                    'lifetime' => time() + self::LIFETIME_TOKEN,
+            ));
 
-        if ($user instanceof Model_User AND $user->loaded()) {
-            $this->user = $user;
-            return TRUE;
-        }
+        $usersNew = MangoDB::instance()
+                    ->getDb('users')
+                    ->update(array(
+                '_id' => $user['_id'],
+                    ), $newData);
+
+            $user = MangoDB::instance()
+                    ->getDb('users')
+                    ->findOne(array(
+                '_id' => $user['_id'],
+            ));
+        
+        
+        $this->user = $user;
+        return TRUE;
     }
 
     /**
@@ -78,14 +110,14 @@ class Auth_REST {
      */
     public function getToken() {
         if ($this->user !== NULL)
-            return $this->user->session_id;
+            return $this->user['session_id'];
         else
             return NULL;
     }
 
     public function getLeftTime() {
         if ($this->user !== NULL)
-            return $this->user->lifetime;
+            return $this->user['lifetime'];
         else
             return NULL;
     }

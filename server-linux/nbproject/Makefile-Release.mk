@@ -35,42 +35,42 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/DataBase/SingletoneConn.o \
-	${OBJECTDIR}/DataBase/Tables/AddressBlocks.o \
-	${OBJECTDIR}/DataBase/Tables/Blocks.o \
-	${OBJECTDIR}/DataBase/Tables/SecurityMethod.o \
-	${OBJECTDIR}/DataBase/Tables/ServerFiles.o \
-	${OBJECTDIR}/Exception/ExceptionFileNotOpened.o \
-	${OBJECTDIR}/Exception/MaxSearchPort.o \
-	${OBJECTDIR}/FileSystem/AllocatedBlocks.o \
-	${OBJECTDIR}/FileSystem/Block.o \
-	${OBJECTDIR}/FileSystem/FileStream.o \
-	${OBJECTDIR}/FileSystem/FileStreamRead.o \
-	${OBJECTDIR}/FileSystem/FileStreamWrite.o \
-	${OBJECTDIR}/Helper/Crypto.o \
-	${OBJECTDIR}/Helper/Network.o \
-	${OBJECTDIR}/Helper/StringExtended.o \
-	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o \
-	${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o \
-	${OBJECTDIR}/Network/SearchServer.o \
-	${OBJECTDIR}/Network/SearchSpace.o \
-	${OBJECTDIR}/Network/TcpBackupClient.o \
-	${OBJECTDIR}/Network/TcpServer.o \
-	${OBJECTDIR}/Network/TcpSession.o \
-	${OBJECTDIR}/Network/UdpBroatcast.o \
-	${OBJECTDIR}/Network/UdpOnce.o \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/redis/RedisAdaptor.o \
-	${OBJECTDIR}/redis/RedisConnection.o \
-	${OBJECTDIR}/redis/anet.o
+	${OBJECTDIR}/_ext/2024390085/Config.o \
+	${OBJECTDIR}/_ext/2090994028/Files.o \
+	${OBJECTDIR}/_ext/2090994028/Users.o \
+	${OBJECTDIR}/_ext/2086375462/Blocks.o \
+	${OBJECTDIR}/_ext/2086375462/Files.o \
+	${OBJECTDIR}/_ext/1016391407/MongoDB.o \
+	${OBJECTDIR}/_ext/1016391407/MongoGlobal.o \
+	${OBJECTDIR}/_ext/1016391407/MongoLocal.o \
+	${OBJECTDIR}/_ext/1008817829/ExceptionFileNotOpened.o \
+	${OBJECTDIR}/_ext/1911983935/AllocatedBlocks.o \
+	${OBJECTDIR}/_ext/1911983935/Block.o \
+	${OBJECTDIR}/_ext/1911983935/FileStream.o \
+	${OBJECTDIR}/_ext/1911983935/FileStreamRead.o \
+	${OBJECTDIR}/_ext/1911983935/FileStreamWrite.o \
+	${OBJECTDIR}/_ext/515591646/Crypto.o \
+	${OBJECTDIR}/_ext/515591646/Network.o \
+	${OBJECTDIR}/_ext/515591646/StringExtended.o \
+	${OBJECTDIR}/_ext/685558945/Backup.o \
+	${OBJECTDIR}/_ext/685558945/Bk.o \
+	${OBJECTDIR}/_ext/685558945/Download.o \
+	${OBJECTDIR}/_ext/685558945/Upload.o \
+	${OBJECTDIR}/_ext/2060777926/SearchServer.o \
+	${OBJECTDIR}/_ext/2060777926/TcpServerBk.o \
+	${OBJECTDIR}/_ext/2060777926/TcpServerDownload.o \
+	${OBJECTDIR}/_ext/2060777926/TcpServerUpload.o \
+	${OBJECTDIR}/_ext/2060777926/UdpBroatcast.o \
+	${OBJECTDIR}/_ext/2060777926/UdpOnce.o \
+	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-lrt -lcrypto -lmongoclient -lboost_thread-mt -lboost_filesystem -lboost_program_options
+CXXFLAGS=-lrt -lcrypto -lmongoclient -lboost_thread-mt -lboost_filesystem -lboost_program_options
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -83,151 +83,151 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsrisdiplom
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsrisdiplom: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsrisdiplom ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/DataBase/SingletoneConn.o: DataBase/SingletoneConn.cpp 
-	${MKDIR} -p ${OBJECTDIR}/DataBase
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/SingletoneConn.o DataBase/SingletoneConn.cpp
+${OBJECTDIR}/_ext/2024390085/Config.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Config.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2024390085
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2024390085/Config.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Config.cpp
 
-${OBJECTDIR}/DataBase/Tables/AddressBlocks.o: DataBase/Tables/AddressBlocks.cpp 
-	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/AddressBlocks.o DataBase/Tables/AddressBlocks.cpp
+${OBJECTDIR}/_ext/2090994028/Files.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2090994028
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2090994028/Files.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.cpp
 
-${OBJECTDIR}/DataBase/Tables/Blocks.o: DataBase/Tables/Blocks.cpp 
-	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/Blocks.o DataBase/Tables/Blocks.cpp
+${OBJECTDIR}/_ext/2090994028/Users.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2090994028
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2090994028/Users.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.cpp
 
-${OBJECTDIR}/DataBase/Tables/SecurityMethod.o: DataBase/Tables/SecurityMethod.cpp 
-	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/SecurityMethod.o DataBase/Tables/SecurityMethod.cpp
+${OBJECTDIR}/_ext/2086375462/Blocks.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2086375462
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2086375462/Blocks.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.cpp
 
-${OBJECTDIR}/DataBase/Tables/ServerFiles.o: DataBase/Tables/ServerFiles.cpp 
-	${MKDIR} -p ${OBJECTDIR}/DataBase/Tables
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/DataBase/Tables/ServerFiles.o DataBase/Tables/ServerFiles.cpp
+${OBJECTDIR}/_ext/2086375462/Files.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2086375462
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2086375462/Files.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.cpp
 
-${OBJECTDIR}/Exception/ExceptionFileNotOpened.o: Exception/ExceptionFileNotOpened.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Exception
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/ExceptionFileNotOpened.o Exception/ExceptionFileNotOpened.cpp
+${OBJECTDIR}/_ext/1016391407/MongoDB.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1016391407
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1016391407/MongoDB.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.cpp
 
-${OBJECTDIR}/Exception/MaxSearchPort.o: Exception/MaxSearchPort.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Exception
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Exception/MaxSearchPort.o Exception/MaxSearchPort.cpp
+${OBJECTDIR}/_ext/1016391407/MongoGlobal.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1016391407
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1016391407/MongoGlobal.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.cpp
 
-${OBJECTDIR}/FileSystem/AllocatedBlocks.o: FileSystem/AllocatedBlocks.cpp 
-	${MKDIR} -p ${OBJECTDIR}/FileSystem
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/AllocatedBlocks.o FileSystem/AllocatedBlocks.cpp
+${OBJECTDIR}/_ext/1016391407/MongoLocal.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1016391407
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1016391407/MongoLocal.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.cpp
 
-${OBJECTDIR}/FileSystem/Block.o: FileSystem/Block.cpp 
-	${MKDIR} -p ${OBJECTDIR}/FileSystem
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/Block.o FileSystem/Block.cpp
+${OBJECTDIR}/_ext/1008817829/ExceptionFileNotOpened.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1008817829
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1008817829/ExceptionFileNotOpened.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.cpp
 
-${OBJECTDIR}/FileSystem/FileStream.o: FileSystem/FileStream.cpp 
-	${MKDIR} -p ${OBJECTDIR}/FileSystem
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStream.o FileSystem/FileStream.cpp
+${OBJECTDIR}/_ext/1911983935/AllocatedBlocks.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1911983935
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1911983935/AllocatedBlocks.o /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.cpp
 
-${OBJECTDIR}/FileSystem/FileStreamRead.o: FileSystem/FileStreamRead.cpp 
-	${MKDIR} -p ${OBJECTDIR}/FileSystem
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamRead.o FileSystem/FileStreamRead.cpp
+${OBJECTDIR}/_ext/1911983935/Block.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1911983935
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1911983935/Block.o /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.cpp
 
-${OBJECTDIR}/FileSystem/FileStreamWrite.o: FileSystem/FileStreamWrite.cpp 
-	${MKDIR} -p ${OBJECTDIR}/FileSystem
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/FileSystem/FileStreamWrite.o FileSystem/FileStreamWrite.cpp
+${OBJECTDIR}/_ext/1911983935/FileStream.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1911983935
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1911983935/FileStream.o /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.cpp
 
-${OBJECTDIR}/Helper/Crypto.o: Helper/Crypto.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Helper
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Crypto.o Helper/Crypto.cpp
+${OBJECTDIR}/_ext/1911983935/FileStreamRead.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1911983935
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1911983935/FileStreamRead.o /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.cpp
 
-${OBJECTDIR}/Helper/Network.o: Helper/Network.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Helper
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/Network.o Helper/Network.cpp
+${OBJECTDIR}/_ext/1911983935/FileStreamWrite.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1911983935
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1911983935/FileStreamWrite.o /home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.cpp
 
-${OBJECTDIR}/Helper/StringExtended.o: Helper/StringExtended.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Helper
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Helper/StringExtended.o Helper/StringExtended.cpp
+${OBJECTDIR}/_ext/515591646/Crypto.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/515591646
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/515591646/Crypto.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.cpp
 
-${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o: Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperation.o Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp
+${OBJECTDIR}/_ext/515591646/Network.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/515591646
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/515591646/Network.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.cpp
 
-${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o: Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Interface/CurrentBaseOperations
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.o Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp
+${OBJECTDIR}/_ext/515591646/StringExtended.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/515591646
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/515591646/StringExtended.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.cpp
 
-${OBJECTDIR}/Network/SearchServer.o: Network/SearchServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchServer.o Network/SearchServer.cpp
+${OBJECTDIR}/_ext/685558945/Backup.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/685558945
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/685558945/Backup.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.cpp
 
-${OBJECTDIR}/Network/SearchSpace.o: Network/SearchSpace.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/SearchSpace.o Network/SearchSpace.cpp
+${OBJECTDIR}/_ext/685558945/Bk.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/685558945
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/685558945/Bk.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.cpp
 
-${OBJECTDIR}/Network/TcpBackupClient.o: Network/TcpBackupClient.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpBackupClient.o Network/TcpBackupClient.cpp
+${OBJECTDIR}/_ext/685558945/Download.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/685558945
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/685558945/Download.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.cpp
 
-${OBJECTDIR}/Network/TcpServer.o: Network/TcpServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpServer.o Network/TcpServer.cpp
+${OBJECTDIR}/_ext/685558945/Upload.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/685558945
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/685558945/Upload.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.cpp
 
-${OBJECTDIR}/Network/TcpSession.o: Network/TcpSession.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/TcpSession.o Network/TcpSession.cpp
+${OBJECTDIR}/_ext/2060777926/SearchServer.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2060777926
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2060777926/SearchServer.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.cpp
 
-${OBJECTDIR}/Network/UdpBroatcast.o: Network/UdpBroatcast.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpBroatcast.o Network/UdpBroatcast.cpp
+${OBJECTDIR}/_ext/2060777926/TcpServerBk.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2060777926
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2060777926/TcpServerBk.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.cpp
 
-${OBJECTDIR}/Network/UdpOnce.o: Network/UdpOnce.cpp 
-	${MKDIR} -p ${OBJECTDIR}/Network
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Network/UdpOnce.o Network/UdpOnce.cpp
+${OBJECTDIR}/_ext/2060777926/TcpServerDownload.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2060777926
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2060777926/TcpServerDownload.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.cpp
+
+${OBJECTDIR}/_ext/2060777926/TcpServerUpload.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2060777926
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2060777926/TcpServerUpload.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.cpp
+
+${OBJECTDIR}/_ext/2060777926/UdpBroatcast.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2060777926
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2060777926/UdpBroatcast.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.cpp
+
+${OBJECTDIR}/_ext/2060777926/UdpOnce.o: /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2060777926
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2060777926/UdpOnce.o /home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
-
-${OBJECTDIR}/redis/RedisAdaptor.o: redis/RedisAdaptor.cpp 
-	${MKDIR} -p ${OBJECTDIR}/redis
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisAdaptor.o redis/RedisAdaptor.cpp
-
-${OBJECTDIR}/redis/RedisConnection.o: redis/RedisConnection.cpp 
-	${MKDIR} -p ${OBJECTDIR}/redis
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/RedisConnection.o redis/RedisConnection.cpp
-
-${OBJECTDIR}/redis/anet.o: redis/anet.cpp 
-	${MKDIR} -p ${OBJECTDIR}/redis
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/redis/anet.o redis/anet.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:
@@ -235,7 +235,7 @@ ${OBJECTDIR}/redis/anet.o: redis/anet.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsris
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cloudsrisdiplom
 
 # Subprojects
 .clean-subprojects:

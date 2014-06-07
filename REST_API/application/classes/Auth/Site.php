@@ -5,7 +5,7 @@ defined('SYSPATH') OR die('No direct access allowed.');
 class Auth_Site {
     private $user = NULL;
 
-    const TIME_AUTH = 432000;//5 суток
+    const LIFETIME_TOKEN = 432000;//5 суток
     const USER_TABLE = 'users';
     
     /**
@@ -15,20 +15,36 @@ class Auth_Site {
      * @return boolean авторизирован или нет
      */
     public function login($email, $password) {
-        $user = ORM::factory('User')
-                ->where('email', '=', $email)
-                ->where('password', '=', $password)
-                ->find();
+        $user = MangoDB::instance()
+                ->getDb('users')
+                ->findOne(array(
+            'login' => $email,
+            'password' => $password,
+        ));
+$token = $this->generateUniqId();
+        if (!empty($user)) {
+            $newData = array('$set' => array(
+                    'lifetime' => time() + self::LIFETIME_TOKEN,
+                    'session_id' => $token
+            ));
 
-        if ($user->loaded()) {
-            $user->lifetime = time() + self::TIME_AUTH;
-            $user->session_id = $this->generateUniqId();
-            Cookie::set('user_auth', $user->session_id, self::TIME_AUTH);
-            $user->save();
 
-            $this->user = $user;
+            $usersNew = MangoDB::instance()
+                    ->getDb('users')
+                    ->update(array(
+                '_id' => $user['_id'],
+                    ), $newData);
+
+            $user = MangoDB::instance()
+                    ->getDb('users')
+                    ->findOne(array(
+                'login' => $email,
+                'password' => $password,
+            ));
         }
-        return $user->loaded();
+        $this->user = $user;
+        Cookie::set('user_auth', $token);
+        return !empty($user);
     }
 
     public function get_user() {
@@ -48,23 +64,39 @@ class Auth_Site {
      */
     public function logged_in() {
         $token = Cookie::get('user_auth');
-        if($token === NULL)
-            return false;
-        $user = ORM::factory('User')
-                ->where('session_id', '=', $token)
-                ->find();
+        $user = MangoDB::instance()
+                ->getDb('users')
+                ->findOne(array(
+            'session_id' => $token,
+        ));
 
-        if (!$user->loaded() || $user->lifetime < time()) {
+        if (empty($user) || $user['lifetime'] < time()) {
             return false;
         }
 
-        if (!$user)
+        if (empty($user))
             return FALSE;
+        
+        //Обвноялем время действия токена
+         $newData = array('$set' => array(
+                    'lifetime' => time() + self::LIFETIME_TOKEN,
+            ));
 
-        if ($user instanceof Model_User AND $user->loaded()) {
-            $this->user = $user;
-            return TRUE;
-        }
+        $usersNew = MangoDB::instance()
+                    ->getDb('users')
+                    ->update(array(
+                '_id' => $user['_id'],
+                    ), $newData);
+
+            $user = MangoDB::instance()
+                    ->getDb('users')
+                    ->findOne(array(
+                '_id' => $user['_id'],
+            ));
+        
+        
+        $this->user = $user;
+        return TRUE;
     }
     
     /**

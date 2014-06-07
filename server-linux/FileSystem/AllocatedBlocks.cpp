@@ -1,68 +1,85 @@
-
 #include "AllocatedBlocks.h"
 
 namespace FileSystem {
     namespace Block {
 
-        AllocatedBlocks::AllocatedBlocks(uint64_t sizeFile, std::string ip) {
-            this->sizeFile = sizeFile;
-            this->ip = ip;
+        AllocatedBlocks::AllocatedBlocks(uint64_t sizeFile, std::string ip,
+                Config* config, MongoLocal* locaMongo) {
+            m_pConfig = config;
+            m_BlockSize = config->getProperty<uint_32>("FileSysteam.block_size");
+            m_pMongoLocal = locaMongo;
 
-            if (sizeFile > BLOCK_SIZE) {
-                this->createBlock(); //для больших файлов сразу создаем отдельный блок
+            m_SizeFile = sizeFile;
+            m_Ip = ip;
+
+            if (sizeFile > m_BlockSize) {
+                //@todo: Сделать. чтобы оставшиеся чась блока добавлялась в стаую блок если есть
+                this->createBlocks(sizeFile); //для больших файлов сразу создаем отдельный блок
             } else {
-                this->searchSmall();
+                this->searchSmall(sizeFile);
             }
         }
 
-        std::vector<Block*> AllocatedBlocks::getVectors() {
-            return blocks;
+        std::vector<Block*> AllocatedBlocks::getBlocks() {
+            return m_Blocks;
         }
 
-        //@TODO: блокировка таблицы!
+        vector<StreamWrite*> AllocatedBlocks::getStreamWriter() {
+            return m_pStreamWriters;
+        }
 
-        void AllocatedBlocks::createBlock() {
-            int blockCount = round();
-            sql::Connection* con = Database::SingletoneConn::Instance().getConnection();
-            Database::Tables::Blocks block(con);
-            for (int i = 0; i < blockCount; i++) {
-                //@todo: подумать с базой мб как то лучше можно а не обращатся к ней в цикле
+        void AllocatedBlocks::createBlocks(uint_64 fileSize) {
+            int blockCount = caclCountBlocks();
 
-                uint32_t idInsert = block.insertBlocks(PATH_TO_BLOCK, 0, ip);
-
-                std::stringstream pathToFile;
-                pathToFile << PATH_TO_BLOCK << "block_" << idInsert << ".blb";
-                string path = pathToFile.str();
-                blocks.push_back(new Block(path, NULL, NULL));
+            for (int i = 0; i < blockCount - 1; i++) {
+                createBlock(m_BlockSize);
             }
+            
+            uint_64 lengthFile = fileSize - m_BlockSize * (blockCount - 1);
+            searchSmall(lengthFile);
         }
 
-        int AllocatedBlocks::round() {
-            int blockCount = (sizeFile / BLOCK_SIZE);
-            if (blockCount * BLOCK_SIZE != sizeFile) {
+        void AllocatedBlocks::createBlock(uint_64 fileSize) {
+            Local::Blocks blocks(m_pMongoLocal);
+            string block_id = blocks.CreateBlock(fileSize);
+            BOOST_LOG_TRIVIAL(debug) << "Create blocks complited id_bock=" << block_id
+                    << "size in block=" << fileSize;
+
+            Block* block = new FileSystem::Block::Block(m_pConfig, block_id + ".blb");
+            m_Blocks.push_back(block);
+
+            m_pStreamWriters.push_back(block->writeFile(0, fileSize, block_id));
+        }
+
+        int AllocatedBlocks::caclCountBlocks() {
+            int blockCount = (m_SizeFile / m_BlockSize);
+            if (blockCount * m_BlockSize != m_SizeFile) {
                 blockCount++;
             }
             return blockCount;
         }
 
-        void AllocatedBlocks::searchSmall() {
-            sql::Connection* con = Database::SingletoneConn::Instance().getConnection();
-            Database::Tables::AddressBlocks addresBlock(con);
-            ResultSet* res = addresBlock.getBlokFreeSpaceId(ip, sizeFile);
+        void AllocatedBlocks::searchSmall(uint_64 fileSize) {
+            Local::Blocks blocks(m_pMongoLocal);
 
-            if (res->next()) {
-                std::cout << "path to block = " << res->getString(1) << "occured = " << res->getInt64(2) << std::endl;
-                blocks.push_back(new Block(res->getString(1), res->getInt64(2)));
+            FileInformInBlock infoBlock = blocks.serachFreeSpaceInBlock(fileSize);
+            string id_block = infoBlock.blockId;
+
+            string pathToBlocks = m_pConfig->getProperty<string>("FileSysteam.folders_blocks");
+            if (infoBlock.isIsset) {
+                Block* block = new Block(pathToBlocks + id_block + ".blb");
+                m_Blocks.push_back(block);
+                m_pStreamWriters.push_back(block->writeFile(infoBlock.offset, fileSize, id_block));
             } else {
-                this->createBlock();
+                createBlock(fileSize);
             }
         }
 
         AllocatedBlocks::~AllocatedBlocks() {
-            for (int i = 0; i < blocks.size(); i++) {
-                delete blocks[i];
-                blocks[i] = NULL;
-            }
+            BOOST_LOG_TRIVIAL(debug) << "delete in AllocatedBlocks";
+
+            for (int i = 0; i < m_pStreamWriters.size(); i++)
+                delete m_Blocks[i];
         }
 
     }

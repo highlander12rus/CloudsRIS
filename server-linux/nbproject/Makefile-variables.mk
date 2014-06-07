@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=GNU-Linux-x86
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=cloudsris
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/cloudsris
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=cloudsris.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/cloudsris.tar
+CND_PLATFORM_Debug=GNU_1-Linux-x86
+CND_ARTIFACT_DIR_Debug=dist/Debug/GNU_1-Linux-x86
+CND_ARTIFACT_NAME_Debug=cloudsrisdiplom
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU_1-Linux-x86/cloudsrisdiplom
+CND_PACKAGE_DIR_Debug=dist/Debug/GNU_1-Linux-x86/package
+CND_PACKAGE_NAME_Debug=cloudsrisdiplom.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU_1-Linux-x86/package/cloudsrisdiplom.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=cloudsris
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/cloudsris
+CND_ARTIFACT_NAME_Release=cloudsrisdiplom
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/cloudsrisdiplom
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=cloudsris.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/cloudsris.tar
+CND_PACKAGE_NAME_Release=cloudsrisdiplom.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/cloudsrisdiplom.tar
 #
 # include compiler specific variables
 #

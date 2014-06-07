@@ -10,5 +10,7 @@ namespace FileSystem {
     }
 
     Stream::~Stream() {
+        file->close();
+        delete file;
     };
 }

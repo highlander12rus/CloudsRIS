@@ -1,89 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="89">
+<configurationDescriptor version="94">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <logicalFolder name="DataBase" displayName="DataBase" projectFiles="true">
-      <logicalFolder name="Tables" displayName="Tables" projectFiles="true">
-        <itemPath>DataBase/Tables/AddressBlocks.cpp</itemPath>
-        <itemPath>DataBase/Tables/AddressBlocks.h</itemPath>
-        <itemPath>DataBase/Tables/Blocks.cpp</itemPath>
-        <itemPath>DataBase/Tables/Blocks.h</itemPath>
-        <itemPath>DataBase/Tables/SecurityMethod.cpp</itemPath>
-        <itemPath>DataBase/Tables/SecurityMethod.h</itemPath>
-        <itemPath>DataBase/Tables/ServerFiles.cpp</itemPath>
-        <itemPath>DataBase/Tables/ServerFiles.h</itemPath>
+    <logicalFolder name="Database" displayName="Database" projectFiles="true">
+      <logicalFolder name="Collection" displayName="Collection" projectFiles="true">
+        <logicalFolder name="Gobal" displayName="Gobal" projectFiles="true">
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.cpp</itemPath>
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.h</itemPath>
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.cpp</itemPath>
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="Local" displayName="Local" projectFiles="true">
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.cpp</itemPath>
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.h</itemPath>
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.cpp</itemPath>
+          <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.h</itemPath>
+        </logicalFolder>
       </logicalFolder>
-      <itemPath>DataBase/SingletoneConn.cpp</itemPath>
-      <itemPath>DataBase/SingletoneConn.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.h</itemPath>
     </logicalFolder>
     <logicalFolder name="Exception" displayName="Exception" projectFiles="true">
-      <itemPath>Exception/ExceptionFileNotOpened.cpp</itemPath>
-      <itemPath>Exception/ExceptionFileNotOpened.h</itemPath>
-      <itemPath>Exception/MaxSearchPort.cpp</itemPath>
-      <itemPath>Exception/MaxSearchPort.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.h</itemPath>
     </logicalFolder>
     <logicalFolder name="FileSystem" displayName="FileSystem" projectFiles="true">
-      <itemPath>FileSystem/AllocatedBlocks.cpp</itemPath>
-      <itemPath>FileSystem/AllocatedBlocks.h</itemPath>
-      <itemPath>FileSystem/Block.cpp</itemPath>
-      <itemPath>FileSystem/Block.h</itemPath>
-      <itemPath>FileSystem/FileStream.cpp</itemPath>
-      <itemPath>FileSystem/FileStream.h</itemPath>
-      <itemPath>FileSystem/FileStreamRead.cpp</itemPath>
-      <itemPath>FileSystem/FileStreamRead.h</itemPath>
-      <itemPath>FileSystem/FileStreamWrite.cpp</itemPath>
-      <itemPath>FileSystem/FileStreamWrite.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileInformInBlock.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.h</itemPath>
     </logicalFolder>
     <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
-      <itemPath>Helper/Crypto.cpp</itemPath>
-      <itemPath>Helper/Crypto.h</itemPath>
-      <itemPath>Helper/Network.cpp</itemPath>
-      <itemPath>Helper/Network.h</itemPath>
-      <itemPath>Helper/StringExtended.cpp</itemPath>
-      <itemPath>Helper/StringExtended.h</itemPath>
-    </logicalFolder>
-    <logicalFolder name="Interface" displayName="Interface" projectFiles="true">
-      <logicalFolder name="CurrentBaseOperations"
-                     displayName="CurrentBaseOperations"
-                     projectFiles="true">
-        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp</itemPath>
-        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperation.h</itemPath>
-        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp</itemPath>
-        <itemPath>Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h</itemPath>
-      </logicalFolder>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/FileSystem.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.h</itemPath>
     </logicalFolder>
     <logicalFolder name="Network" displayName="Network" projectFiles="true">
-      <itemPath>Network/SearchServer.cpp</itemPath>
-      <itemPath>Network/SearchServer.h</itemPath>
-      <itemPath>Network/SearchSpace.cpp</itemPath>
-      <itemPath>Network/SearchSpace.h</itemPath>
-      <itemPath>Network/StructServersResponce.h</itemPath>
-      <itemPath>Network/StructUdpBroatcastRecive.h</itemPath>
-      <itemPath>Network/StructUdpReceiveOtherServer.h</itemPath>
-      <itemPath>Network/TcpBackupClient.cpp</itemPath>
-      <itemPath>Network/TcpBackupClient.h</itemPath>
-      <itemPath>Network/TcpServer.cpp</itemPath>
-      <itemPath>Network/TcpServer.h</itemPath>
-      <itemPath>Network/TcpSession.cpp</itemPath>
-      <itemPath>Network/TcpSession.h</itemPath>
-      <itemPath>Network/UdpBroatcast.cpp</itemPath>
-      <itemPath>Network/UdpBroatcast.h</itemPath>
-      <itemPath>Network/UdpOnce.cpp</itemPath>
-      <itemPath>Network/UdpOnce.h</itemPath>
-    </logicalFolder>
-    <logicalFolder name="redis" displayName="redis" projectFiles="true">
-      <itemPath>redis/RedisAdaptor.cpp</itemPath>
-      <itemPath>redis/RedisAdaptor.h</itemPath>
-      <itemPath>redis/RedisConnection.cpp</itemPath>
-      <itemPath>redis/RedisConnection.h</itemPath>
-      <itemPath>redis/anet.cpp</itemPath>
-      <itemPath>redis/anet.h</itemPath>
-      <itemPath>redis/fmacros.h</itemPath>
-      <itemPath>redis/redisclient.h</itemPath>
+      <logicalFolder name="Operatinos" displayName="Operatinos" projectFiles="true">
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.cpp</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.cpp</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.cpp</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.cpp</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="Struct" displayName="Struct" projectFiles="true">
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Struct/StructHeaderCleintUpload.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Struct/StructHeaderClientDownload.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructServersResponce.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructUdpBroatcastRecive.h</itemPath>
+        <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructUdpReceiveOtherServer.h</itemPath>
+      </logicalFolder>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.h</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.cpp</itemPath>
+      <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Исходные файлы"
                    projectFiles="true">
-      <itemPath>Config.h</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
@@ -105,198 +104,368 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Config.cpp</itemPath>
+    <itemPath>/home/vfs/NetBeansProjects/CloudsRisDiplom/Config.h</itemPath>
   </logicalFolder>
   <sourceRootList>
-    <Elem>/home/vfs/CloudsRIS/server-linux/DataBase</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/Event</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/Exception</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/FileSystem</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/Helper</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/Interface</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/Network</Elem>
-    <Elem>/home/vfs/CloudsRIS/server-linux/redis</Elem>
+    <Elem>/home/vfs/NetBeansProjects/CloudsRisDiplom/Database</Elem>
+    <Elem>/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception</Elem>
+    <Elem>/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem</Elem>
+    <Elem>/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper</Elem>
+    <Elem>/home/vfs/NetBeansProjects/CloudsRisDiplom/Network</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>default</compilerSet>
+        <compilerSet>GNU_1|GNU</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
-        <ccTool>
-          <standard>8</standard>
-          <commandlineTool>g++</commandlineTool>
+        <cTool>
           <incDir>
+            <pElem>/home/vfs/NetBeansProjects/mongo-client/mongo-cxx-driver-v2.4/src</pElem>
             <pElem>/usr/local/include</pElem>
           </incDir>
-          <commandLine>-lmysqlcppconn -lrt -lcrypto</commandLine>
+          <commandLine>-lrt -lcrypto</commandLine>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>/home/vfs/NetBeansProjects/mongo-client/mongo-cxx-driver-v2.4/src</pElem>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/include</pElem>
+          </incDir>
+          <commandLine>-lrt -lcrypto</commandLine>
         </ccTool>
         <linkerTool>
           <linkerAddLib>
             <pElem>/usr/local/lib</pElem>
           </linkerAddLib>
+          <commandlineTool>g++</commandlineTool>
           <linkerLibItems>
-            <linkerLibFileItem>/usr/local/lib/libboost_date_time.a</linkerLibFileItem>
+            <linkerLibFileItem>/home/vfs/NetBeansProjects/mongo-client/mongo-cxx-driver-v2.4/libmongoclient.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_exception.a</linkerLibFileItem>
             <linkerLibFileItem>/usr/local/lib/libboost_filesystem.a</linkerLibFileItem>
-            <linkerLibFileItem>/usr/local/lib/libboost_serialization.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/local/lib/libboost_log.a</linkerLibFileItem>
             <linkerLibFileItem>/usr/local/lib/libboost_system.a</linkerLibFileItem>
             <linkerLibFileItem>/usr/local/lib/libboost_thread.a</linkerLibFileItem>
-            <linkerLibFileItem>/usr/local/lib/libboost_timer.a</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/i386-linux-gnu/librt.a</linkerLibFileItem>
             <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
-            <linkerLibFileItem>/usr/local/lib/libboost_random.a</linkerLibFileItem>
-            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
-            <linkerLibFileItem>/usr/local/lib/libboost_signals.a</linkerLibFileItem>
-            <linkerLibFileItem>/usr/local/lib/libboost_log.a</linkerLibFileItem>
+            <linkerOptionItem>`pkg-config --libs openssl`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="Config.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/AddressBlocks.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/AddressBlocks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/SecurityMethod.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Exception/ExceptionFileNotOpened.cpp"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Config.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Config.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/AllocatedBlocks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/Block.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStream.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStream.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamRead.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamRead.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Helper/Crypto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Helper/Crypto.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Helper/StringExtended.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Helper/StringExtended.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.h"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/SearchSpace.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/SearchSpace.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/StructServersResponce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/StructUdpReceiveOtherServer.h"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Network/TcpBackupClient.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/TcpBackupClient.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileInformInBlock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/FileSystem.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Struct/StructHeaderCleintUpload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Struct/StructHeaderClientDownload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructServersResponce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructUdpBroatcastRecive.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/RedisAdaptor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/RedisAdaptor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/RedisConnection.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/RedisConnection.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/anet.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/anet.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/fmacros.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/redisclient.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
@@ -307,7 +476,7 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
-          <standard>8</standard>
+          <commandLine>-lrt -lcrypto -lmongoclient -lboost_thread-mt -lboost_filesystem -lboost_program_options</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -316,145 +485,312 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Config.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/SingletoneConn.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/SingletoneConn.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/AddressBlocks.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/AddressBlocks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/Blocks.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/Blocks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/SecurityMethod.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/SecurityMethod.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/ServerFiles.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DataBase/Tables/ServerFiles.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Exception/ExceptionFileNotOpened.cpp"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Config.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="Exception/ExceptionFileNotOpened.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Config.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Exception/MaxSearchPort.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Exception/MaxSearchPort.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/AllocatedBlocks.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/AllocatedBlocks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/Block.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/Block.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStream.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStream.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamRead.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamRead.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamWrite.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FileSystem/FileStreamWrite.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Helper/Crypto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Helper/Crypto.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Helper/Network.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Helper/Network.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Helper/StringExtended.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Helper/StringExtended.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.cpp"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperation.h"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Files.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.cpp"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="Interface/CurrentBaseOperations/ICurrentBaseOperationEditor.h"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Gobal/Users.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Network/SearchServer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/SearchServer.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/SearchSpace.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Network/SearchSpace.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/StructServersResponce.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/StructUdpBroatcastRecive.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Network/StructUdpReceiveOtherServer.h"
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Blocks.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Network/TcpBackupClient.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/TcpBackupClient.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/Collection/Local/Files.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/TcpServer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/TcpServer.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoDB.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/TcpSession.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/TcpSession.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoGlobal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/UdpBroatcast.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/UdpBroatcast.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Database/MongoLocal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Network/UdpOnce.cpp" ex="false" tool="1" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
-      <item path="Network/UdpOnce.h" ex="false" tool="3" flavor2="0">
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Exception/ExceptionFileNotOpened.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/AllocatedBlocks.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/Block.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileInformInBlock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamRead.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/FileSystem/FileStreamWrite.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Crypto.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/FileSystem.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/Network.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Helper/StringExtended.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Backup.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Bk.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Download.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Operatinos/Upload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/SearchServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Struct/StructHeaderCleintUpload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/Struct/StructHeaderClientDownload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructServersResponce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructUdpBroatcastRecive.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/StructUdpReceiveOtherServer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerBk.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerDownload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/TcpServerUpload.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpBroatcast.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/vfs/NetBeansProjects/CloudsRisDiplom/Network/UdpOnce.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/RedisAdaptor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/RedisAdaptor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/RedisConnection.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/RedisConnection.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/anet.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="redis/anet.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/fmacros.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="redis/redisclient.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

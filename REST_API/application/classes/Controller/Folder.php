@@ -10,88 +10,154 @@ class Controller_Folder extends Controller_REST {
             throw new HTTP_Exception_404;
 
         $path = urldecode($path);
+
+        $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
+
+        $user = Auth::instance()->get_user();
+
+        if ($path != '/') {
+            $pathParent = $path;
+
+            $test = explode("/", $path);
+            array_pop($test);
+            $folderName = array_pop($test);
+            $pathCurent = implode('/', $test) . '/';
+
+            //выбираем файлы
+            $filesMongo = MangoDB::instance()
+                    ->getDb('folders')
+                    ->count(array(
+                'user_id' => new MongoId($user['_id']),
+                'path' => $pathCurent,
+                'name' => $folderName,
+            ));
+            if ($filesMongo < 1) {
+                throw new HTTP_Exception_404;
+            }
+
+            $query = array(
+                array(
+                    'user_id' => new MongoId($user['_id']),
+                    'path' => $pathCurent,
+                    'name' => $folderName,
+                ),
+                array(
+                    'user_id' => new MongoId($user['_id']),
+                    'path' => $pathParent,
+                ),
+            );
+        } else {
+            $query = array(
+                array(
+                    'user_id' => new MongoId($user['_id']),
+                    'path' => '/',
+                ),
+            );
+        }
+
+        //выбираем файлы
+        $filesMongo = MangoDB::instance()
+                ->getDb('folders')
+                ->find(array(
+            '$or' => $query,
+        ));
+
+        if (empty($filesMongo)) {
+            throw new HTTP_Exception_404;
+        }
+
+        $folders = array();
+        $files = array();
+
+        foreach ($filesMongo as $value) {
+            if ($value['path'] == $path && $value['name'] != "/") {
+                $folders[] =  $value['name'];
+            } else {
+                foreach ($value['files'] as $file) {
+                    $fileS = $file['_id'];
+
+                    $files[] = array(
+                        'id' => $file['_id'] . '',
+                        'name' => $file['name'],
+                        'length' => $file['length'],
+                    );
+                }
+            }
+        }
+
+        $this->json->folders = $folders;
+        $this->json->files = $files;
+    }
+
+    public function action_create() {
+        $path = HTML::chars($_POST['name']);
+        if ($path == "" || $path == '/') {
+            $this->response->status(406);
+            $this->json->errors = array(
+                'errors' => 'Ошибка, папка не должна быть пустой'
+            );
+            return;
+        }
+
+        $path = urldecode($path);
         $path = HTML::chars($path);
 
         $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
 
-        $isFolder = ORM::factory('Folder')
-                ->where('name', '=', $path)
-                ->find();
-        if(!$isFolder->loaded())
-            throw new HTTP_Exception_404;
+        $test = explode("/", $path);
+        array_pop($test);
+        $folderName = array_pop($test);
+        $path = implode('/', $test) . '/';
+
+        $user = Auth::instance()->get_user();
+        MangoDB::instance()
+                ->getDb('folders')
+                ->insert(array(
+                    'name' => $folderName,
+                    'user_id' => new MongoId($user['_id']),
+                    'path' => $path,
+                    "files" => array(),
+        ));
 
 
-            $foldes = ORM::factory('Folder')
-                ->where(DB::expr("(name REGEXP '{$path}[a-zA-z0-9]*[/]?$')"), '=', 1)     
-                ->where('user_id', '=', Auth::instance()->get_user()->id)
-                ->find_all();
-
-        //hack ищем файлы  данной дириктории
-        $folder_id_curent = -1;
-        $folders = array();
-        foreach ($foldes as $folder) {
-            if ($folder->name == $path) {
-                $folder_id_curent = $folder->id;
-                break;
-            }
-            $folders[] = $folder->name;
-        }
-        
-        $files_curent_dir = DB::select('name')
-                ->from('files')
-                ->where('folder_id', '=', $folder_id_curent)
-                ->execute();
-        $files_array = array();
-        foreach ($files_curent_dir as $file) {
-            $files_array[] = $file['name'];
-        }
-        
-        $this->json->folders = $folders;
-        $this->json->files = $files_array;
-    }
-
-    /* public function action_update() {
-
-      } */
-
-    public function action_create() {
-        $folder = ORM::factory('Folder');
-        $folder->values($_POST, array('name'));
-        try {
-            $folder->user_id = Auth::instance()->get_user()->id;
-            $folder->save();
-            $this->response->status(204);
-        } catch (ORM_Validation_Exception $e) {
-            $errors = $e->errors('');
-            if (isset($errors['_external'])) {
-                $arr = $errors['_external'];
-                unset($errors['_external']);
-            } else {
-                $arr = array();
-            }
-
-            $errors = array_merge($errors, $arr);
-            $this->response->status(406);
-            $this->json->errors = $errors;
-        }
+        $this->response->status(204);
     }
 
     public function action_delete() {
+        //@todo: првоерка что не существует файлво в дириктории) т.к .и хи надо удалять
         $name = $this->request->delete('name', NULL);
-        if ($name === NULL)
-            throw new HTTP_Exception_400;
-        $name = HTML::chars($name);
 
-        $folder = ORM::factory('Folder')
-                ->where('name', '=', $name)
-                ->where('user_id', '=', Auth::instance()->get_user()->id)
-                ->find();
-        if ($folder->loaded()) {
-            $folder->delete();
-            $this->response->status(204);
-        } else {
-            throw new HTTP_Exception_404;
+        $path = HTML::chars($name);
+        if ($path == "" || $path == '/') {
+            $this->response->status(406);
+            $this->json->errors = array(
+                'errors' => 'Ошибка, папка не должна быть пустой'
+            );
+            return;
         }
+
+        $path = urldecode($path);
+        $path = HTML::chars($path);
+
+        $path = $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path;
+
+        $test = explode("/", $path);
+        array_pop($test);
+        $folderName = array_pop($test);
+        $path = implode('/', $test) . '/';
+
+
+        $user = Auth::instance()->get_user();
+        MangoDB::instance()
+                ->getDb('folders')
+                ->remove(array(
+                    'name' => $folderName,
+                    'user_id' => new MongoId($user['_id']),
+                    'path' => $path[UTF8::strlen($path) - 1] != '/' ? $path . '/' : $path,
+        ));
+
+
+        $this->response->status(204);
     }
 
 }

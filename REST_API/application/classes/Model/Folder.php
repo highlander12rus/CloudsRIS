@@ -2,29 +2,9 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-class Model_Folder extends ORM {
+class Model_Folder extends Mango {
 
-    protected $_table_columns = array
-        (
-        'id' => '',
-        'name' => '',
-        'user_id' => '',
-    );    
     
-    protected $_belongs_to  = array(
-        'user' => array(
-            'model' => 'User',
-            'foreign_key' => 'user_id',
-        ),
-    );
-    
-    protected $_has_many = array(
-        'files' => array(
-            'model' => 'File',
-            'foreign_key' => 'folder_id',
-        ),
-    );
-
     public function filters() {
         return array(
             TRUE => array(
